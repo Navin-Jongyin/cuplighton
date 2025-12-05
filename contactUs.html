@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Cup Lighton</title>
+
+    <style>
+        /* Global */
+        body {
+            margin: 0;
+            font-family: Montserrat, sans-serif;
+            background: #f8f8f8;
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            background: #111;
+            color: white;
+            padding: 20px 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        header img {
+            height: 32px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 16px;
+            opacity: 0.8;
+        }
+
+        nav a:hover,
+        nav .active {
+            opacity: 1;
+        }
+
+        /* Contact Layout */
+        .contact-section {
+            padding: 80px 60px;
+        }
+
+        .contact-container {
+            display: flex;
+            gap: 60px;
+            max-width: 1100px;
+            margin: auto;
+            align-items: stretch;
+            /* equal height columns */
+        }
+
+        /* Contact Info */
+        .contact-info {
+            flex: 0.9;
+        }
+
+        .contact-info h2 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .contact-info p {
+            margin: 0 0 20px;
+            color: #555;
+        }
+
+        .info-item {
+            margin-bottom: 25px;
+        }
+
+        .info-item h4 {
+            margin: 0 0 5px;
+            font-size: 18px;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            flex: 1.1;
+            background: white;
+            padding: 40px 32px;
+            /* FIX: perfect left-right spacing */
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+        }
+
+        .contact-form h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .contact-form form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+            box-sizing: border-box;
+            /* FIX */
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+            font-family: inherit;
+            box-sizing: border-box;
+            /* FIX: no overflow spacing */
+        }
+
+        .contact-form textarea {
+            height: 150px;
+            resize: none;
+        }
+
+        .contact-form button {
+            background: #111;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.25s;
+        }
+
+        .contact-form button:hover {
+            background: #333;
+        }
+
+        /* Footer */
+        footer {
+            background: #111;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 60px;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+
+            header {
+                padding: 20px 30px;
+            }
+
+            .contact-container {
+                flex-direction: column;
+                gap: 40px;
+            }
+
+            .contact-section {
+                padding: 60px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <a href="index.html">
+            <img src="images/cupLight.png" alt="Cup Lighton Logo">
+        </a>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="index.html#projects">Projects</a>
+            <a href="index.html#products">Products</a>
+            <a href="contactUs.html" class="active">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+
+        <div class="contact-container">
+
+            <div class="contact-info">
+                <h2>ติดต่อเรา</h2>
+                <p>หากต้องการให้ช่วยดูสเปค หรือว่าต้องการให้ simulate แสงของโครงการสามารถส่ง Auto Cad/ Sketch up / 3D
+                    Model มาให้ทางไลน์หรือ Email ได้เลยนะครับ</p>
+
+                <div class="info-item">
+                    <h4>📍 ที่ตั้ง</h4>
+                    <p>88/66 Buddhamonthon 2 Rd.,<br> Bang Kae Nue, Bang Kae,<br>Bangkok 10160, Thailand</p>
+                </div>
+
+                <div class="info-item">
+                    <h4>📞 โทรศัพท์</h4>
+                    <p>+66-86-588-2287<br>+66-82-541-4542<br>+66-94-953-9423</p>
+
+                </div>
+
+                <div class="info-item">
+                    <h4>📧 อีเมล</h4>
+                    <p>info@cuplighton.com<br>cuplighton.info@gmail.com</p>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="contact-form">
+                <h2>Send a Message</h2>
+
+                <form>
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Email Address" required>
+                    <input type="text" placeholder="Subject" required>
+                    <textarea placeholder="Your Message" required></textarea>
+
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        © 2025 Cup Lighton — All Rights Reserved
+    </footer>
+
+</body>
+
+</html>
