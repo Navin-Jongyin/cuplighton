@@ -95,9 +95,12 @@
 
         .product-grid {
             display: flex;
-            /* center single card */
-            justify-content: center;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            /* space products equally */
+            gap: 30px;
         }
+
 
         .product-card {
             background: white;
@@ -238,6 +241,26 @@
                 <!-- SINGLE PRODUCT -->
                 <div class="product-card" data-category="indoor">
                     <img src="images/product1.JPG" alt="Modern Pendant Light">
+                    <h3 class="product-title">Modern Pendant Light</h3>
+                    <div class="product-category">Indoor</div>
+                    <div class="product-bottom">
+                        <span class="product-price">฿3,490</span>
+                        <button class="product-btn"
+                            onclick="openPdf('pdf/Varina Bollard Datasheet.pdf')">Datasheet</button>
+                    </div>
+                </div>
+                <div class="product-card" data-category="indoor">
+                    <img src="images/product2.jpeg" alt="Modern Pendant Light">
+                    <h3 class="product-title">Modern Pendant Light</h3>
+                    <div class="product-category">Indoor</div>
+                    <div class="product-bottom">
+                        <span class="product-price">฿3,490</span>
+                        <button class="product-btn"
+                            onclick="openPdf('pdf/Varina Bollard Datasheet.pdf')">Datasheet</button>
+                    </div>
+                </div>
+                <div class="product-card" data-category="indoor">
+                    <img src="images/product3.jpeg" alt="Modern Pendant Light">
                     <h3 class="product-title">Modern Pendant Light</h3>
                     <div class="product-category">Indoor</div>
                     <div class="product-bottom">
