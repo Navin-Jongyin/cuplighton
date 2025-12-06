@@ -41,6 +41,12 @@
         <!-- RIGHT CONTENT -->
         <section class="products-content-area">
 
+            <!-- Search Box -->
+            <div class="products-search-container">
+                <input type="text" id="search-input" class="products-search-input" placeholder="Search products...">
+                <span class="products-search-icon">🔍</span>
+            </div>
+
             <div id="status" class="products-status">Loading products...</div>
 
             <div id="product-grid" class="products-grid">
@@ -61,7 +67,9 @@
         const statusEl = document.getElementById("status");
         const categoryItems = document.querySelectorAll(".products-category-item");
         const productGrid = document.getElementById("product-grid");
+        const searchInput = document.getElementById("search-input");
         let allProducts = [];
+        let currentCategory = "all";
 
         // Load products from data.json
         async function loadProducts() {
@@ -79,6 +87,57 @@
             }
         }
 
+        // Filter products based on category and search term
+        function filterProducts() {
+            const searchTerm = searchInput.value.toLowerCase();
+            let filteredProducts = allProducts;
+
+            // Filter by category
+            if (currentCategory !== "all") {
+                filteredProducts = filteredProducts.filter(p => {
+                    // Support both single category (string) and multiple categories (array)
+                    if (Array.isArray(p.categories)) {
+                        return p.categories.includes(currentCategory);
+                    } else if (p.category) {
+                        return p.category === currentCategory;
+                    }
+                    return false;
+                });
+            }
+
+            // Filter by search term
+            if (searchTerm) {
+                filteredProducts = filteredProducts.filter(p => {
+                    const nameMatch = p.name.toLowerCase().includes(searchTerm);
+                    let categoryMatch = false;
+
+                    // Check both single and multiple categories
+                    if (Array.isArray(p.categories)) {
+                        categoryMatch = p.categories.some(cat => cat.toLowerCase().includes(searchTerm));
+                    } else if (p.category) {
+                        categoryMatch = p.category.toLowerCase().includes(searchTerm);
+                    }
+
+                    return nameMatch || categoryMatch;
+                });
+            }
+
+            // Render filtered products
+            renderProducts(filteredProducts);
+
+            // Update status
+            if (searchTerm) {
+                statusEl.textContent = `Found ${filteredProducts.length} product(s) matching "${searchTerm}".`;
+            } else if (currentCategory === "all") {
+                statusEl.textContent = `Showing all ${allProducts.length} product(s).`;
+            } else {
+                statusEl.textContent = `Showing ${filteredProducts.length} product(s) in "${capitalize(currentCategory)}".`;
+            }
+        }
+
+        // Search input event
+        searchInput.addEventListener("input", filterProducts);
+
         // Render products to the grid
         function renderProducts(products) {
             productGrid.innerHTML = '';
@@ -86,7 +145,12 @@
             products.forEach(product => {
                 const card = document.createElement('div');
                 card.className = 'products-card';
-                card.setAttribute('data-category', product.category);
+
+                // Set data-category attribute (use first category if multiple)
+                const categoryData = Array.isArray(product.categories)
+                    ? product.categories[0]
+                    : product.category;
+                card.setAttribute('data-category', categoryData);
                 card.style.cursor = 'pointer';
 
                 // Add click event to navigate to product detail page
@@ -97,10 +161,18 @@
                     }
                 });
 
+                // Display categories (show all if multiple)
+                let categoryDisplay;
+                if (Array.isArray(product.categories)) {
+                    categoryDisplay = product.categories.map(cat => capitalize(cat)).join(', ');
+                } else {
+                    categoryDisplay = capitalize(product.category);
+                }
+
                 card.innerHTML = `
                     <img src="${product.image}" alt="${product.name}">
                     <h3 class="products-card-title">${product.name}</h3>
-                    <div class="products-card-category">${capitalize(product.category)}</div>
+                    <div class="products-card-category">${categoryDisplay}</div>
                     <div class="products-card-bottom">
                         <span class="products-card-price">฿${product.price.toLocaleString()}</span>
                         <button class="products-card-btn" onclick="event.stopPropagation(); openPdf('${product.pdf}')">Datasheet</button>
@@ -120,28 +192,14 @@
         categoryItems.forEach(item => {
             item.addEventListener("click", () => {
                 const category = item.dataset.category;
+                currentCategory = category;
 
                 // active state on sidebar
                 categoryItems.forEach(c => c.classList.remove("products-category-active"));
                 item.classList.add("products-category-active");
 
-                // Filter products
-                let filteredProducts;
-                if (category === "all") {
-                    filteredProducts = allProducts;
-                } else {
-                    filteredProducts = allProducts.filter(p => p.category === category);
-                }
-
-                // Render filtered products
-                renderProducts(filteredProducts);
-
-                // Update status
-                if (category === "all") {
-                    statusEl.textContent = `Showing all ${allProducts.length} product(s).`;
-                } else {
-                    statusEl.textContent = `Showing ${filteredProducts.length} product(s) in "${capitalize(category)}".`;
-                }
+                // Filter products with current search term
+                filterProducts();
             });
         });
 
