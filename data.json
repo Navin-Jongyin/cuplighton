@@ -1,0 +1,82 @@
+[
+    {
+        "id": 1,
+        "name": "Adale Solar Post",
+        "price": 3490,
+        "category": "outdoor",
+        "image": "images/product/Adale/adale.png",
+        "images": [
+            "images/product/Adale/adale.png",
+            "images/product/Adale/adale.png",
+            "images/product/Adale/adale.png"
+        ],
+        "pdf": "images/product/Adale/Adale Solar Post top.pdf",
+        "description": "A sleek and modern pendant light perfect for contemporary interiors."
+    },
+    {
+        "id": 2,
+        "name": "Concord Flood Light",
+        "price": 2890,
+        "category": "outdoor",
+        "image": "images/product/Concord/concord1.png",
+        "images": [
+            "images/product/Concord/concord1.png",
+            "images/product/Concord/concord2.png",
+            "images/product/Concord/concord3.png"
+        ],
+        "pdf": "images/product/Concord/Concord_Outdoor_Floodlight.pdf"
+    },
+    {
+        "id": 3,
+        "name": "Flexi Neon",
+        "price": 4990,
+        "category": "outdoor",
+        "image": "images/product/Flexi Neon/flexi.png",
+        "pdf": "images/product/Flexi Neon/Flexi_Neon.pdf"
+    },
+    {
+        "id": 4,
+        "name": "Hamburg Solar Bollard",
+        "price": 4990,
+        "category": "outdoor",
+        "image": "images/product/Hamburg/hamburg.png",
+        "pdf": "images/product/Hamburg/Hamburg.pdf"
+    },
+    {
+        "id": 5,
+        "name": "Marina Underwater Light",
+        "price": 4990,
+        "category": "outdoor",
+        "image": "images/product/Marina/marina.png",
+        "pdf": "images/product/Marina/Marina.pdf"
+    },
+    {
+        "id": 6,
+        "name": "Sora Solar Bollard",
+        "price": 4990,
+        "category": "outdoor",
+        "image": "images/product/Sora/sora.png",
+        "pdf": "images/product/Sora/Sora.pdf"
+    },
+    {
+        "id": 7,
+        "name": "Varina Bollard",
+        "price": 4990,
+        "category": "outdoor",
+        "image": "images/product/Varina/varina1.JPG",
+        "images": [
+            "images/product/Varina/varina1.JPG",
+            "images/product/Varina/varina2.JPG",
+            "images/product/Varina/varina3.JPG"
+        ],
+        "pdf": "images/product/Varina/Varina.pdf"
+    },
+    {
+        "id": 8,
+        "name": "Adale Solar Surface Wall",
+        "price": 4990,
+        "category": "outdoor",
+        "image": "images/product/Adale Wall/Adale_Wall.png",
+        "pdf": "images/product/Adale Wall/Adale_Wall.pdf"
+    }
+]

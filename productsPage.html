@@ -5,200 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cup Lighton | Products</title>
-
-    <style>
-        /* Global */
-        body {
-            margin: 0;
-            font-family: Montserrat, sans-serif;
-            background: #f8f8f8;
-            color: #333;
-        }
-
-        /* Header */
-        header {
-            background: #111;
-            color: white;
-            padding: 20px 80px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        header .logo {
-            height: 32px;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin-left: 20px;
-            font-size: 16px;
-        }
-
-        /* Layout */
-        .page-wrapper {
-            display: flex;
-            padding: 40px 80px;
-            gap: 40px;
-        }
-
-        /* Sidebar Categories */
-        .sidebar {
-            width: 220px;
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-            height: fit-content;
-            position: sticky;
-            top: 120px;
-        }
-
-        .sidebar h3 {
-            margin-top: 0;
-            margin-bottom: 12px;
-            font-size: 18px;
-        }
-
-        .category-item {
-            padding: 10px;
-            margin-bottom: 6px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: 0.2s;
-        }
-
-        .category-item:hover {
-            background: #f0f0f0;
-        }
-
-        .category-active {
-            background: #111;
-            color: white;
-        }
-
-        /* Products Area */
-        .content-area {
-            flex: 1;
-        }
-
-        #status {
-            margin-bottom: 20px;
-            font-size: 14px;
-            color: #666;
-        }
-
-        .product-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: flex-start;
-            /* align products to the left */
-            gap: 30px;
-        }
-
-
-        .product-card {
-            background: white;
-            border-radius: 12px;
-            padding: 16px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.07);
-            display: flex;
-            flex-direction: column;
-            transition: 0.25s;
-            width: 260px;
-            /* nice fixed width */
-        }
-
-        .product-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
-        }
-
-        .product-card img {
-            width: 100%;
-            height: 200px;
-            /* Increase height for better proportions */
-            object-fit: contain;
-            /* Show entire product without cropping */
-            background: #ffffff;
-            /* Clean background behind transparent areas */
-            border-radius: 8px;
-            margin-bottom: 10px;
-        }
-
-
-        .product-title {
-            font-size: 15px;
-            font-weight: 600;
-            margin-bottom: 6px;
-        }
-
-        .product-category {
-            font-size: 12px;
-            text-transform: capitalize;
-            color: #777;
-            margin-bottom: 8px;
-        }
-
-        .product-bottom {
-            margin-top: auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .product-price {
-            font-weight: 700;
-            color: #f39c12;
-        }
-
-        .product-btn {
-            border: none;
-            background: #111;
-            color: white;
-            padding: 8px 14px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 13px;
-            transition: 0.2s;
-        }
-
-        .product-btn:hover {
-            background: #333;
-        }
-
-        /* Footer */
-        footer {
-            background: #111;
-            color: white;
-            text-align: center;
-            padding: 20px;
-            margin-top: 40px;
-            font-size: 14px;
-        }
-
-        /* Mobile */
-        @media (max-width: 768px) {
-            .page-wrapper {
-                flex-direction: column;
-                padding: 20px;
-            }
-
-            .sidebar {
-                width: 100%;
-                position: static;
-            }
-
-            .product-grid {
-                justify-content: center;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
@@ -206,7 +13,7 @@
     <!-- Header -->
     <header>
         <a href="index.html">
-            <img src="images/cupLight.png" class="logo" alt="Cup Lighton Logo">
+            <img src="images/logo/cupLight.png" class="logo" alt="Cup Lighton Logo">
         </a>
         <nav>
             <a href="index.html">Home</a>
@@ -217,122 +24,27 @@
     </header>
 
     <!-- Page Layout -->
-    <div class="page-wrapper">
+    <div class="products-page-wrapper">
 
         <!-- LEFT SIDEBAR (Categories) -->
-        <aside class="sidebar">
+        <aside class="products-sidebar">
             <h3>Categories</h3>
             <div id="category-list">
-                <div class="category-item category-active" data-category="all">All Products</div>
-                <div class="category-item" data-category="indoor">Indoor</div>
-                <div class="category-item" data-category="outdoor">Outdoor</div>
-                <div class="category-item" data-category="decorative">Decorative</div>
-                <div class="category-item" data-category="solar">Solar</div>
+                <div class="products-category-item products-category-active" data-category="all">All Products</div>
+                <div class="products-category-item" data-category="indoor">Indoor</div>
+                <div class="products-category-item" data-category="outdoor">Outdoor</div>
+                <div class="products-category-item" data-category="decorative">Decorative</div>
+                <div class="products-category-item" data-category="solar">Solar</div>
             </div>
         </aside>
 
         <!-- RIGHT CONTENT -->
-        <section class="content-area">
+        <section class="products-content-area">
 
-            <div id="status">Showing all products.</div>
+            <div id="status" class="products-status">Loading products...</div>
 
-            <div id="product-grid" class="product-grid">
-
-                <!-- SINGLE PRODUCT -->
-                <div class="product-card" data-category="indoor">
-                    <img src="images/product1.JPG" alt="Modern Pendant Light">
-                    <h3 class="product-title">Varina Bollard</h3>
-                    <div class="product-category">Indoor</div>
-                    <div class="product-bottom">
-                        <span class="product-price">฿5,500</span>
-                        <button class="product-btn"
-                            onclick="openPdf('pdf/Varina Bollard Datasheet.pdf')">Datasheet</button>
-                    </div>
-                </div>
-                <div class="product-card" data-category="outdoor">
-                    <img src="images/product2.jpeg" alt="Modern Pendant Light">
-                    <h3 class="product-title">Modern Pendant Light</h3>
-                    <div class="product-category">Outdoor</div>
-                    <div class="product-bottom">
-                        <span class="product-price">฿63,500</span>
-                        <button class="product-btn"
-                            onclick="openPdf('pdf/Varina Bollard Datasheet.pdf')">Datasheet</button>
-                    </div>
-                </div>
-                <div class="product-card" data-category="outdoor">
-                    <img src="images/product3.jpeg" alt="Modern Pendant Light">
-                    <h3 class="product-title">Varina Bollard</h3>
-                    <div class="product-category">Outdoor</div>
-                    <div class="product-bottom">
-                        <span class="product-price">฿65,000</span>
-                        <button class="product-btn"
-                            onclick="openPdf('pdf/Varina Bollard Datasheet.pdf')">Datasheet</button>
-                    </div>
-                </div>
-                <div class="product-card" data-category="outdoor">
-                    <img src="images/product4.png" alt="Modern Pendant Light">
-                    <h3 class="product-title">Under water luminaires</h3>
-                    <div class="product-category">Outdoor</div>
-                    <div class="product-bottom">
-                        <span class="product-price">฿3,200</span>
-                        <button class="product-btn" onclick="openPdf('pdf/underwaterLight.pdf')">Datasheet</button>
-                    </div>
-                </div>
-                <div class="product-card" data-category="outdoor">
-                    <img src="images/product5.png" alt="Modern Pendant Light">
-                    <h3 class="product-title">Under water luminaires</h3>
-                    <div class="product-category">Outdoor</div>
-                    <div class="product-bottom">
-                        <span class="product-price">฿3,200</span>
-                        <button class="product-btn" onclick="openPdf('pdf/underwaterLight.pdf')">Datasheet</button>
-                    </div>
-                </div>
-                <div class="product-card" data-category="outdoor">
-                    <img src="images/product6.png" alt="Modern Pendant Light">
-                    <h3 class="product-title">Under water luminaires</h3>
-                    <div class="product-category">Outdoor</div>
-                    <div class="product-bottom">
-                        <span class="product-price">฿3,200</span>
-                        <button class="product-btn" onclick="openPdf('pdf/underwaterLight.pdf')">Datasheet</button>
-                    </div>
-                </div>
-                <div class="product-card" data-category="outdoor">
-                    <img src="images/product7.png" alt="Modern Pendant Light">
-                    <h3 class="product-title">Under water luminaires</h3>
-                    <div class="product-category">Outdoor</div>
-                    <div class="product-bottom">
-                        <span class="product-price">฿3,200</span>
-                        <button class="product-btn" onclick="openPdf('pdf/underwaterLight.pdf')">Datasheet</button>
-                    </div>
-                </div>
-                <div class="product-card" data-category="outdoor">
-                    <img src="images/product8.png" alt="Modern Pendant Light">
-                    <h3 class="product-title">Adale Solar Post</h3>
-                    <div class="product-category">Outdoor</div>
-                    <div class="product-bottom">
-                        <span class="product-price">฿3,200</span>
-                        <button class="product-btn" onclick="openPdf('pdf/Adale Solar Post top.pdf')">Datasheet</button>
-                    </div>
-                </div>
-                <div class="product-card" data-category="outdoor">
-                    <img src="images/product9.png" alt="Modern Pendant Light">
-                    <h3 class="product-title">Solar Bollard</h3>
-                    <div class="product-category">Outdoor</div>
-                    <div class="product-bottom">
-                        <span class="product-price">฿3,200</span>
-                        <button class="product-btn" onclick="openPdf('pdf/Solar_Bollard.pdf')">Datasheet</button>
-                    </div>
-                </div>
-                <div class="product-card" data-category="outdoor">
-                    <img src="images/product10.png" alt="Modern Pendant Light">
-                    <h3 class="product-title">Solar Bollard</h3>
-                    <div class="product-category">Outdoor</div>
-                    <div class="product-bottom">
-                        <span class="product-price">฿3,200</span>
-                        <button class="product-btn" onclick="openPdf('pdf/Flexi Neon-2.pdf')">Datasheet</button>
-                    </div>
-                </div>
-
+            <div id="product-grid" class="products-grid">
+                <!-- Products will be loaded from data.json -->
             </div>
 
         </section>
@@ -347,8 +59,57 @@
     <!-- SCRIPT -->
     <script>
         const statusEl = document.getElementById("status");
-        const categoryItems = document.querySelectorAll(".category-item");
-        const productCards = document.querySelectorAll(".product-card");
+        const categoryItems = document.querySelectorAll(".products-category-item");
+        const productGrid = document.getElementById("product-grid");
+        let allProducts = [];
+
+        // Load products from data.json
+        async function loadProducts() {
+            try {
+                const response = await fetch('data.json');
+                allProducts = await response.json();
+
+                // Render all products initially
+                renderProducts(allProducts);
+                statusEl.textContent = `Showing all ${allProducts.length} product(s).`;
+            } catch (error) {
+                console.error('Error loading products:', error);
+                statusEl.textContent = 'Failed to load products.';
+                productGrid.innerHTML = '<p style="text-align: center; color: #666;">Failed to load products. Please try again later.</p>';
+            }
+        }
+
+        // Render products to the grid
+        function renderProducts(products) {
+            productGrid.innerHTML = '';
+
+            products.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'products-card';
+                card.setAttribute('data-category', product.category);
+                card.style.cursor = 'pointer';
+
+                // Add click event to navigate to product detail page
+                card.addEventListener('click', (e) => {
+                    // Don't navigate if clicking the datasheet button
+                    if (!e.target.classList.contains('products-card-btn')) {
+                        window.location.href = `productDetail.html?id=${product.id}`;
+                    }
+                });
+
+                card.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}">
+                    <h3 class="products-card-title">${product.name}</h3>
+                    <div class="products-card-category">${capitalize(product.category)}</div>
+                    <div class="products-card-bottom">
+                        <span class="products-card-price">฿${product.price.toLocaleString()}</span>
+                        <button class="products-card-btn" onclick="event.stopPropagation(); openPdf('${product.pdf}')">Datasheet</button>
+                    </div>
+                `;
+
+                productGrid.appendChild(card);
+            });
+        }
 
         // Open local PDF in new tab
         function openPdf(path) {
@@ -361,26 +122,25 @@
                 const category = item.dataset.category;
 
                 // active state on sidebar
-                categoryItems.forEach(c => c.classList.remove("category-active"));
-                item.classList.add("category-active");
+                categoryItems.forEach(c => c.classList.remove("products-category-active"));
+                item.classList.add("products-category-active");
 
-                let visibleCount = 0;
-
-                productCards.forEach(card => {
-                    const cardCat = card.dataset.category;
-
-                    if (category === "all" || cardCat === category) {
-                        card.style.display = "";
-                        visibleCount++;
-                    } else {
-                        card.style.display = "none";
-                    }
-                });
-
+                // Filter products
+                let filteredProducts;
                 if (category === "all") {
-                    statusEl.textContent = `Showing all ${productCards.length} product(s).`;
+                    filteredProducts = allProducts;
                 } else {
-                    statusEl.textContent = `Showing ${visibleCount} product(s) in "${capitalize(category)}".`;
+                    filteredProducts = allProducts.filter(p => p.category === category);
+                }
+
+                // Render filtered products
+                renderProducts(filteredProducts);
+
+                // Update status
+                if (category === "all") {
+                    statusEl.textContent = `Showing all ${allProducts.length} product(s).`;
+                } else {
+                    statusEl.textContent = `Showing ${filteredProducts.length} product(s) in "${capitalize(category)}".`;
                 }
             });
         });
@@ -388,6 +148,9 @@
         function capitalize(str) {
             return str.charAt(0).toUpperCase() + str.slice(1);
         }
+
+        // Load products on page load
+        document.addEventListener('DOMContentLoaded', loadProducts);
     </script>
 
 </body>

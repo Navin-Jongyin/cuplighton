@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Detail | Cup Lighton</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <a href="index.html">
+            <img src="images/logo/cupLight.png" alt="Cup Lighton Logo">
+        </a>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="index.html#projects">Projects</a>
+            <a href="productsPage.html">Products</a>
+            <a href="contactUs.html">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Product Detail Container -->
+    <div class="product-detail-container">
+        <div class="product-detail-content">
+
+            <!-- Back Button -->
+            <a href="productsPage.html" class="back-button">← Back to Products</a>
+
+            <div class="product-detail-layout">
+
+                <!-- Product Image Gallery -->
+                <div class="product-detail-image-section">
+                    <div class="product-main-image">
+                        <img id="product-image" src="" alt="Product">
+                    </div>
+                    <div class="product-thumbnail-gallery" id="thumbnail-gallery">
+                        <!-- Thumbnails will be added dynamically -->
+                    </div>
+                </div>
+
+                <!-- Product Info -->
+                <div class="product-detail-info">
+                    <h1 id="product-name">Loading...</h1>
+                    <div class="product-detail-category" id="product-category"></div>
+                    <div class="product-detail-price" id="product-price">฿0</div>
+
+                    <div class="product-detail-description">
+                        <h3>Description</h3>
+                        <p id="product-description">High-quality lighting solution designed to enhance your space with
+                            optimal illumination and elegant design.</p>
+                    </div>
+
+                    <div class="product-detail-features">
+                        <h3>Features</h3>
+                        <ul id="product-features">
+                            <li>Energy efficient LED technology</li>
+                            <li>Long-lasting durability</li>
+                            <li>Easy installation</li>
+                            <li>Modern design</li>
+                        </ul>
+                    </div>
+
+                    <div class="product-detail-actions">
+                        <button class="product-detail-btn-primary" id="datasheet-btn">Download Datasheet</button>
+                        <button class="product-detail-btn-secondary"
+                            onclick="window.location.href='contactUs.html'">Contact Us</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        © 2025 Cup Lighton — All Rights Reserved
+    </footer>
+
+    <script>
+        // Get product ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = parseInt(urlParams.get('id'));
+
+        // Load product data
+        async function loadProductDetail() {
+            try {
+                const response = await fetch('data.json');
+                const products = await response.json();
+                const product = products.find(p => p.id === productId);
+
+                if (product) {
+                    // Update page title
+                    document.title = `${product.name} | Cup Lighton`;
+
+                    // Populate product details
+                    document.getElementById('product-name').textContent = product.name;
+                    document.getElementById('product-category').textContent = capitalize(product.category);
+                    document.getElementById('product-price').textContent = `฿${product.price.toLocaleString()}`;
+
+                    // Handle multiple images or single image
+                    const images = product.images || [product.image];
+                    const mainImage = document.getElementById('product-image');
+                    const thumbnailGallery = document.getElementById('thumbnail-gallery');
+
+                    // Set main image
+                    mainImage.src = images[0];
+                    mainImage.alt = product.name;
+
+                    // Create thumbnails if there are multiple images
+                    if (images.length > 1) {
+                        thumbnailGallery.innerHTML = '';
+                        images.forEach((img, index) => {
+                            const thumbnail = document.createElement('img');
+                            thumbnail.src = img;
+                            thumbnail.alt = `${product.name} - Image ${index + 1}`;
+                            thumbnail.className = index === 0 ? 'thumbnail active-thumbnail' : 'thumbnail';
+                            thumbnail.onclick = () => {
+                                mainImage.src = img;
+                                // Update active thumbnail
+                                document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active-thumbnail'));
+                                thumbnail.classList.add('active-thumbnail');
+                            };
+                            thumbnailGallery.appendChild(thumbnail);
+                        });
+                    } else {
+                        // Hide thumbnail gallery if only one image
+                        thumbnailGallery.style.display = 'none';
+                    }
+
+                    // Set up datasheet button
+                    document.getElementById('datasheet-btn').onclick = () => {
+                        window.open(product.pdf, '_blank');
+                    };
+
+                    // Add description if available
+                    if (product.description) {
+                        document.getElementById('product-description').textContent = product.description;
+                    }
+
+                    // Add features if available
+                    if (product.features && product.features.length > 0) {
+                        const featuresList = document.getElementById('product-features');
+                        featuresList.innerHTML = '';
+                        product.features.forEach(feature => {
+                            const li = document.createElement('li');
+                            li.textContent = feature;
+                            featuresList.appendChild(li);
+                        });
+                    }
+                } else {
+                    // Product not found
+                    document.querySelector('.product-detail-content').innerHTML = `
+                        <div style="text-align: center; padding: 60px 20px;">
+                            <h2>Product Not Found</h2>
+                            <p>The product you're looking for doesn't exist.</p>
+                            <a href="productsPage.html" class="back-button">← Back to Products</a>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                console.error('Error loading product:', error);
+                document.querySelector('.product-detail-content').innerHTML = `
+                    <div style="text-align: center; padding: 60px 20px;">
+                        <h2>Error Loading Product</h2>
+                        <p>Failed to load product details. Please try again later.</p>
+                        <a href="productsPage.html" class="back-button">← Back to Products</a>
+                    </div>
+                `;
+            }
+        }
+
+        function capitalize(str) {
+            return str.charAt(0).toUpperCase() + str.slice(1);
+        }
+
+        // Load product on page load
+        document.addEventListener('DOMContentLoaded', loadProductDetail);
+    </script>
+
+</body>
+
+</html>
