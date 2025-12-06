@@ -3,18 +3,9 @@
         "id": 1,
         "name": "Adale Solar Post",
         "price": 3490,
-        "categories": [
-            "outdoor",
-            "solar"
-        ],
+        "category": "outdoor",
         "image": "images/product/Adale/adale.png",
-        "images": [
-            "images/product/Adale/adale.png",
-            "images/product/Adale/adale.png",
-            "images/product/Adale/adale.png"
-        ],
-        "pdf": "images/product/Adale/Adale Solar Post top.pdf",
-        "description": "A sleek and modern pendant light perfect for contemporary interiors."
+        "pdf": "images/product/Adale/Adale Solar Post top.pdf"
     },
     {
         "id": 2,

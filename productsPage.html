@@ -169,8 +169,9 @@
                     categoryDisplay = capitalize(product.category);
                 }
 
+                const cardImage = product.images ? product.images[0] : product.image;
                 card.innerHTML = `
-                    <img src="${product.image}" alt="${product.name}">
+                    <img src="${cardImage}" alt="${product.name}">
                     <h3 class="products-card-title">${product.name}</h3>
                     <div class="products-card-category">${categoryDisplay}</div>
                     <div class="products-card-bottom">
