@@ -3,7 +3,10 @@
         "id": 1,
         "name": "Adale Solar Post",
         "price": 3490,
-        "category": "outdoor",
+        "categories": [
+            "outdoor",
+            "solar"
+        ],
         "image": "images/product/Adale/adale.png",
         "images": [
             "images/product/Adale/adale.png",
@@ -38,7 +41,10 @@
         "id": 4,
         "name": "Hamburg Solar Bollard",
         "price": 4990,
-        "category": "outdoor",
+        "categories": [
+            "outdoor",
+            "solar"
+        ],
         "image": "images/product/Hamburg/hamburg.png",
         "pdf": "images/product/Hamburg/Hamburg.pdf"
     },
@@ -47,14 +53,17 @@
         "name": "Marina Underwater Light",
         "price": 4990,
         "category": "outdoor",
-        "image": "images/product/Marina/marina.png",
+        "image": "images/product/Marina/marina_nobg.png",
         "pdf": "images/product/Marina/Marina.pdf"
     },
     {
         "id": 6,
         "name": "Sora Solar Bollard",
         "price": 4990,
-        "category": "outdoor",
+        "categories": [
+            "outdoor",
+            "solar"
+        ],
         "image": "images/product/Sora/sora.png",
         "pdf": "images/product/Sora/Sora.pdf"
     },
@@ -75,8 +84,11 @@
         "id": 8,
         "name": "Adale Solar Surface Wall",
         "price": 4990,
-        "category": "outdoor",
-        "image": "images/product/Adale Wall/Adale_Wall.png",
+        "categories": [
+            "outdoor",
+            "solar"
+        ],
+        "image": "images/product/Adale Wall/Adale_Wall_nobg.png",
         "pdf": "images/product/Adale Wall/Adale_Wall.pdf"
     }
 ]
