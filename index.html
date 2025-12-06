@@ -57,6 +57,95 @@
 
         </div>
     </div>
+
+    <!-- Featured Products Section -->
+    <section class="home-products-section">
+        <div class="home-section-header">
+            <div>
+                <h2>Featured Products</h2>
+                <p>Discover our top lighting solutions</p>
+            </div>
+            <a href="productsPage.html" class="home-see-all">See all →</a>
+        </div>
+
+        <div class="product-grid" id="home-featured-products">
+            <div class="loading">Loading products...</div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        © 2025 Cup Lighton — All Rights Reserved
+    </footer>
+
+    <script>
+        // Load featured products from data.json
+        async function loadFeaturedProducts() {
+            const productGrid = document.getElementById('home-featured-products');
+
+            try {
+                const response = await fetch('data.json');
+                const products = await response.json();
+
+                // Get first 4 products
+                const featuredProducts = products.slice(0, 4);
+
+                // Clear loading message
+                productGrid.innerHTML = '';
+
+                // Create product cards
+                featuredProducts.forEach(product => {
+                    const card = document.createElement('div');
+                    card.className = 'product-card';
+
+                    // Get the first image if images array exists, otherwise use image field
+                    const imageUrl = product.images ? product.images[0] : product.image;
+
+                    // Display categories (show all if multiple)
+                    let categoryDisplay;
+                    if (Array.isArray(product.categories)) {
+                        categoryDisplay = product.categories.map(cat => capitalize(cat)).join(', ');
+                    } else {
+                        categoryDisplay = capitalize(product.category);
+                    }
+
+                    card.innerHTML = `
+                        <img src="${imageUrl}" alt="${product.name}" style="cursor: pointer;">
+                        <h3 style="cursor: pointer;">${product.name}</h3>
+                        <p class="home-product-category" style="cursor: pointer;">${categoryDisplay}</p>
+                        <div class="home-product-bottom">
+                            <p class="home-product-price">฿${product.price.toLocaleString()}</p>
+                            <button class="home-product-btn" onclick="event.stopPropagation(); window.open('${product.pdf}', '_blank')">Datasheet</button>
+                        </div>
+                    `;
+
+                    // Add click event to card elements (not button)
+                    card.querySelector('img').addEventListener('click', () => {
+                        window.location.href = `productDetail.html?id=${product.id}`;
+                    });
+                    card.querySelector('h3').addEventListener('click', () => {
+                        window.location.href = `productDetail.html?id=${product.id}`;
+                    });
+                    card.querySelector('.home-product-category').addEventListener('click', () => {
+                        window.location.href = `productDetail.html?id=${product.id}`;
+                    });
+
+                    productGrid.appendChild(card);
+                });
+            } catch (error) {
+                console.error('Error loading products:', error);
+                productGrid.innerHTML = '<p style="text-align: center; color: #666;">Failed to load products.</p>';
+            }
+        }
+
+        function capitalize(str) {
+            return str.charAt(0).toUpperCase() + str.slice(1);
+        }
+
+        // Load products when page loads
+        document.addEventListener('DOMContentLoaded', loadFeaturedProducts);
+    </script>
+
 </body>
 
 </html>
