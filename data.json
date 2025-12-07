@@ -159,5 +159,40 @@
             "images/product/Line Wall/line_wall3.png"
         ],
         "pdf": "images/product/Line Wall/Line_Outdoor_Wall_washer.pdf"
+    },
+    {
+        "id": 14,
+        "name": "Boston 1",
+        "price": 1990,
+        "categories": [
+            "outdoor"
+        ],
+        "image": "images/product/Boston 1/Boston1.png",
+        "pdf": "images/product/Boston 1/Boston1.pdf"
+    },
+    {
+        "id": 15,
+        "name": "Boston 2",
+        "price": 1990,
+        "categories": [
+            "outdoor"
+        ],
+        "image": "images/product/Boston 2/Boston2.png",
+        "pdf": "images/product/Boston 2/Boston2.pdf"
+    },
+    {
+        "id": 16,
+        "name": "Stone Solar Light",
+        "price": 1990,
+        "categories": [
+            "outdoor",
+            "solar"
+        ],
+        "image": "images/product/Stone Solar Light/Stone1.png",
+        "images": [
+            "images/product/Stone Solar Light/Stone2.png",
+            "images/product/Stone Solar Light/Stone1.png"
+        ],
+        "pdf": "images/product/Stone Solar Light/Stone_Solar_Outdoor.pdf"
     }
 ]
