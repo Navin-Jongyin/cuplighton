@@ -1,0 +1,27 @@
+[
+    {
+        "id": "project1",
+        "name": "Lighting Installation Project",
+        "description": "Professional outdoor lighting solution designed to enhance the ambiance and safety of outdoor spaces.",
+        "categories": [
+            "outdoor",
+            "commercial"
+        ],
+        "image": "images/projects/project1/project1-1.JPG",
+        "images": [
+            "images/projects/project1/project1-1.JPG",
+            "images/projects/project1/project1-2.JPG",
+            "images/projects/project1/project1-3.JPG",
+            "images/projects/project1/project1-4.JPG",
+            "images/projects/project1/project1-5.JPG",
+            "images/projects/project1/project1-6.JPG"
+        ],
+        "details": [
+            "Complete outdoor lighting system",
+            "Energy-efficient LED technology",
+            "Professional installation and setup",
+            "Custom lighting design",
+            "Weather-resistant fixtures"
+        ]
+    }
+]

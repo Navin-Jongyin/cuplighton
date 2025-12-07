@@ -24,18 +24,19 @@ header {
 }
 
 header img {
-    height: 32px;
+    height: 45px;
 }
 
 nav a {
     color: white;
     text-decoration: none;
     margin-left: 20px;
-    font-size: 16px;
+    font-size: 20px;
+    font-weight: 500;
 }
 
 nav a:hover {
-    color: rgb(252, 248, 0);
+    color: #ffd401;
 }
 
 /* Hero */
@@ -338,12 +339,6 @@ footer {
 
 .product-detail-category {
     display: inline-block;
-    padding: 6px 14px;
-    background: #f0f0f0;
-    border-radius: 20px;
-    font-size: 13px;
-    text-transform: capitalize;
-    color: #666;
     margin-bottom: 20px;
 }
 
@@ -538,6 +533,54 @@ footer {
     }
 }
 
+/* Home Page Projects Section */
+.home-projects-section {
+    padding: 60px 80px;
+    background: #f9f9f9;
+}
+
+.home-projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.home-project-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+}
+
+.home-project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.home-project-card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.home-project-info {
+    padding: 20px;
+}
+
+.home-project-info h3 {
+    margin: 0 0 8px 0;
+    font-size: 20px;
+    color: #111;
+}
+
+.home-project-info p {
+    margin: 0;
+    color: #666;
+    font-size: 14px;
+}
+
 /* Home Page Featured Products */
 .home-products-section {
     padding: 60px 80px;
@@ -635,6 +678,19 @@ footer {
 
 .home-product-btn:hover {
     background: #333;
+}
+
+/* Category Tags */
+.category-tag {
+    display: inline-block;
+    padding: 5px 15px;
+    margin: 0 8px 8px 0;
+    background: #e0e0e0;
+    color: #666;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: capitalize;
 }
 
 /* Products Search Box */

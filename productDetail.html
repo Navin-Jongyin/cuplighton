@@ -13,7 +13,7 @@
     <!-- Header -->
     <header>
         <a href="index.html">
-            <img src="images/logo/cupLight.png" alt="Cup Lighton Logo">
+            <img src="images/logo/logo_2.png" alt="Cup Lighton Logo">
         </a>
         <nav>
             <a href="index.html">Home</a>
@@ -99,7 +99,23 @@
 
                     // Populate product details
                     document.getElementById('product-name').textContent = product.name;
-                    document.getElementById('product-category').textContent = capitalize(product.category);
+
+                    // Handle single category or multiple categories as separate tags
+                    const categoryContainer = document.getElementById('product-category');
+                    categoryContainer.innerHTML = '';
+                    const categories = Array.isArray(product.categories)
+                        ? product.categories
+                        : (product.category ? [product.category] : []);
+
+                    categories.forEach(cat => {
+                        if (cat) {
+                            const tag = document.createElement('span');
+                            tag.className = 'category-tag';
+                            tag.textContent = capitalize(cat);
+                            categoryContainer.appendChild(tag);
+                        }
+                    });
+
                     document.getElementById('product-price').textContent = `฿${product.price.toLocaleString()}`;
 
                     // Handle multiple images or single image
