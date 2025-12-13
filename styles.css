@@ -211,8 +211,8 @@ p {
     text-align: center;
     overflow: hidden;
     background:
-        linear-gradient(rgba(5, 5, 5, 0.7), rgba(5, 5, 5, 0.7)),
-        url('images/hero-bg.png');
+        linear-gradient(rgba(5, 5, 5, 0.7), rgba(0, 0, 0, 0.7)),
+        url('images/decoration/mainBg.png');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -226,7 +226,7 @@ p {
     transform: translate(-50%, -50%);
     width: 60vw;
     height: 60vw;
-    background: var(--accent-glow);
+    /* background: var(--accent-glow); */
     filter: blur(100px);
     opacity: 0.2;
     border-radius: 50%;
@@ -414,7 +414,7 @@ p {
 .product-image {
     width: 100%;
     aspect-ratio: 1;
-    background: var(--bg-tertiary);
+    background: #ffffff;
     margin-bottom: var(--spacing-sm);
     display: flex;
     align-items: center;
@@ -624,12 +624,13 @@ p {
 .products-hero {
     padding: 8rem 0 4rem;
     background:
-        linear-gradient(rgba(5, 5, 5, 0.7), rgba(5, 5, 5, 0.9)),
-        url('images/products-hero.png');
+        linear-gradient(rgba(48, 48, 48, 0.7), rgba(31, 31, 31, 0.9)),
+        url('images/decoration/deco2.JPG');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
     margin-bottom: var(--spacing-lg);
+
 }
 
 /* Product Detail Page */
@@ -637,18 +638,67 @@ p {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--spacing-lg);
-    align-items: center;
+    align-items: start;
+    background-color: var(--bg-secondary);
+    padding: var(--spacing-lg);
+    border-radius: 8px;
 }
 
-.product-detail-image img {
+.product-detail-image {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.main-image-container {
     width: 100%;
+    background: #ffffff;
     border-radius: 12px;
+    overflow: hidden;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.main-image-container img {
+    width: 100%;
+    display: block;
+    padding: var(--spacing-md);
+}
+
+.image-thumbnails {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.thumbnail {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: var(--transition-fast);
+    background: #ffffff;
+}
+
+.thumbnail:hover {
+    border-color: var(--accent-gold);
+    opacity: 0.8;
+}
+
+.thumbnail.active {
+    border-color: var(--accent-gold);
+    box-shadow: 0 0 10px var(--accent-glow);
 }
 
 @media (max-width: 768px) {
     .product-detail-container {
         grid-template-columns: 1fr;
+    }
+
+    .thumbnail {
+        width: 60px;
+        height: 60px;
     }
 }
 

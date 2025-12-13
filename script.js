@@ -52,130 +52,228 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Product Detail Page Logic ---
 
-    // Product Database
-    const productsData = {
-        'aurum-pendant': {
-            name: 'Aurum Pendant',
-            category: 'Indoor / Ceiling Lights',
-            price: '$1,299',
-            image: 'images/aurum-pendant.png',
-            description: 'The Aurum Pendant is a masterpiece of minimalist design. Crafted from high-grade brushed gold and featuring a warm LED core, it creates a sophisticated ambiance in any modern living space. Perfect for dining areas or grand entryways.',
-            features: [
-                'Material: Brushed Gold Aluminum',
-                'Light Source: Integrated Warm LED (3000K)',
-                'Dimensions: 40cm x 40cm x 20cm',
-                'Dimmable: Yes',
-                'Warranty: 5 Years'
-            ]
-        },
-        'noir-chandelier': {
-            name: 'Noir Chandelier',
-            category: 'Indoor / Ceiling Lights',
-            price: '$2,499',
-            image: 'images/noir-chandelier.png',
-            description: 'Make a bold statement with the Noir Chandelier. Its matte black finish and crystal accents combine to offer a dramatic interplay of light and shadow. A true centerpiece for luxury interiors.',
-            features: [
-                'Material: Matte Black Steel & K9 Crystal',
-                'Light Source: 8 x E12 Bulbs (Not Included)',
-                'Dimensions: 80cm Diameter',
-                'Style: Modern Industrial',
-                'Assembly Required: Yes'
-            ]
-        },
-        'lumina-lamp': {
-            name: 'Lumina Floor Lamp',
-            category: 'Indoor / Floor Lamps',
-            price: '$899',
-            image: 'images/lumina-lamp.png',
-            description: 'Sleek, tall, and elegant, the Lumina Floor Lamp features an adjustable arm and a weighted base for stability. Its directed light is ideal for reading nooks or highlighting architectural details.',
-            features: [
-                'Material: Powder Coated Metal',
-                'Adjustable Arm & Head',
-                'Height: 160cm',
-                'Switch: Foot Pedal',
-                'Cord Length: 2m'
-            ]
-        },
-        'eclipse-sconce': {
-            name: 'Eclipse Wall Sconce',
-            category: 'Indoor / Wall Lights',
-            price: '$450',
-            image: '', // Placeholder logic handled below if specific image missing
-            description: 'Inspired by the celestial event, the Eclipse Wall Sconce provides soft, indirect lighting that washes the wall in a warm glow. Ideal for corridors and bedrooms.',
-            features: [
-                'Material: Brass & Frosted Glass',
-                'Mounting: Hardwired',
-                'Light Output: Ambient',
-                'Diameter: 25cm'
-            ]
-        },
-        'crystal-cascade': {
-            name: 'Crystal Cascade',
-            category: 'Indoor / Ceiling Lights',
-            price: '$3,200',
-            image: '',
-            description: 'A waterfall of light. The Crystal Cascade features hundreds of hand-cut crystals suspended in a wave pattern, refracting light into a spectrum of colors.',
-            features: [
-                'Material: Chrome & Premium Crystal',
-                'Customizable Length',
-                'Light Source: LED Matrix',
-                'Weight: 15kg'
-            ]
-        },
-        'orbital-desk-lamp': {
-            name: 'Orbital Desk Lamp',
-            category: 'Decoratives / Table Lamps',
-            price: '$350',
-            image: '',
-            description: 'Futuristic and functional. The Orbital Desk Lamp uses magnetic levitation technology to float the light source, creating a conversation piece for any executive desk.',
-            features: [
-                'Technology: Magnetic Levitation',
-                'Charging: Wireless Base',
-                'Control: Touch Sensor',
-                'Finish: Space Grey'
-            ]
+    // --- Load Products from JSON ---
+    const productGrid = document.querySelector('.product-grid');
+    let allProductsData = null;
+
+    if (productGrid) {
+        // Function to render products based on filter
+        function renderProducts(filterCategory = null, filterSubcategory = null) {
+            if (!allProductsData) return;
+
+            productGrid.innerHTML = '';
+            let productCount = 0;
+
+            // Iterate through categories and products
+            Object.keys(allProductsData.categories).forEach(categoryKey => {
+                const category = allProductsData.categories[categoryKey];
+
+                // Skip if filtering by category and this isn't it
+                if (filterCategory && categoryKey.toLowerCase() !== filterCategory.toLowerCase()) {
+                    return;
+                }
+
+                Object.keys(category).forEach(subcategoryKey => {
+                    const products = category[subcategoryKey];
+
+                    // Skip if filtering by subcategory and this isn't it
+                    if (filterSubcategory && subcategoryKey.toLowerCase() !== filterSubcategory.toLowerCase()) {
+                        return;
+                    }
+
+                    products.forEach((product, index) => {
+                        const productCard = document.createElement('article');
+                        productCard.className = 'product-card';
+                        productCard.dataset.category = categoryKey;
+                        productCard.dataset.subcategory = subcategoryKey;
+
+                        // Create unique ID for product
+                        const productId = `${categoryKey}-${subcategoryKey}-${index}`;
+
+                        productCard.innerHTML = `
+                            <a href="product-detail.html?id=${productId}">
+                                <div class="product-image">
+                                    <img src="${product.image}" alt="${product.name}">
+                                </div>
+                                <div class="product-info">
+                                    <h3>${product.name}</h3>
+                                    <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">${product.description || 'Premium lighting solution'}</p>
+                                    <span class="product-price">$${product.price.toLocaleString()}</span>
+                                    <button class="btn btn-primary" style="width: 100%;">Add to Cart</button>
+                                </div>
+                            </a>
+                        `;
+
+                        productGrid.appendChild(productCard);
+                        productCount++;
+                    });
+                });
+            });
+
+            // Update page subtitle with count
+            if (pageSubtitle) {
+                const itemText = productCount === 1 ? 'item' : 'items';
+                if (filterSubcategory) {
+                    pageSubtitle.textContent = `Showing ${productCount} ${itemText} in ${filterSubcategory}`;
+                } else if (filterCategory) {
+                    pageSubtitle.textContent = `Showing ${productCount} ${itemText} in ${filterCategory}`;
+                } else {
+                    pageSubtitle.textContent = `Showing all ${productCount} ${itemText}`;
+                }
+            }
         }
-    };
+
+        // Load products from JSON
+        fetch('product.json')
+            .then(response => response.json())
+            .then(data => {
+                allProductsData = data;
+                renderProducts(); // Show all products initially
+
+                // Add click handlers for subcategory filtering
+                const subCategoryLinks = document.querySelectorAll('.category-list ul .category-link');
+                subCategoryLinks.forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+
+                        const subcategoryText = link.textContent.trim();
+                        const parentCategoryLink = link.closest('ul').previousElementSibling;
+                        const parentCategoryText = parentCategoryLink.textContent.trim();
+
+                        // Update page title
+                        if (pageTitle) {
+                            pageTitle.textContent = `${parentCategoryText} / ${subcategoryText}`;
+                        }
+
+                        // Filter products
+                        renderProducts(parentCategoryText, subcategoryText);
+                    });
+                });
+
+                // Update "All Products" link to show all
+                const allProductsLink = document.getElementById('all-products-link');
+                if (allProductsLink) {
+                    allProductsLink.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        if (pageTitle) pageTitle.textContent = 'All Products';
+                        renderProducts(); // Show all products
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error loading products:', error);
+                productGrid.innerHTML = '<p style="text-align: center; grid-column: 1/-1;">Error loading products. Please try again later.</p>';
+            });
+    }
+
+    // --- Product Detail Page Logic ---
 
     // Check if we are on the product detail page
     if (window.location.pathname.includes('product-detail.html')) {
         const urlParams = new URLSearchParams(window.location.search);
         const productId = urlParams.get('id');
 
-        if (productId && productsData[productId]) {
-            const product = productsData[productId];
+        if (productId) {
+            // Load product data from JSON
+            fetch('product.json')
+                .then(response => response.json())
+                .then(data => {
+                    // Parse the product ID (format: category-subcategory-index)
+                    const [categoryKey, subcategoryKey, indexStr] = productId.split('-');
+                    const index = parseInt(indexStr);
 
-            // Populate Data
-            document.title = `${product.name} | Cuplighton`;
-            document.getElementById('detail-category').textContent = product.category;
-            document.getElementById('detail-name').textContent = product.name;
-            document.getElementById('detail-title').textContent = product.name;
-            document.getElementById('detail-price').textContent = product.price;
-            document.getElementById('detail-description').textContent = product.description;
+                    // Find the product in the JSON data
+                    if (data.categories[categoryKey] &&
+                        data.categories[categoryKey][subcategoryKey] &&
+                        data.categories[categoryKey][subcategoryKey][index]) {
 
-            // Image handling (fallback if specific image not defined in this demo)
-            const imgElement = document.getElementById('detail-image');
-            if (product.image) {
-                imgElement.src = product.image;
-            } else {
-                // Placeholder for items without generated images
-                imgElement.style.backgroundColor = '#1a1a1a';
-                imgElement.alt = 'Image coming soon';
-            }
+                        const product = data.categories[categoryKey][subcategoryKey][index];
 
-            // Populate Features
-            const featuresList = document.getElementById('detail-features');
-            featuresList.innerHTML = ''; // Clear loading text
-            product.features.forEach(feature => {
-                const li = document.createElement('li');
-                li.textContent = feature;
-                li.style.marginBottom = '0.5rem';
-                featuresList.appendChild(li);
-            });
+                        // Populate Data
+                        document.title = `${product.name} | Cuplighton`;
+                        document.getElementById('detail-category').textContent = `${categoryKey.charAt(0).toUpperCase() + categoryKey.slice(1)} / ${subcategoryKey.charAt(0).toUpperCase() + subcategoryKey.slice(1)}`;
+                        document.getElementById('detail-name').textContent = product.name;
+                        document.getElementById('detail-title').textContent = product.name;
+                        document.getElementById('detail-price').textContent = `$${product.price.toLocaleString()}`;
+                        document.getElementById('detail-description').textContent = product.description || 'Premium lighting solution designed for modern spaces.';
+
+
+                        // Image Gallery handling
+                        const imgElement = document.getElementById('detail-image');
+                        const thumbnailsContainer = document.getElementById('image-thumbnails');
+
+                        // Use images array if available, otherwise fall back to single image
+                        const productImages = product.images && product.images.length > 0
+                            ? product.images
+                            : (product.image ? [product.image] : []);
+
+                        if (productImages.length > 0) {
+                            // Set main image
+                            imgElement.src = productImages[0];
+                            imgElement.alt = product.name;
+
+                            // Create thumbnails if multiple images
+                            if (productImages.length > 1) {
+                                thumbnailsContainer.innerHTML = '';
+                                productImages.forEach((imageSrc, index) => {
+                                    const thumbnail = document.createElement('img');
+                                    thumbnail.src = imageSrc;
+                                    thumbnail.alt = `${product.name} - Image ${index + 1}`;
+                                    thumbnail.className = 'thumbnail' + (index === 0 ? ' active' : '');
+                                    thumbnail.addEventListener('click', () => {
+                                        imgElement.src = imageSrc;
+                                        // Update active thumbnail
+                                        document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
+                                        thumbnail.classList.add('active');
+                                    });
+                                    thumbnailsContainer.appendChild(thumbnail);
+                                });
+                            }
+                        } else {
+                            imgElement.style.backgroundColor = '#ffffff';
+                            imgElement.alt = 'Image coming soon';
+                        }
+
+
+                        // Populate Features (if available)
+                        const featuresList = document.getElementById('detail-features');
+                        featuresList.innerHTML = '';
+
+                        if (product.features && product.features.length > 0) {
+                            product.features.forEach(feature => {
+                                const li = document.createElement('li');
+                                li.textContent = feature;
+                                li.style.marginBottom = '0.5rem';
+                                featuresList.appendChild(li);
+                            });
+                        } else {
+                            // Default features if none specified
+                            const defaultFeatures = [
+                                'Premium Quality Materials',
+                                'Energy Efficient',
+                                'Easy Installation',
+                                '2 Year Warranty'
+                            ];
+                            defaultFeatures.forEach(feature => {
+                                const li = document.createElement('li');
+                                li.textContent = feature;
+                                li.style.marginBottom = '0.5rem';
+                                featuresList.appendChild(li);
+                            });
+                        }
+                    } else {
+                        // Product not found
+                        document.querySelector('.product-detail-container').innerHTML = '<h2 class="text-center">Product Not Found</h2><p class="text-center"><a href="products.html" class="text-gold">Return to Collection</a></p>';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading product details:', error);
+                    document.querySelector('.product-detail-container').innerHTML = '<h2 class="text-center">Error Loading Product</h2><p class="text-center"><a href="products.html" class="text-gold">Return to Collection</a></p>';
+                });
         } else {
-            // Handle invalid ID
+            // No product ID provided
             document.querySelector('.product-detail-container').innerHTML = '<h2 class="text-center">Product Not Found</h2><p class="text-center"><a href="products.html" class="text-gold">Return to Collection</a></p>';
         }
     }

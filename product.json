@@ -1,0 +1,133 @@
+{
+    "categories": {
+        "indoor": {
+            "recessed": [
+                {
+                    "name": "Bergen",
+                    "price": 1299,
+                    "image": "Products/Images/Indoor/Recessed/Bergen/Bergen_1.png",
+                    "images": [
+                        "Products/Images/Indoor/Recessed/Bergen/Bergen_1.png",
+                        "Products/Images/Indoor/Recessed/Bergen/Bergen_2.png"
+                    ],
+                    "description": ""
+                },
+                {
+                    "name": "Kowloon",
+                    "price": 1299,
+                    "image": "Products/Images/Indoor/Recessed/Kowloon/Kowloon_1.png",
+                    "images": [
+                        "Products/Images/Indoor/Recessed/Kowloon/Kowloon_1.png"
+                    ],
+                    "description": ""
+                },
+                {
+                    "name": "Sakai",
+                    "price": 1299,
+                    "image": "Products/Images/Indoor/Recessed/Sakai/Sakai.png",
+                    "images": [
+                        "Products/Images/Indoor/Recessed/Sakai/Sakai.png"
+                    ],
+                    "description": ""
+                },
+                {
+                    "name": "Shibuya",
+                    "price": 1299,
+                    "image": "Products/Images/Indoor/Recessed/Shibuya/Shibuya_1.png",
+                    "images": [
+                        "Products/Images/Indoor/Recessed/Shibuya/Shibuya_1.png"
+                    ],
+                    "description": ""
+                }
+            ],
+            "surface": [
+                {
+                    "name": "Jena",
+                    "price": 1299,
+                    "image": "Products/Images/Indoor/Surface/Jena/Jena_1.png",
+                    "images": [
+                        "Products/Images/Indoor/Surface/Jena/Jena_1.png",
+                        "Products/Images/Indoor/Surface/Jena/Jena_2.png",
+                        "Products/Images/Indoor/Surface/Jena/Jena_3.png",
+                        "Products/Images/Indoor/Surface/Jena/Jena_4.png"
+                    ],
+                    "description": ""
+                },
+                {
+                    "name": "Jena 3",
+                    "price": 1299,
+                    "image": "Products/Images/Indoor/Surface/Jena 3/Jena.png",
+                    "images": [
+                        "Products/Images/Indoor/Surface/Jena 3/Jena.png"
+                    ],
+                    "description": ""
+                },
+                {
+                    "name": "Jena 4",
+                    "price": 1299,
+                    "image": "Products/Images/Indoor/Surface/Jena 4/Jena4_1.png",
+                    "images": [
+                        "Products/Images/Indoor/Surface/Jena 4/Jena4_1.png",
+                        "Products/Images/Indoor/Surface/Jena 4/Jena4_2.png"
+                    ],
+                    "description": ""
+                },
+                {
+                    "name": "Lavik",
+                    "price": 1299,
+                    "image": "Products/Images/Indoor/Surface/Lavik/Lavik_1.png",
+                    "images": [
+                        "Products/Images/Indoor/Surface/Lavik/Lavik_1.png",
+                        "Products/Images/Indoor/Surface/Lavik/Lavik_2.png"
+                    ],
+                    "description": ""
+                },
+                {
+                    "name": "T8 Water Proof",
+                    "price": 1299,
+                    "image": "Products/Images/Indoor/Surface/T8 Water Proof/T8_1.png",
+                    "images": [
+                        "Products/Images/Indoor/Surface/T8 Water Proof/T8_1.png",
+                        "Products/Images/Indoor/Surface/T8 Water Proof/T8_2.png",
+                        "Products/Images/Indoor/Surface/T8 Water Proof/T8_3.png",
+                        "Products/Images/Indoor/Surface/T8 Water Proof/T8_4.png"
+                    ],
+                    "description": ""
+                },
+                {
+                    "name": "Capetown",
+                    "price": 1299,
+                    "image": "Products/Images/Indoor/Surface/Capetown/Capetown_2.png",
+                    "images": [
+                        "Products/Images/Indoor/Surface/Capetown/Capetown_2.png"
+                    ],
+                    "description": ""
+                }
+            ],
+            "pendant": [
+                {
+                    "name": "Capetown",
+                    "price": 1299,
+                    "image": "Products/Images/Indoor/Pendant/Capetown/Capetown_1.png",
+                    "images": [
+                        "Products/Images/Indoor/Pendant/Capetown/Capetown_1.png"
+                    ],
+                    "description": ""
+                }
+            ],
+            "chandelier": [],
+            "tracklight": [
+                {
+                    "name": "Fokuz",
+                    "price": 1299,
+                    "image": "Products/Images/Indoor/Track Light/Fokuz/Fokuz_1.png",
+                    "images": [
+                        "Products/Images/Indoor/Track Light/Fokuz/Fokuz_1.png",
+                        "Products/Images/Indoor/Track Light/Fokuz/Fokuz_2.png"
+                    ],
+                    "description": ""
+                }
+            ]
+        }
+    }
+}
