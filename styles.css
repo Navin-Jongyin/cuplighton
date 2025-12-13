@@ -28,7 +28,7 @@
     --spacing-xl: 8rem;
 
     /* Layout */
-    --container-width: 1200px;
+    --container-width: 1400px;
     --header-height: 80px;
 
     /* Transitions */
@@ -38,7 +38,7 @@
 
 @media (min-width: 1600px) {
     :root {
-        --container-width: 1550px;
+        --container-width: 1700px;
     }
 }
 
@@ -75,7 +75,7 @@ img {
 .container {
     max-width: var(--container-width);
     margin: 0 auto;
-    padding: 0 var(--spacing-sm);
+    padding: 0 var(--spacing-xs);
 }
 
 .text-gold {
