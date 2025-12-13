@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Cuplighton</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <header class="header">
+        <div class="container nav flex">
+            <a href="index.html" class="logo">
+                <img src="images/Logo/logo.png" alt="Logo">
+            </a>
+            <nav>
+                <ul class="flex nav-links">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="about.html" class="nav-link">About</a></li>
+                    <li><a href="products.html" class="nav-link">Products</a></li>
+                    <li><a href="services.html" class="nav-link"> Services</a></li>
+                    <li><a href="contact.html" class="nav-link active">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main style="padding-top: var(--header-height);">
+        <!-- Page Header -->
+        <section style="padding: 6rem 0 2rem; background: radial-gradient(circle at top, #1a1a1a, #050505);">
+            <div class="container text-center">
+                <h1>Contact Us</h1>
+                <p>We're here to help illuminate your vision.</p>
+            </div>
+        </section>
+
+        <section class="featured">
+            <div class="container">
+                <div class="contact-grid">
+                    <!-- Contact Form -->
+                    <div class="contact-form">
+                        <form onsubmit="event.preventDefault(); alert('Message sent! We will contact you shortly.');">
+                            <div class="form-group">
+                                <label class="form-label">Name</label>
+                                <input type="text" class="form-input" placeholder="Your Name" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Email</label>
+                                <input type="email" class="form-input" placeholder="your@email.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Message</label>
+                                <textarea class="form-textarea" rows="5" placeholder="How can we help?"
+                                    required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Send Message</button>
+                        </form>
+                    </div>
+
+                    <!-- Contact Info -->
+                    <div class="contact-info">
+                        <div class="contact-info-item">
+                            <h3>Showroom</h3>
+                            <p>123 Luxury Avenue<br>New York, NY 10012</p>
+                        </div>
+                        <div class="contact-info-item">
+                            <h3>Contact</h3>
+                            <p>Phone: +1 (212) 555-0199<br>Email: concierge@cuplighton.com</p>
+                        </div>
+                        <div class="contact-info-item">
+                            <h3>Hours</h3>
+                            <p>Mon-Fri: 10am - 8pm<br>Sat-Sun: 11am - 6pm</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="logo" style="margin-bottom: 1rem;">CUPLIGHT<span>ON</span></div>
+            <ul class="flex footer-links">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="products.html" class="nav-link">Catalog</a></li>
+                <li><a href="contact.html" class="nav-link active">Support</a></li>
+            </ul>
+            <p>&copy; 2025 Cuplighton. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

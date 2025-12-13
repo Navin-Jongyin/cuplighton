@@ -4,168 +4,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Cuplighton | Premium Lighting</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-    <header>
-        <a href="#">
-            <img src="images/logo/logo_2.png" alt="cupLight-Logo">
-        </a>
-        <nav>
-            <a href="#hero">Home</a>
-            <a href="projectsPage.html">Projects</a>
-            <a href="productsPage.html">Products</a>
-            <a href="contactUs.html">Contact</a>
-        </nav>
+
+    <!-- Navigation -->
+    <header class="header">
+        <div class="container nav flex">
+            <a href="index.html" class="logo">
+                <img src="images/Logo/logo.png" alt="Logo">
+            </a>
+            <nav>
+                <ul class="flex nav-links">
+                    <li><a href="index.html" class="nav-link active">Home</a></li>
+                    <li><a href="about.html" class="nav-link">About</a></li>
+                    <li><a href="products.html" class="nav-link">Products</a></li>
+                    <li><a href="services.html" class="nav-link">Services</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
-    <section class="hero" id="hero">
+
+    <!-- Hero Section -->
+    <section class="hero">
         <div class="hero-content">
-            <h2>The Light Leads Your Life</h2>
-            <p>Explore your style</p>
+            <h1 class="hero-title">Lux et Veritas</h1>
+            <p class="hero-subtitle">Discover our exclusive collection of premium lighting fixtures designed to
+                transform your space into a masterpiece of light and shadow.</p>
+            <a href="products.html" class="btn btn-primary">See Our Products</a>
         </div>
     </section>
-    <div class="floating-box">
-        <div class="category-box">
 
-            <div class="category-section">
-                <img src="https://img.icons8.com/ios-filled/50/000000/lamp.png" alt="Indoor" class="cat-icon">
-                <h3>Indoor</h3>
-            </div>
-
-            <div class="divider"></div>
-
-            <div class="category-section">
-                <img src="https://img.icons8.com/ios-filled/50/000000/garden.png" alt="Outdoor" class="cat-icon">
-                <h3>Outdoor</h3>
-            </div>
-
-            <div class="divider"></div>
-
-            <div class="category-section">
-                <img src="https://img.icons8.com/ios-filled/50/000000/chandelier.png" alt="Decorative" class="cat-icon">
-                <h3>Decorative</h3>
-            </div>
-
-            <div class="divider"></div>
-
-            <div class="category-section">
-                <img src="https://img.icons8.com/ios-filled/50/000000/solar-panel.png" alt="Solar" class="cat-icon">
-                <h3>Solar</h3>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- Featured Products Section -->
-    <section class="home-products-section">
-        <div class="home-section-header">
-            <div>
+    <!-- Featured Collection -->
+    <section class="featured">
+        <div class="container">
+            <div class="text-center" style="margin-bottom: 4rem;">
                 <h2>Featured Products</h2>
-                <p>Discover our top lighting solutions</p>
+                <p>Curated selection of our finest designs</p>
             </div>
-            <a href="productsPage.html" class="home-see-all">See all →</a>
-        </div>
 
-        <div class="product-grid" id="home-featured-products">
-            <div class="loading">Loading products...</div>
+            <div class="product-grid">
+                <!-- Product 1 -->
+                <article class="product-card">
+                    <div class="product-image">
+                        <img src="images/aurum-pendant.png" alt="Aurum Pendant">
+                    </div>
+                    <div class="product-info text-center">
+                        <h3>Aurum Pendant</h3>
+                        <span class="product-price">$1,299</span>
+                        <a href="products.html" class="btn">View Details</a>
+                    </div>
+                </article>
+
+                <!-- Product 2 -->
+                <article class="product-card">
+                    <div class="product-image">
+                        <img src="images/noir-chandelier.png" alt="Noir Chandelier">
+                    </div>
+                    <div class="product-info text-center">
+                        <h3>Noir Chandelier</h3>
+                        <span class="product-price">$2,499</span>
+                        <a href="products.html" class="btn">View Details</a>
+                    </div>
+                </article>
+
+                <!-- Product 3 -->
+                <article class="product-card">
+                    <div class="product-image">
+                        <img src="images/lumina-lamp.png" alt="Lumina Floor Lamp">
+                    </div>
+                    <div class="product-info text-center">
+                        <h3>Lumina Floor Lamp</h3>
+                        <span class="product-price">$899</span>
+                        <a href="products.html" class="btn">View Details</a>
+                    </div>
+                </article>
+
+            </div>
         </div>
     </section>
 
-    <!-- Projects Section -->
-    <section class="home-projects-section" id="projects">
-        <div class="home-section-header">
-            <div>
-                <h2>Our Projects</h2>
-                <p>Explore our completed lighting installations</p>
-            </div>
-            <a href="projectsPage.html" class="home-see-all">See all →</a>
-        </div>
-
-        <div class="home-projects-grid">
-            <div class="home-project-card" onclick="window.location.href='projectDetail.html?id=project1'">
-                <img src="images/projects/project1/project1-1.JPG" alt="Project 1">
-                <div class="home-project-info">
-                    <h3>Lighting Installation Project</h3>
-                    <p>Professional outdoor lighting solution</p>
-                </div>
-            </div>
+    <!-- Contact CTA -->
+    <section style="padding: 8rem 0; background: var(--bg-secondary);">
+        <div class="container text-center">
+            <h2>Bespoke Lighting Solutions</h2>
+            <p style="margin-bottom: 2rem;">Looking for something unique? Let us design your perfect light.</p>
+            <a href="contact.html" class="btn">Contact Us</a>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer>
-        © 2025 Cup Lighton — All Rights Reserved
+    <footer class="footer">
+        <div class="container">
+            <div class="logo" style="margin-bottom: 1rem;">CUPLIGHT<span>ON</span></div>
+            <ul class="flex footer-links">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="products.html" class="nav-link">Catalog</a></li>
+                <li><a href="contact.html" class="nav-link">Support</a></li>
+            </ul>
+            <p>&copy; 2025 Cuplighton. All rights reserved.</p>
+        </div>
     </footer>
-
-    <script>
-        // Load featured products from data.json
-        async function loadFeaturedProducts() {
-            const productGrid = document.getElementById('home-featured-products');
-
-            try {
-                const response = await fetch('data.json');
-                const products = await response.json();
-
-                // Get first 4 products
-                const featuredProducts = products.slice(0, 4);
-
-                // Clear loading message
-                productGrid.innerHTML = '';
-
-                // Create product cards
-                featuredProducts.forEach(product => {
-                    const card = document.createElement('div');
-                    card.className = 'product-card';
-
-                    // Get the first image if images array exists, otherwise use image field
-                    const imageUrl = product.images ? product.images[0] : product.image;
-
-                    // Display categories (show all if multiple)
-                    let categoryDisplay;
-                    if (Array.isArray(product.categories)) {
-                        categoryDisplay = product.categories.map(cat => capitalize(cat)).join(', ');
-                    } else {
-                        categoryDisplay = capitalize(product.category);
-                    }
-
-                    card.innerHTML = `
-                        <img src="${imageUrl}" alt="${product.name}" style="cursor: pointer;">
-                        <h3 style="cursor: pointer;">${product.name}</h3>
-                        <p class="home-product-category" style="cursor: pointer;">${categoryDisplay}</p>
-                        <div class="home-product-bottom">
-                            <p class="home-product-price">฿${product.price.toLocaleString()}</p>
-                            <button class="home-product-btn" onclick="event.stopPropagation(); window.open('${product.pdf}', '_blank')">Datasheet</button>
-                        </div>
-                    `;
-
-                    // Add click event to card elements (not button)
-                    card.querySelector('img').addEventListener('click', () => {
-                        window.location.href = `productDetail.html?id=${product.id}`;
-                    });
-                    card.querySelector('h3').addEventListener('click', () => {
-                        window.location.href = `productDetail.html?id=${product.id}`;
-                    });
-                    card.querySelector('.home-product-category').addEventListener('click', () => {
-                        window.location.href = `productDetail.html?id=${product.id}`;
-                    });
-
-                    productGrid.appendChild(card);
-                });
-            } catch (error) {
-                console.error('Error loading products:', error);
-                productGrid.innerHTML = '<p style="text-align: center; color: #666;">Failed to load products.</p>';
-            }
-        }
-
-        function capitalize(str) {
-            return str.charAt(0).toUpperCase() + str.slice(1);
-        }
-
-        // Load products when page loads
-        document.addEventListener('DOMContentLoaded', loadFeaturedProducts);
-    </script>
 
 </body>
 

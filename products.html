@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products | Cuplighton</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <header class="header">
+        <div class="container nav flex">
+            <a href="index.html" class="logo">
+                <img src="images/Logo/logo.png" alt="Logo">
+            </a>
+            <nav>
+                <ul class="flex nav-links">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="about.html" class="nav-link">About</a></li>
+                    <li><a href="products.html" class="nav-link active">Products</a></li>
+                    <li><a href="services.html" class="nav-link"> Services</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main style="padding-top: var(--header-height);">
+        <!-- Page Header -->
+        <section class="products-hero">
+            <div class="container text-center">
+                <h1>Exclusive Collection</h1>
+                <p>Discover our range of premium lighting solutions</p>
+            </div>
+        </section>
+
+        <!-- Products Layout -->
+        <section class="featured">
+            <div class="container">
+                <div class="products-layout">
+                    <!-- Sidebar -->
+                    <aside class="sidebar">
+                        <h3 class="sidebar-title">Categories</h3>
+                        <ul class="category-list">
+                            <li>
+                                <a href="#" class="category-link" id="all-products-link">All Products</a>
+                            </li>
+                            <li>
+                                <a href="#" class="category-link">Indoor</a>
+                                <ul>
+                                    <li><a href="#" class="category-link">Ceiling Lights</a></li>
+                                    <li><a href="#" class="category-link">Wall Lights</a></li>
+                                    <li><a href="#" class="category-link">Floor Lamps</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#" class="category-link">Outdoor</a>
+                                <ul>
+                                    <li><a href="#" class="category-link">Wall Lanterns</a></li>
+                                    <li><a href="#" class="category-link">Path Lights</a></li>
+                                    <li><a href="#" class="category-link">String Lights</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#" class="category-link">Decoratives</a>
+                                <ul>
+                                    <li><a href="#" class="category-link">Table Lamps</a></li>
+                                    <li><a href="#" class="category-link">Accent Pieces</a></li>
+                                    <li><a href="#" class="category-link">Art Lighting</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#" class="category-link">LED/Other</a>
+                                <ul>
+                                    <li><a href="#" class="category-link">Smart Bulbs</a></li>
+                                    <li><a href="#" class="category-link">LED Strips</a></li>
+                                    <li><a href="#" class="category-link">Accessories</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <h3 class="sidebar-title" style="margin-top: 2rem;">Price Range</h3>
+                        <ul class="category-list">
+                            <li><a href="#" class="category-link">Under $500</a></li>
+                            <li><a href="#" class="category-link">$500 - $1,000</a></li>
+                            <li><a href="#" class="category-link">$1,000 - $2,500</a></li>
+                            <li><a href="#" class="category-link">Above $2,500</a></li>
+                        </ul>
+                    </aside>
+
+                    <!-- Product Main Content -->
+                    <div class="products-main">
+                        <div class="grid-header">
+                            <h2 id="page-title">All Products</h2>
+                            <p id="page-subtitle">Showing all items</p>
+                        </div>
+
+                        <!-- Product Grid -->
+                        <div class="product-grid">
+                            <!-- Product 1 -->
+                            <article class="product-card">
+                                <a href="product-detail.html?id=aurum-pendant">
+                                    <div class="product-image">
+                                        <img src="images/aurum-pendant.png" alt="Aurum Pendant">
+                                    </div>
+                                    <div class="product-info">
+                                        <h3>Aurum Pendant</h3>
+                                        <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">Minimalist gold pendant for
+                                            modern spaces.</p>
+                                        <span class="product-price">$1,299</span>
+                                        <button class="btn btn-primary" style="width: 100%;">Add to Cart</button>
+                                    </div>
+                                </a>
+                            </article>
+
+                            <!-- Product 2 -->
+                            <article class="product-card">
+                                <a href="product-detail.html?id=noir-chandelier">
+                                    <div class="product-image">
+                                        <img src="images/noir-chandelier.png" alt="Noir Chandelier">
+                                    </div>
+                                    <div class="product-info">
+                                        <h3>Noir Chandelier</h3>
+                                        <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">Statement piece with matte
+                                            black finish.</p>
+                                        <span class="product-price">$2,499</span>
+                                        <button class="btn btn-primary" style="width: 100%;">Add to Cart</button>
+                                    </div>
+                                </a>
+                            </article>
+
+                            <!-- Product 3 -->
+                            <article class="product-card">
+                                <a href="product-detail.html?id=lumina-lamp">
+                                    <div class="product-image">
+                                        <img src="images/lumina-lamp.png" alt="Lumina Floor Lamp">
+                                    </div>
+                                    <div class="product-info">
+                                        <h3>Lumina Floor Lamp</h3>
+                                        <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">Elegant floor lamp with
+                                            adjustable arm.</p>
+                                        <span class="product-price">$899</span>
+                                        <button class="btn btn-primary" style="width: 100%;">Add to Cart</button>
+                                    </div>
+                                </a>
+                            </article>
+
+                            <!-- Product 4 -->
+                            <article class="product-card">
+                                <a href="product-detail.html?id=eclipse-sconce">
+                                    <div class="product-image" style="filter: hue-rotate(135deg);"></div>
+                                    <div class="product-info">
+                                        <h3>Eclipse Wall Sconce</h3>
+                                        <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">Ambient lighting inspired
+                                            by solar eclipses.</p>
+                                        <span class="product-price">$450</span>
+                                        <button class="btn btn-primary" style="width: 100%;">Add to Cart</button>
+                                    </div>
+                                </a>
+                            </article>
+
+                            <!-- Product 5 -->
+                            <article class="product-card">
+                                <a href="product-detail.html?id=crystal-cascade">
+                                    <div class="product-image" style="filter: hue-rotate(180deg);"></div>
+                                    <div class="product-info">
+                                        <h3>Crystal Cascade</h3>
+                                        <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">Luxurious crystal
+                                            chandelier cascading light.</p>
+                                        <span class="product-price">$3,200</span>
+                                        <button class="btn btn-primary" style="width: 100%;">Add to Cart</button>
+                                    </div>
+                                </a>
+                            </article>
+
+                            <!-- Product 6 -->
+                            <article class="product-card">
+                                <a href="product-detail.html?id=orbital-desk-lamp">
+                                    <div class="product-image" style="filter: hue-rotate(225deg);"></div>
+                                    <div class="product-info">
+                                        <h3>Orbital Desk Lamp</h3>
+                                        <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">Futuristic design for the
+                                            modern desk.</p>
+                                        <span class="product-price">$350</span>
+                                        <button class="btn btn-primary" style="width: 100%;">Add to Cart</button>
+                                    </div>
+                                </a>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="logo" style="margin-bottom: 1rem;">CUPLIGHT<span>ON</span></div>
+            <ul class="flex footer-links">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="products.html" class="nav-link active">Catalog</a></li>
+                <li><a href="contact.html" class="nav-link">Support</a></li>
+            </ul>
+            <p>&copy; 2025 Cuplighton. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
