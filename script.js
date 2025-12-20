@@ -1,4 +1,61 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // --- Load Featured Products on Homepage ---
+    const featuredProductsGrid = document.getElementById('featured-products-grid');
+    
+    if (featuredProductsGrid) {
+        fetch('product.json')
+            .then(response => response.json())
+            .then(data => {
+                // Collect all products from all categories
+                const allProducts = [];
+                Object.keys(data.categories).forEach(categoryKey => {
+                    const category = data.categories[categoryKey];
+                    Object.keys(category).forEach(subcategoryKey => {
+                        const products = category[subcategoryKey];
+                        products.forEach((product, index) => {
+                            allProducts.push({
+                                ...product,
+                                category: categoryKey,
+                                subcategory: subcategoryKey,
+                                index: index,
+                                id: `${categoryKey}-${subcategoryKey}-${index}`
+                            });
+                        });
+                    });
+                });
+
+                // Select random 5 products for featured section
+                const shuffled = allProducts.sort(() => 0.5 - Math.random());
+                const featured = shuffled.slice(0, 5);
+
+                // Render featured products
+                featuredProductsGrid.innerHTML = '';
+                featured.forEach(product => {
+                    const productCard = document.createElement('article');
+                    productCard.className = 'product-card';
+                    
+                    productCard.innerHTML = `
+                        <a href="product-detail.html?id=${product.id}">
+                            <div class="product-image">
+                                <img src="${product.image}" alt="${product.name}">
+                            </div>
+                            <div class="product-info text-center">
+                                <h3>${product.name}</h3>
+                                <span class="product-price">$${product.price.toLocaleString()}</span>
+                                <button class="btn">View Details</button>
+                            </div>
+                        </a>
+                    `;
+                    
+                    featuredProductsGrid.appendChild(productCard);
+                });
+            })
+            .catch(error => {
+                console.error('Error loading featured products:', error);
+                featuredProductsGrid.innerHTML = '<p style="text-align: center; grid-column: 1/-1;">Error loading products.</p>';
+            });
+    }
+
     const categoryLinks = document.querySelectorAll('.category-list > li > .category-link');
 
     categoryLinks.forEach(link => {
@@ -53,8 +110,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // --- Load Products from JSON ---
-    const productGrid = document.querySelector('.product-grid');
+    // --- Load Products from JSON (for products.html page only) ---
+    const productGrid = document.querySelector('.product-grid:not(#featured-products-grid)');
     let allProductsData = null;
 
     if (productGrid) {
