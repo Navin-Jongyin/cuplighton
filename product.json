@@ -10,16 +10,19 @@
                         "Products/Images/Indoor/Recessed/Bergen/Bergen_1.png",
                         "Products/Images/Indoor/Recessed/Bergen/Bergen_2.png"
                     ],
-                    "description": ""
+                    "description": "",
+                    "datasheet": "Products/Datasheet/Indoor/Recessed/Bergen/Bergen.pdf"
                 },
                 {
                     "name": "Kowloon",
                     "price": 1299,
                     "image": "Products/Images/Indoor/Recessed/Kowloon/Kowloon_1.png",
                     "images": [
-                        "Products/Images/Indoor/Recessed/Kowloon/Kowloon_1.png"
+                        "Products/Images/Indoor/Recessed/Kowloon/Kowloon_1.png",
+                        "Products/Images/Indoor/Recessed/Kowloon/Kowloon_2.png"
                     ],
-                    "description": ""
+                    "description": "",
+                    "datasheet": "Products/Datasheet/Indoor/Recessed/Kowloon/Kowloon.pdf"
                 },
                 {
                     "name": "Sakai",
@@ -28,7 +31,8 @@
                     "images": [
                         "Products/Images/Indoor/Recessed/Sakai/Sakai.png"
                     ],
-                    "description": ""
+                    "description": "",
+                    "datasheet": "Products/Datasheet/Indoor/Recessed/Sakai/Sakai.pdf"
                 },
                 {
                     "name": "Shibuya",
@@ -37,7 +41,8 @@
                     "images": [
                         "Products/Images/Indoor/Recessed/Shibuya/Shibuya_1.png"
                     ],
-                    "description": ""
+                    "description": "",
+                    "datasheet": "Products/Datasheet/Indoor/Recessed/Shibuya/Shibuya.pdf"
                 }
             ],
             "surface": [
@@ -51,7 +56,8 @@
                         "Products/Images/Indoor/Surface/Jena/Jena_3.png",
                         "Products/Images/Indoor/Surface/Jena/Jena_4.png"
                     ],
-                    "description": ""
+                    "description": "",
+                    "datasheet": "Products/Datasheet/Indoor/Surface/Jena/Jena.pdf"
                 },
                 {
                     "name": "Jena 3",
@@ -60,7 +66,8 @@
                     "images": [
                         "Products/Images/Indoor/Surface/Jena 3/Jena.png"
                     ],
-                    "description": ""
+                    "description": "",
+                    "datasheet": "Products/Datasheet/Indoor/Surface/Jena 3/Jena3.pdf"
                 },
                 {
                     "name": "Jena 4",
@@ -70,7 +77,8 @@
                         "Products/Images/Indoor/Surface/Jena 4/Jena4_1.png",
                         "Products/Images/Indoor/Surface/Jena 4/Jena4_2.png"
                     ],
-                    "description": ""
+                    "description": "",
+                    "datasheet": "Products/Datasheet/Indoor/Surface/Jena 4/Jena4.pdf"
                 },
                 {
                     "name": "Lavik",
@@ -80,7 +88,8 @@
                         "Products/Images/Indoor/Surface/Lavik/Lavik_1.png",
                         "Products/Images/Indoor/Surface/Lavik/Lavik_2.png"
                     ],
-                    "description": ""
+                    "description": "",
+                    "datasheet": "Products/Datasheet/Indoor/Surface/Lavik/Lavik.pdf"
                 },
                 {
                     "name": "T8 Water Proof",
@@ -92,7 +101,8 @@
                         "Products/Images/Indoor/Surface/T8 Water Proof/T8_3.png",
                         "Products/Images/Indoor/Surface/T8 Water Proof/T8_4.png"
                     ],
-                    "description": ""
+                    "description": "",
+                    "datasheet": "Products/Datasheet/Indoor/Surface/T8/T8.pdf"
                 },
                 {
                     "name": "Capetown",
@@ -101,7 +111,8 @@
                     "images": [
                         "Products/Images/Indoor/Surface/Capetown/Capetown_2.png"
                     ],
-                    "description": ""
+                    "description": "",
+                    "datasheet": "Products/Datasheet/Indoor/Surface/Capetown/Capetown.pdf"
                 }
             ],
             "pendant": [
@@ -112,7 +123,8 @@
                     "images": [
                         "Products/Images/Indoor/Pendant/Capetown/Capetown_1.png"
                     ],
-                    "description": ""
+                    "description": "",
+                    "datasheet": "Products/Datasheet/Indoor/Pendant/Capetown/Capetown.pdf"
                 }
             ],
             "chandelier": [],
@@ -126,6 +138,26 @@
                         "Products/Images/Indoor/Track Light/Fokuz/Fokuz_2.png"
                     ],
                     "description": ""
+                }
+            ]
+        },
+        "outdoor": {
+            "wall": [],
+            "ceiling": [],
+            "ground": [],
+            "underwater": [
+                {
+                    "name": "Seal",
+                    "price": 1299,
+                    "image": "Products/Images/Outdoor/Underwater/Seal/Seal_1.png",
+                    "images": [
+                        "Products/Images/Outdoor/Underwater/Seal/Seal_1.png",
+                        "Products/Images/Outdoor/Underwater/Seal/Seal_2.png",
+                        "Products/Images/Outdoor/Underwater/Seal/Seal_3.png",
+                        "Products/Images/Outdoor/Underwater/Seal/Seal_4.png"
+                    ],
+                    "description": "",
+                    "datasheet": "Products/Datasheet/Outdoor/Underwater/Seal/Seal.pdf"
                 }
             ]
         }

@@ -24,9 +24,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                 });
 
-                // Select random 5 products for featured section
+                // Select random products for featured section (one row)
                 const shuffled = allProducts.sort(() => 0.5 - Math.random());
-                const featured = shuffled.slice(0, 5);
+                const featured = shuffled.slice(0, 6);
 
                 // Render featured products
                 featuredProductsGrid.innerHTML = '';
@@ -293,6 +293,18 @@ document.addEventListener('DOMContentLoaded', () => {
                             imgElement.alt = 'Image coming soon';
                         }
 
+
+                        // Handle Datasheet Button
+                        const datasheetBtn = document.getElementById('datasheet-btn');
+                        if (product.datasheet) {
+                            datasheetBtn.onclick = () => {
+                                window.open(product.datasheet, '_blank');
+                            };
+                        } else {
+                            datasheetBtn.disabled = true;
+                            datasheetBtn.textContent = 'Datasheet Not Available';
+                            datasheetBtn.style.opacity = '0.5';
+                        }
 
                         // Populate Features (if available)
                         const featuresList = document.getElementById('detail-features');
