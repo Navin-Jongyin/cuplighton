@@ -128,7 +128,7 @@
                 }
             ],
             "chandelier": [],
-            "tracklight": [
+            "track light": [
                 {
                     "name": "Fokuz",
                     "price": 1299,
@@ -145,6 +145,62 @@
             "wall": [],
             "ceiling": [],
             "ground": [],
+            "solar": [
+                {
+                    "name": "Ador",
+                    "price": 1299,
+                    "image": "Products/Images/Outdoor/Solar/Ador/Ador.png",
+                    "description": "",
+                    "datasheet": "Products/Datasheet/Outdoor/Solar/Ador/Ador.pdf"
+                },
+                {
+                    "name": "Aster",
+                    "price": 1299,
+                    "image": "Products/Images/Outdoor/Solar/Aster/Aster_1.png",
+                    "images": [
+                        "Products/Images/Outdoor/Solar/Aster/Aster_1.png",
+                        "Products/Images/Outdoor/Solar/Aster/Aster_2.png",
+                        "Products/Images/Outdoor/Solar/Aster/Aster_3.png"
+                    ],
+                    "description": "",
+                    "datasheet": "Products/Datasheet/Outdoor/Solar/Aster/Aster.pdf"
+                },
+                {
+                    "name": "Columbus",
+                    "price": 1299,
+                    "image": "Products/Images/Outdoor/Solar/Columbus/Columbus_1.png",
+                    "images": [
+                        "Products/Images/Outdoor/Solar/Columbus/Columbus_1.png",
+                        "Products/Images/Outdoor/Solar/Columbus/Columbus_2.png",
+                        "Products/Images/Outdoor/Solar/Columbus/Columbus_3.png"
+                    ],
+                    "description": "",
+                    "datasheet": "Products/Datasheet/Outdoor/Solar/Columbus/Columbus.pdf"
+                },
+                {
+                    "name": "Dayton",
+                    "price": 1299,
+                    "image": "Products/Images/Outdoor/Solar/Dayton/Dayton_1.png",
+                    "images": [
+                        "Products/Images/Outdoor/Solar/Dayton/Dayton_1.png",
+                        "Products/Images/Outdoor/Solar/Dayton/Dayton_2.png"
+                    ],
+                    "description": "",
+                    "datasheet": "Products/Datasheet/Outdoor/Solar/Dayton/Dayton.pdf"
+                },
+                {
+                    "name": "Hamburg",
+                    "price": 1299,
+                    "image": "Products/Images/Outdoor/Solar/Hamburg/Hamburg_1.png",
+                    "images": [
+                        "Products/Images/Outdoor/Solar/Hamburg/Hamburg_1.png",
+                        "Products/Images/Outdoor/Solar/Hamburg/Hamburg_2.png",
+                        "Products/Images/Outdoor/Solar/Hamburg/Hamburg_3.png"
+                    ],
+                    "description": "",
+                    "datasheet": "Products/Datasheet/Outdoor/Solar/Hamburg/Hamburg.pdf"
+                }
+            ],
             "underwater": [
                 {
                     "name": "Seal",
@@ -158,6 +214,233 @@
                     ],
                     "description": "",
                     "datasheet": "Products/Datasheet/Outdoor/Underwater/Seal/Seal.pdf"
+                },
+                {
+                    "name": "Coral",
+                    "price": 1299,
+                    "image": "Products/Images/Outdoor/Underwater/Coral/Coral_1.png",
+                    "images": [
+                        "Products/Images/Outdoor/Underwater/Coral/Coral_1.png",
+                        "Products/Images/Outdoor/Underwater/Coral/Coral_2.png",
+                        "Products/Images/Outdoor/Underwater/Coral/Coral_3.png",
+                        "Products/Images/Outdoor/Underwater/Coral/Coral_4.png"
+                    ],
+                    "description": "",
+                    "datasheet": "Products/Datasheet/Outdoor/Underwater/Coral/Coral.pdf"
+                },
+                {
+                    "name": "Dolphins",
+                    "price": 1299,
+                    "image": "Products/Images/Outdoor/Underwater/Dolphins/Dolphins_1.png",
+                    "images": [
+                        "Products/Images/Outdoor/Underwater/Dolphins/Dolphins_1.png",
+                        "Products/Images/Outdoor/Underwater/Dolphins/Dolphins_2.png",
+                        "Products/Images/Outdoor/Underwater/Dolphins/Dolphins_3.png"
+                    ],
+                    "description": "",
+                    "datasheet": "Products/Datasheet/Outdoor/Underwater/Dolphins/Dolphins.pdf"
+                },
+                {
+                    "name": "Harbour",
+                    "price": 1299,
+                    "image": "Products/Images/Outdoor/Underwater/Harbour/Harbour.png",
+                    "description": "",
+                    "datasheet": "Products/Datasheet/Outdoor/Underwater/Harbour/Harbour.pdf"
+                },
+                {
+                    "name": "Lagoon",
+                    "price": 1299,
+                    "image": "Products/Images/Outdoor/Underwater/Lagoon/Lagoon.png",
+                    "description": "",
+                    "datasheet": "Products/Datasheet/Outdoor/Underwater/Lagoon/Lagoon.pdf"
+                },
+                {
+                    "name": "Lagoon 2",
+                    "price": 1299,
+                    "image": "Products/Images/Outdoor/Underwater/Lagoon 2/Lagoon_2.png",
+                    "description": "",
+                    "datasheet": "Products/Datasheet/Outdoor/Underwater/Lagoon 2/Lagoon_2.pdf"
+                },
+                {
+                    "name": "Lyon",
+                    "price": 1299,
+                    "image": "Products/Images/Outdoor/Underwater/Lyon/Lyon.png",
+                    "description": "",
+                    "datasheet": "Products/Datasheet/Outdoor/Underwater/Lyon/Lyon.pdf"
+                },
+                {
+                    "name": "Marina",
+                    "price": 1299,
+                    "image": "Products/Images/Outdoor/Underwater/Marina/Marina.png",
+                    "description": "",
+                    "datasheet": "Products/Datasheet/Outdoor/Underwater/Marina/Marina.pdf"
+                }
+            ],
+            "bollard": [
+                {
+                    "name": "Bernard 1",
+                    "price": 1299,
+                    "image": "Products/Images/Outdoor/Bollard/Bernard 1/Bernard_1.png",
+                    "description": "",
+                    "datasheet": "Products/Datasheet/Outdoor/Bollard/Bernard 1/Bernard_1.pdf"
+                },
+                {
+                    "name": "Bernard 2",
+                    "price": 1299,
+                    "image": "Products/Images/Outdoor/Bollard/Bernard 2/Bernard_2.png",
+                    "description": "",
+                    "datasheet": "Products/Datasheet/Outdoor/Bollard/Bernard 2/Bernard_2.pdf"
+                },
+                {
+                    "name": "Bernard 3",
+                    "price": 1299,
+                    "image": "Products/Images/Outdoor/Bollard/Bernard 3/Bernard_3.png",
+                    "description": "",
+                    "datasheet": "Products/Datasheet/Outdoor/Bollard/Bernard 3/Bernard_3.pdf"
+                },
+                {
+                    "name": "Bremen",
+                    "price": 1299,
+                    "image": "Products/Images/Outdoor/Bollard/Bremen/Bremen_1.png",
+                    "images": [
+                        "Products/Images/Outdoor/Bollard/Bremen/Bremen_1.png",
+                        "Products/Images/Outdoor/Bollard/Bremen/Bremen_2.png"
+                    ],
+                    "description": "",
+                    "datasheet": "Products/Datasheet/Outdoor/Bollard/Bremen/Bremen_1.pdf"
+                },
+                {
+                    "name": "Harmony",
+                    "price": 1299,
+                    "image": "Products/Images/Outdoor/Bollard/Harmony/Harmony_1.png",
+                    "images": [
+                        "Products/Images/Outdoor/Bollard/Harmony/Harmony_1.png",
+                        "Products/Images/Outdoor/Bollard/Harmony/Harmony_2.png"
+                    ],
+                    "description": "",
+                    "datasheet": "Products/Datasheet/Outdoor/Bollard/Bremen/Bremen_1.pdf"
+                },
+                {
+                    "name": "Holu",
+                    "price": 1299,
+                    "image": "Products/Images/Outdoor/Bollard/Holu/Holu.png",
+                    "description": "",
+                    "datasheet": "Products/Datasheet/Outdoor/Bollard/Holu/Holu.pdf"
+                },
+                {
+                    "name": "Holulu",
+                    "price": 1299,
+                    "image": "Products/Images/Outdoor/Bollard/Holulu/Holulu.png",
+                    "description": "",
+                    "datasheet": "Products/Datasheet/Outdoor/Bollard/Holulu/Holulu.pdf"
+                },
+                {
+                    "name": "Melo",
+                    "price": 1299,
+                    "image": "Products/Images/Outdoor/Bollard/Melo/Melo_1.png",
+                    "images": [
+                        "Products/Images/Outdoor/Bollard/Melo/Melo_1.png",
+                        "Products/Images/Outdoor/Bollard/Melo/Melo_2.png"
+                    ],
+                    "description": "",
+                    "datasheet": "Products/Datasheet/Outdoor/Bollard/Melo/Melo.pdf"
+                },
+                {
+                    "name": "Munich",
+                    "price": 1299,
+                    "image": "Products/Images/Outdoor/Bollard/Munich/Munich_1.png",
+                    "images": [
+                        "Products/Images/Outdoor/Bollard/Munich/Munich_1.png",
+                        "Products/Images/Outdoor/Bollard/Munich/Munich_2.png"
+                    ],
+                    "description": "",
+                    "datasheet": "Products/Datasheet/Outdoor/Bollard/Munich/Munich_1.pdf"
+                },
+                {
+                    "name": "Ningbo",
+                    "price": 1299,
+                    "image": "Products/Images/Outdoor/Bollard/Ningbo/Ningbo_1.png",
+                    "images": [
+                        "Products/Images/Outdoor/Bollard/Ningbo/Ningbo_1.png",
+                        "Products/Images/Outdoor/Bollard/Ningbo/Ningbo_2.png"
+                    ],
+                    "description": "",
+                    "datasheet": "Products/Datasheet/Outdoor/Bollard/Ningbo/Ningbo_1.pdf"
+                },
+                {
+                    "name": "Norfolk",
+                    "price": 1299,
+                    "image": "Products/Images/Outdoor/Bollard/Norfolk/Norfolk_1.png",
+                    "images": [
+                        "Products/Images/Outdoor/Bollard/Norfolk/Norfolk_1.png",
+                        "Products/Images/Outdoor/Bollard/Norfolk/Norfolk_2.png",
+                        "Products/Images/Outdoor/Bollard/Norfolk/Norfolk_3.png",
+                        "Products/Images/Outdoor/Bollard/Norfolk/Norfolk_4.png"
+                    ],
+                    "description": "",
+                    "datasheet": "Products/Datasheet/Outdoor/Bollard/Norfolk/Norfolk_1.pdf"
+                },
+                {
+                    "name": "Sully",
+                    "price": 1299,
+                    "image": "Products/Images/Outdoor/Bollard/Sully/Sully.png",
+                    "description": "",
+                    "datasheet": "Products/Datasheet/Outdoor/Bollard/Sully/Sully.pdf"
+                }
+            ],
+            "flood light": [
+                {
+                    "name": "Bristol",
+                    "price": 1299,
+                    "image": "Products/Images/Outdoor/Floodlight/Bristol/Bristol_1.png",
+                    "images": [
+                        "Products/Images/Outdoor/Floodlight/Bristol/Bristol_1.png",
+                        "Products/Images/Outdoor/Floodlight/Bristol/Bristol_2.png"
+                    ],
+                    "description": "",
+                    "datasheet": "Products/Datasheet/Outdoor/Floodlight/Bristol/Bristol_1.pdf"
+                },
+                {
+                    "name": "Niva",
+                    "price": 1299,
+                    "image": "Products/Images/Outdoor/Floodlight/Niva/Niva_1.png",
+                    "images": [
+                        "Products/Images/Outdoor/Floodlight/Niva/Niva_1.png",
+                        "Products/Images/Outdoor/Floodlight/Niva/Niva_2.png"
+                    ],
+                    "description": "",
+                    "datasheet": "Products/Datasheet/Outdoor/Floodlight/Bremen/Bremen.pdf"
+                },
+                {
+                    "name": "Nova",
+                    "price": 1299,
+                    "image": "Products/Images/Outdoor/Floodlight/Nova/Nova_1.png",
+                    "images": [
+                        "Products/Images/Outdoor/Floodlight/Nova/Nova_1.png",
+                        "Products/Images/Outdoor/Floodlight/Nova/Nova_2.png"
+                    ],
+                    "description": "",
+                    "datasheet": "Products/Datasheet/Outdoor/Floodlight/Nova/Nova.pdf"
+                },
+                {
+                    "name": "Utopia",
+                    "price": 1299,
+                    "image": "Products/Images/Outdoor/Floodlight/Utopia/Utopia_1.png",
+                    "images": [
+                        "Products/Images/Outdoor/Floodlight/Utopia/Utopia_1.png",
+                        "Products/Images/Outdoor/Floodlight/Utopia/Utopia_2.png",
+                        "Products/Images/Outdoor/Floodlight/Utopia/Utopia_3.png",
+                        "Products/Images/Outdoor/Floodlight/Utopia/Utopia_4.png"
+                    ],
+                    "description": "",
+                    "datasheet": "Products/Datasheet/Outdoor/Floodlight/Utopia/Utopia.pdf"
+                },
+                {
+                    "name": "Whicham",
+                    "price": 1299,
+                    "image": "Products/Images/Outdoor/Floodlight/Whicham/Whicham.png",
+                    "description": "",
+                    "datasheet": "Products/Datasheet/Outdoor/Floodlight/Whicham/Whicham.pdf"
                 }
             ]
         }

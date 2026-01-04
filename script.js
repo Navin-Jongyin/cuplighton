@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     // --- Load Featured Products on Homepage ---
     const featuredProductsGrid = document.getElementById('featured-products-grid');
-    
+
     if (featuredProductsGrid) {
         fetch('product.json')
             .then(response => response.json())
@@ -33,20 +33,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 featured.forEach(product => {
                     const productCard = document.createElement('article');
                     productCard.className = 'product-card';
-                    
+
                     productCard.innerHTML = `
                         <a href="product-detail.html?id=${product.id}">
                             <div class="product-image">
                                 <img src="${product.image}" alt="${product.name}">
                             </div>
                             <div class="product-info text-center">
+                                <span class="product-category-tag">${product.category} / ${product.subcategory}</span>
                                 <h3>${product.name}</h3>
                                 <span class="product-price">$${product.price.toLocaleString()}</span>
                                 <button class="btn">View Details</button>
                             </div>
                         </a>
                     `;
-                    
+
                     featuredProductsGrid.appendChild(productCard);
                 });
             })
@@ -154,6 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                     <img src="${product.image}" alt="${product.name}">
                                 </div>
                                 <div class="product-info">
+                                    <span class="product-category-tag">${categoryKey} / ${subcategoryKey}</span>
                                     <h3>${product.name}</h3>
                                     <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">${product.description || 'Premium lighting solution'}</p>
                                     <span class="product-price">$${product.price.toLocaleString()}</span>
