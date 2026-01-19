@@ -442,6 +442,108 @@
                     "description": "",
                     "datasheet": "Products/Datasheet/Outdoor/Floodlight/Whicham/Whicham.pdf"
                 }
+            ],
+            "street light": [
+                {
+                    "name": "Albus 1",
+                    "price": 1299,
+                    "image": "Products/Images/Outdoor/Street Light/Albus 1/Albus1_1.png",
+                    "images": [
+                        "Products/Images/Outdoor/Street Light/Albus 1/Albus1_1.png",
+                        "Products/Images/Outdoor/Street Light/Albus 1/Albus1_2.png"
+                    ],
+                    "description": "",
+                    "datasheet": "Products/Datasheet/Outdoor/Street Light/Albus 1/Albus1_1.pdf"
+                },
+                {
+                    "name": "Albus 2",
+                    "price": 1299,
+                    "image": "Products/Images/Outdoor/Street Light/Albus 2/Albus2_1.png",
+                    "images": [
+                        "Products/Images/Outdoor/Street Light/Albus 2/Albus2_1.png",
+                        "Products/Images/Outdoor/Street Light/Albus 2/Albus2_2.png"
+                    ],
+                    "description": "",
+                    "datasheet": "Products/Datasheet/Outdoor/Street Light/Albus 2/Albus2_1.pdf"
+                },
+                {
+                    "name": "Apex",
+                    "price": 1299,
+                    "image": "Products/Images/Outdoor/Street Light/Apex/Apex.png",
+                    "description": "",
+                    "datasheet": "Products/Datasheet/Outdoor/Street Light/Apex/Apex.pdf"
+                },
+                {
+                    "name": "Ascott",
+                    "price": 1299,
+                    "image": "Products/Images/Outdoor/Street Light/Ascott/Ascott_1.png",
+                    "images": [
+                        "Products/Images/Outdoor/Street Light/Ascott/Ascott_1.png",
+                        "Products/Images/Outdoor/Street Light/Ascott/Ascott_2.png"
+                    ],
+                    "description": "",
+                    "datasheet": "Products/Datasheet/Outdoor/Street Light/Ascott/Ascott_1.pdf"
+                },
+                {
+                    "name": "Atlanta",
+                    "price": 1299,
+                    "image": "Products/Images/Outdoor/Street Light/Atlanta/Atlanta.png",
+                    "description": "",
+                    "datasheet": "Products/Datasheet/Outdoor/Street Light/Ascott/Ascott_1.pdf"
+                },
+                {
+                    "name": "Gera",
+                    "price": 1299,
+                    "image": "Products/Images/Outdoor/Street Light/Gera/Gera.png",
+                    "description": "",
+                    "datasheet": "Products/Datasheet/Outdoor/Street Light/Gera/Gera.pdf"
+                },
+                {
+                    "name": "Graz",
+                    "price": 1299,
+                    "image": "Products/Images/Outdoor/Street Light/Graz/Graz.png",
+                    "description": "",
+                    "datasheet": "Products/Datasheet/Outdoor/Street Light/Graz/Graz.pdf"
+                },
+                {
+                    "name": "Hammaro 1",
+                    "price": 1299,
+                    "image": "Products/Images/Outdoor/Street Light/Hammaro 1/Hammaro1.png",
+                    "description": "",
+                    "datasheet": "Products/Datasheet/Outdoor/Street Light/Hammaro 1/Hammaro1.pdf"
+                },
+                {
+                    "name": "Hammaro 2",
+                    "price": 1299,
+                    "image": "Products/Images/Outdoor/Street Light/Hammaro 2/Hammaro2.png",
+                    "description": "",
+                    "datasheet": "Products/Datasheet/Outdoor/Street Light/Hammaro 2/Hammaro2.pdf"
+                },
+                {
+                    "name": "Hat",
+                    "price": 1299,
+                    "image": "Products/Images/Outdoor/Street Light/Hat/Hat_1.png",
+                    "images": [
+                        "Products/Images/Outdoor/Street Light/Hat/Hat_1.png",
+                        "Products/Images/Outdoor/Street Light/Hat/Hat_2.png"
+                    ],
+                    "description": "",
+                    "datasheet": "Products/Datasheet/Outdoor/Street Light/Hat/Hat.pdf"
+                },
+                {
+                    "name": "Macao",
+                    "price": 1299,
+                    "image": "Products/Images/Outdoor/Street Light/Macao/Macao.png",
+                    "description": "",
+                    "datasheet": "Products/Datasheet/Outdoor/Street Light/Hart/Hart.pdf"
+                },
+                {
+                    "name": "Moon",
+                    "price": 1299,
+                    "image": "Products/Images/Outdoor/Street Light/Moon/Moon.png",
+                    "description": "",
+                    "datasheet": "Products/Datasheet/Outdoor/Street Light/Moon/Moon.pdf"
+                }
             ]
         }
     }
