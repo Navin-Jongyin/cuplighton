@@ -1,60 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
     // --- Load Featured Products on Homepage ---
+    // --- Featured Products on Homepage ---
+    // Now handled by static HTML in index.html
     const featuredProductsGrid = document.getElementById('featured-products-grid');
-
     if (featuredProductsGrid) {
-        fetch('product.json')
-            .then(response => response.json())
-            .then(data => {
-                // Collect all products from all categories
-                const allProducts = [];
-                Object.keys(data.categories).forEach(categoryKey => {
-                    const category = data.categories[categoryKey];
-                    Object.keys(category).forEach(subcategoryKey => {
-                        const products = category[subcategoryKey];
-                        products.forEach((product, index) => {
-                            allProducts.push({
-                                ...product,
-                                category: categoryKey,
-                                subcategory: subcategoryKey,
-                                index: index,
-                                id: `${categoryKey}-${subcategoryKey}-${index}`
-                            });
-                        });
-                    });
-                });
-
-                // Select random products for featured section (one row)
-                const shuffled = allProducts.sort(() => 0.5 - Math.random());
-                const featured = shuffled.slice(0, 6);
-
-                // Render featured products
-                featuredProductsGrid.innerHTML = '';
-                featured.forEach(product => {
-                    const productCard = document.createElement('article');
-                    productCard.className = 'product-card';
-
-                    productCard.innerHTML = `
-                        <a href="product-detail.html?id=${product.id}">
-                            <div class="product-image">
-                                <img src="${product.image}" alt="${product.name}">
-                            </div>
-                            <div class="product-info text-center">
-                                <span class="product-category-tag">${product.category} / ${product.subcategory}</span>
-                                <h3>${product.name}</h3>
-                                <span class="product-price">$${product.price.toLocaleString()}</span>
-                                <button class="btn">View Details</button>
-                            </div>
-                        </a>
-                    `;
-
-                    featuredProductsGrid.appendChild(productCard);
-                });
-            })
-            .catch(error => {
-                console.error('Error loading featured products:', error);
-                featuredProductsGrid.innerHTML = '<p style="text-align: center; grid-column: 1/-1;">Error loading products.</p>';
-            });
+        // Optional: Add any specific behavior for the static grid here if needed
+        // For now, we just leave the static HTML as is
     }
 
     const categoryLinks = document.querySelectorAll('.category-list > li > .category-link');
@@ -73,6 +24,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Toggle the expanded class
                 parentLi.classList.toggle('expanded');
+
+                // NEW: Also filter products by this category
+
+                // 1. Manage Active State for Links
+                const allCategoryLinks = document.querySelectorAll('.category-list > li > .category-link');
+                allCategoryLinks.forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+
+                // Uncheck all checkboxes first to ensure clean state
+                const allCheckboxes = document.querySelectorAll('.category-checkbox input[type="checkbox"]');
+                allCheckboxes.forEach(cb => cb.checked = false);
+
+                // Update text
+                const categoryText = link.textContent.trim();
+                const pageTitle = document.getElementById('page-title');
+                const pageSubtitle = document.getElementById('page-subtitle');
+
+                if (pageTitle) pageTitle.textContent = categoryText;
+                if (pageSubtitle) pageSubtitle.textContent = `Showing all items in ${categoryText}`;
+
+                // Trigger filter override
+                if (typeof renderProducts === 'function') {
+                    renderProducts(categoryText);
+                }
             });
         }
     });
@@ -105,8 +80,22 @@ document.addEventListener('DOMContentLoaded', () => {
     if (allProductsLink) {
         allProductsLink.addEventListener('click', (e) => {
             e.preventDefault();
-            pageTitle.textContent = 'All Products';
-            pageSubtitle.textContent = 'Showing all items';
+
+            // Clear active state from sidebar
+            const allCategoryLinks = document.querySelectorAll('.category-list > li > .category-link');
+            allCategoryLinks.forEach(l => l.classList.remove('active'));
+
+            // Uncheck all checkboxes
+            const allCheckboxes = document.querySelectorAll('.category-checkbox input[type="checkbox"]');
+            allCheckboxes.forEach(cb => cb.checked = false);
+
+            // Clear context
+            if (typeof renderProducts === 'function') {
+                // If on products page, we can trigger re-render
+                renderProducts(null, true);
+            }
+
+            if (pageTitle) pageTitle.textContent = 'All Products';
         });
     }
 
@@ -114,31 +103,63 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Load Products from JSON (for products.html page only) ---
     const productGrid = document.querySelector('.product-grid:not(#featured-products-grid)');
     let allProductsData = null;
+    let currentContextCategory = null;
 
     if (productGrid) {
-        // Function to render products based on filter
-        function renderProducts(filterCategory = null, filterSubcategory = null) {
+        // Function to render products based on selected checkboxes or explicit category filter
+        window.renderProducts = function (categoryOverride = null, resetContext = false) {
             if (!allProductsData) return;
+
+            if (resetContext) {
+                currentContextCategory = null;
+            } else if (categoryOverride) {
+                currentContextCategory = categoryOverride;
+            }
 
             productGrid.innerHTML = '';
             let productCount = 0;
+
+            // Get all checked checkboxes
+            const checkedBoxes = document.querySelectorAll('.category-checkbox input[type="checkbox"]:checked');
+            const allProductsCheckbox = document.getElementById('all-products');
+
+            // Collect selected categories and subcategories
+            const selectedFilters = new Set();
+            checkedBoxes.forEach(checkbox => {
+                if (checkbox.id !== 'all-products' && checkbox.value) {
+                    selectedFilters.add(checkbox.value.toLowerCase());
+                }
+            });
 
             // Iterate through categories and products
             Object.keys(allProductsData.categories).forEach(categoryKey => {
                 const category = allProductsData.categories[categoryKey];
 
-                // Skip if filtering by category and this isn't it
-                if (filterCategory && categoryKey.toLowerCase() !== filterCategory.toLowerCase()) {
-                    return;
-                }
+                // Logic update: Allow cross-category filtering if filters are present.
+                // We handle context inside the loop logic below.
 
                 Object.keys(category).forEach(subcategoryKey => {
                     const products = category[subcategoryKey];
 
-                    // Skip if filtering by subcategory and this isn't it
-                    if (filterSubcategory && subcategoryKey.toLowerCase() !== filterSubcategory.toLowerCase()) {
-                        return;
+                    // Logic:
+                    // 1. If filters are active, they take precedence (show matched subcategories globally).
+                    // 2. If NO filters are active, respect current context.
+                    // 3. Fallback to global if neither.
+
+                    let shouldShow = false;
+
+                    if (selectedFilters.size > 0) {
+                        shouldShow = selectedFilters.has(subcategoryKey.toLowerCase());
+                    } else {
+                        // No specific filters -> Fallback to context
+                        if (currentContextCategory) {
+                            shouldShow = categoryKey.toLowerCase() === currentContextCategory.toLowerCase();
+                        } else {
+                            shouldShow = true;
+                        }
                     }
+
+                    if (!shouldShow) return;
 
                     products.forEach((product, index) => {
                         const productCard = document.createElement('article');
@@ -146,7 +167,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         productCard.dataset.category = categoryKey;
                         productCard.dataset.subcategory = subcategoryKey;
 
-                        // Create unique ID for product
                         const productId = `${categoryKey}-${subcategoryKey}-${index}`;
 
                         productCard.innerHTML = `
@@ -170,54 +190,96 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             });
 
-            // Update page subtitle with count
+            // Update page subtitle
+            const pageSubtitle = document.getElementById('page-subtitle');
+
             if (pageSubtitle) {
                 const itemText = productCount === 1 ? 'item' : 'items';
-                if (filterSubcategory) {
-                    pageSubtitle.textContent = `Showing ${productCount} ${itemText} in ${filterSubcategory}`;
-                } else if (filterCategory) {
-                    pageSubtitle.textContent = `Showing ${productCount} ${itemText} in ${filterCategory}`;
+
+                if (currentContextCategory) {
+                    if (selectedFilters.size > 0) {
+                        // Simplify message when cross-filtering might be happening
+                        pageSubtitle.textContent = `Showing ${productCount} ${itemText} (Filtered)`;
+                    } else {
+                        pageSubtitle.textContent = `Showing all ${productCount} ${itemText} in ${currentContextCategory}`;
+                    }
                 } else {
-                    pageSubtitle.textContent = `Showing all ${productCount} ${itemText}`;
+                    if (selectedFilters.size > 0) {
+                        pageSubtitle.textContent = `Showing ${productCount} ${itemText} (Filtered)`;
+                    } else {
+                        pageSubtitle.textContent = `Showing all ${productCount} ${itemText}`;
+                    }
                 }
             }
-        }
+        };
 
         // Load products from JSON
         fetch('product.json')
             .then(response => response.json())
             .then(data => {
                 allProductsData = data;
-                renderProducts(); // Show all products initially
 
-                // Add click handlers for subcategory filtering
-                const subCategoryLinks = document.querySelectorAll('.category-list ul .category-link');
-                subCategoryLinks.forEach(link => {
-                    link.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
+                // Check for URL parameters to filter initially
+                const urlParams = new URLSearchParams(window.location.search);
+                const categoryParam = urlParams.get('category');
 
-                        const subcategoryText = link.textContent.trim();
-                        const parentCategoryLink = link.closest('ul').previousElementSibling;
-                        const parentCategoryText = parentCategoryLink.textContent.trim();
-
-                        // Update page title
-                        if (pageTitle) {
-                            pageTitle.textContent = `${parentCategoryText} / ${subcategoryText}`;
+                if (categoryParam) {
+                    const categoryLinks = document.querySelectorAll('.category-list > li > .category-link');
+                    categoryLinks.forEach(link => {
+                        if (link.textContent.trim().toLowerCase() === categoryParam.toLowerCase()) {
+                            const parentLi = link.parentElement;
+                            parentLi.classList.add('expanded');
+                            link.classList.add('active');
+                            if (pageTitle) pageTitle.textContent = categoryParam;
                         }
+                    });
+                    // Filter products by this category
+                    renderProducts(categoryParam);
+                } else {
+                    renderProducts(); // Show all products initially
+                }
 
-                        // Filter products
-                        renderProducts(parentCategoryText, subcategoryText);
+                // Add change handlers for all checkboxes
+                const allCheckboxes = document.querySelectorAll('.category-checkbox input[type="checkbox"]');
+                const allProductsCheckbox = document.getElementById('all-products');
+
+                allCheckboxes.forEach(checkbox => {
+                    checkbox.addEventListener('change', () => {
+                        if (checkbox.id === 'all-products' && checkbox.checked) {
+                            allCheckboxes.forEach(cb => {
+                                if (cb.id !== 'all-products') cb.checked = false;
+                            });
+                            // Reset context when All Products checked
+                            renderProducts(null, true);
+                        } else if (checkbox.id !== 'all-products' && checkbox.checked) {
+                            if (allProductsCheckbox && allProductsCheckbox.checked) {
+                                allProductsCheckbox.checked = false;
+                            }
+                            renderProducts();
+                        } else {
+                            // Checkbox unchecked
+                            renderProducts();
+                        }
                     });
                 });
 
-                // Update "All Products" link to show all
+                // Update "All Products" link handler inside here to ensure access to renderProducts
                 const allProductsLink = document.getElementById('all-products-link');
                 if (allProductsLink) {
                     allProductsLink.addEventListener('click', (e) => {
                         e.preventDefault();
+
+                        // Clear active state from sidebar
+                        const allCategoryLinks = document.querySelectorAll('.category-list > li > .category-link');
+                        allCategoryLinks.forEach(l => l.classList.remove('active'));
+
+                        const allCheckboxes = document.querySelectorAll('.category-checkbox input[type="checkbox"]');
+                        allCheckboxes.forEach(cb => cb.checked = false);
+
                         if (pageTitle) pageTitle.textContent = 'All Products';
-                        renderProducts(); // Show all products
+
+                        // Reset context and render all
+                        renderProducts(null, true);
                     });
                 }
             })
@@ -228,29 +290,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Product Detail Page Logic ---
-
-    // Check if we are on the product detail page
     if (window.location.pathname.includes('product-detail.html')) {
         const urlParams = new URLSearchParams(window.location.search);
         const productId = urlParams.get('id');
 
         if (productId) {
-            // Load product data from JSON
             fetch('product.json')
                 .then(response => response.json())
                 .then(data => {
-                    // Parse the product ID (format: category-subcategory-index)
                     const [categoryKey, subcategoryKey, indexStr] = productId.split('-');
                     const index = parseInt(indexStr);
 
-                    // Find the product in the JSON data
                     if (data.categories[categoryKey] &&
                         data.categories[categoryKey][subcategoryKey] &&
                         data.categories[categoryKey][subcategoryKey][index]) {
 
                         const product = data.categories[categoryKey][subcategoryKey][index];
 
-                        // Populate Data
                         document.title = `${product.name} | Cuplighton`;
                         document.getElementById('detail-category').textContent = `${categoryKey.charAt(0).toUpperCase() + categoryKey.slice(1)} / ${subcategoryKey.charAt(0).toUpperCase() + subcategoryKey.slice(1)}`;
                         document.getElementById('detail-name').textContent = product.name;
@@ -259,21 +315,17 @@ document.addEventListener('DOMContentLoaded', () => {
                         document.getElementById('detail-description').textContent = product.description || 'Premium lighting solution designed for modern spaces.';
 
 
-                        // Image Gallery handling
                         const imgElement = document.getElementById('detail-image');
                         const thumbnailsContainer = document.getElementById('image-thumbnails');
 
-                        // Use images array if available, otherwise fall back to single image
                         const productImages = product.images && product.images.length > 0
                             ? product.images
                             : (product.image ? [product.image] : []);
 
                         if (productImages.length > 0) {
-                            // Set main image
                             imgElement.src = productImages[0];
                             imgElement.alt = product.name;
 
-                            // Create thumbnails if multiple images
                             if (productImages.length > 1) {
                                 thumbnailsContainer.innerHTML = '';
                                 productImages.forEach((imageSrc, index) => {
@@ -283,7 +335,6 @@ document.addEventListener('DOMContentLoaded', () => {
                                     thumbnail.className = 'thumbnail' + (index === 0 ? ' active' : '');
                                     thumbnail.addEventListener('click', () => {
                                         imgElement.src = imageSrc;
-                                        // Update active thumbnail
                                         document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
                                         thumbnail.classList.add('active');
                                     });
@@ -295,8 +346,6 @@ document.addEventListener('DOMContentLoaded', () => {
                             imgElement.alt = 'Image coming soon';
                         }
 
-
-                        // Handle Datasheet Button
                         const datasheetBtn = document.getElementById('datasheet-btn');
                         if (product.datasheet) {
                             datasheetBtn.onclick = () => {
@@ -308,7 +357,6 @@ document.addEventListener('DOMContentLoaded', () => {
                             datasheetBtn.style.opacity = '0.5';
                         }
 
-                        // Populate Features (if available)
                         const featuresList = document.getElementById('detail-features');
                         featuresList.innerHTML = '';
 
@@ -320,7 +368,6 @@ document.addEventListener('DOMContentLoaded', () => {
                                 featuresList.appendChild(li);
                             });
                         } else {
-                            // Default features if none specified
                             const defaultFeatures = [
                                 'Premium Quality Materials',
                                 'Energy Efficient',
@@ -335,7 +382,6 @@ document.addEventListener('DOMContentLoaded', () => {
                             });
                         }
                     } else {
-                        // Product not found
                         document.querySelector('.product-detail-container').innerHTML = '<h2 class="text-center">Product Not Found</h2><p class="text-center"><a href="products.html" class="text-gold">Return to Collection</a></p>';
                     }
                 })
@@ -344,7 +390,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     document.querySelector('.product-detail-container').innerHTML = '<h2 class="text-center">Error Loading Product</h2><p class="text-center"><a href="products.html" class="text-gold">Return to Collection</a></p>';
                 });
         } else {
-            // No product ID provided
             document.querySelector('.product-detail-container').innerHTML = '<h2 class="text-center">Product Not Found</h2><p class="text-center"><a href="products.html" class="text-gold">Return to Collection</a></p>';
         }
     }

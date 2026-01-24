@@ -37,19 +37,52 @@
         </div>
     </section>
 
-    <!-- Featured Collection -->
-    <section class="featured">
+    <!-- Shop by Category -->
+    <section class="categories-section">
         <div class="container">
-            <div style="margin-bottom: 4rem; display: flex; justify-content: space-between; align-items: center;">
-                <h2>Featured Products</h2>
-                <a href="products.html" class="btn" style="padding: 0.5rem 1.5rem; background: #FFC107; color: #000;">See All</a>
-            </div>
-
-            <div class="product-grid" id="featured-products-grid">
-                <!-- Products will be loaded dynamically from product.json -->
+            <h2 class="section-title text-center">Shop by Category</h2>
+            <div class="category-grid">
+                <!-- Indoor -->
+                <a href="products.html?category=Indoor" class="category-card">
+                    <div class="category-image">
+                        <img src="images/aurum-pendant.png" alt="Indoor Lighting">
+                    </div>
+                    <div class="category-content">
+                        <h3>Indoor</h3>
+                    </div>
+                </a>
+                <!-- Outdoor -->
+                <a href="products.html?category=Outdoor" class="category-card">
+                    <div class="category-image">
+                        <img src="images/noir-chandelier.png" alt="Outdoor Lighting">
+                    </div>
+                    <div class="category-content">
+                        <h3>Outdoor</h3>
+                    </div>
+                </a>
+                <!-- Decoratives -->
+                <a href="products.html?category=Decoratives" class="category-card">
+                    <div class="category-image">
+                        <img src="images/lumina-lamp.png" alt="Decorative Lighting">
+                    </div>
+                    <div class="category-content">
+                        <h3>Decoratives</h3>
+                    </div>
+                </a>
+                <!-- LED/Other -->
+                <a href="products.html?category=LED/Other" class="category-card">
+                    <div class="category-image">
+                        <img src="images/eclipse-sconce.png" alt="LED & Other">
+                    </div>
+                    <div class="category-content">
+                        <h3>LED & Other</h3>
+                    </div>
+                </a>
             </div>
         </div>
     </section>
+
+
 
     <!-- Contact CTA -->
     <section style="padding: 8rem 0; background: var(--bg-secondary);">
