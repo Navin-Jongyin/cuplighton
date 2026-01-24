@@ -159,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                     <h3>${product.name}</h3>
                                     <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">${product.description || 'Premium lighting solution'}</p>
                                     <span class="product-price">$${product.price.toLocaleString()}</span>
-                                    <button class="btn btn-primary" style="width: 100%;">Add to Cart</button>
+                                    <button class="btn btn-primary" style="width: 100%;">View Details</button>
                                 </div>
                             </a>
                         `;
