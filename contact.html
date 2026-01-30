@@ -30,10 +30,12 @@
 
     <main style="padding-top: var(--header-height);">
         <!-- Page Header -->
-        <section style="padding: 6rem 0 2rem; background: radial-gradient(circle at top, #1a1a1a, #050505);">
+        <section class="contact-hero">
             <div class="container text-center">
-                <h1>Contact Us</h1>
-                <p>We're here to help illuminate your vision.</p>
+                <div class="contact-hero-badge">Get In Touch</div>
+                <h1 class="contact-hero-title">Let's Illuminate Your Space</h1>
+                <p class="contact-hero-subtitle">Our lighting experts are ready to bring your vision to life. Whether
+                    you have questions about our products or need design consultation, we're here to help.</p>
             </div>
         </section>
 
@@ -42,26 +44,58 @@
                 <div class="contact-grid">
                     <!-- Contact Form -->
                     <div class="contact-form">
-                        <form onsubmit="event.preventDefault(); alert('Message sent! We will contact you shortly.');">
-                            <div class="form-group">
-                                <label class="form-label">Name</label>
-                                <input type="text" class="form-input" placeholder="Your Name" required>
+                        <h2 class="contact-form-title">Send Us a Message</h2>
+                        <p class="contact-form-description">Fill out the form below and we'll get back to you within 24
+                            hours.</p>
+                        <form
+                            onsubmit="event.preventDefault(); alert('Thank you for reaching out! We will contact you shortly.');">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Full Name *</label>
+                                    <input type="text" class="form-input" placeholder="John Doe" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Email Address *</label>
+                                    <input type="email" class="form-input" placeholder="john@example.com" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Phone Number</label>
+                                    <input type="tel" class="form-input" placeholder="+1 (555) 000-0000">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Subject *</label>
+                                    <select class="form-input" required>
+                                        <option value="">Select a subject</option>
+                                        <option value="product">Product Inquiry</option>
+                                        <option value="design">Design Consultation</option>
+                                        <option value="support">Technical Support</option>
+                                        <option value="partnership">Partnership Opportunity</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group">
-                                <label class="form-label">Email</label>
-                                <input type="email" class="form-input" placeholder="your@email.com" required>
+                                <label class="form-label">Your Message *</label>
+                                <textarea class="form-textarea" rows="6"
+                                    placeholder="Tell us about your project or inquiry..." required></textarea>
                             </div>
-                            <div class="form-group">
-                                <label class="form-label">Message</label>
-                                <textarea class="form-textarea" rows="5" placeholder="How can we help?"
-                                    required></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Send Message</button>
+                            <button type="submit" class="btn btn-primary">
+                                <span>Send Message</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                                </svg>
+                            </button>
                         </form>
                     </div>
 
                     <!-- Contact Info -->
                     <div class="contact-info">
+                        <h2 class="contact-info-title">Other Ways to Reach Us</h2>
                         <div class="contact-info-item">
                             <div class="contact-icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -71,8 +105,10 @@
                                     <circle cx="12" cy="10" r="3"></circle>
                                 </svg>
                             </div>
-                            <h3>Showroom</h3>
-                            <p>123 Luxury Avenue<br>New York, NY 10012</p>
+                            <h3>Visit Our Showroom</h3>
+                            <p class="contact-info-label">Address</p>
+                            <p class="contact-info-value">123 Design Boulevard, Suite 500<br>New York, NY 10012, USA</p>
+                            <p class="contact-info-note">Experience our lighting collections in person</p>
                         </div>
                         <div class="contact-info-item">
                             <div class="contact-icon">
@@ -84,8 +120,12 @@
                                     </path>
                                 </svg>
                             </div>
-                            <h3>Contact</h3>
-                            <p>Phone: +1 (212) 555-0199<br>Email: concierge@cuplighton.com</p>
+                            <h3>Call or Email</h3>
+                            <p class="contact-info-label">Phone</p>
+                            <p class="contact-info-value">+1 (212) 555-0199</p>
+                            <p class="contact-info-label">Email</p>
+                            <p class="contact-info-value">hello@cuplighton.com</p>
+                            <p class="contact-info-note">We respond within 24 hours</p>
                         </div>
                         <div class="contact-info-item">
                             <div class="contact-icon">
@@ -96,8 +136,18 @@
                                     <polyline points="12 6 12 12 16 14"></polyline>
                                 </svg>
                             </div>
-                            <h3>Hours</h3>
-                            <p>Mon-Fri: 10am - 8pm<br>Sat-Sun: 11am - 6pm</p>
+                            <h3>Business Hours</h3>
+                            <p class="contact-info-label">Weekdays</p>
+                            <p class="contact-info-value">Monday - Friday: 9:00 AM - 7:00 PM</p>
+                            <p class="contact-info-label">Weekends</p>
+                            <p class="contact-info-value">Saturday - Sunday: 10:00 AM - 6:00 PM</p>
+                            <p class="contact-info-note">All times in EST</p>
+                        </div>
+
+                        <div class="contact-info-cta">
+                            <h3>Need Immediate Assistance?</h3>
+                            <p>For urgent inquiries, please call our customer service hotline</p>
+                            <a href="tel:+12125550199" class="btn btn-primary">Call Now</a>
                         </div>
                     </div>
                 </div>
