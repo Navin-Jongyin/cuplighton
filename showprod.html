@@ -208,6 +208,8 @@
     <option value="">Select Category</option>
     <option value="Indoor">Indoor</option>
     <option value="Outdoor">Outdoor</option>
+    <option value="Decoratives">Decoratives</option>
+    <option value="LED/Other">LED / Other</option>
   </select>
 
   <select id="subcategory">
@@ -242,6 +244,8 @@
         <option value="">Select Category</option>
         <option value="Indoor">Indoor</option>
         <option value="Outdoor">Outdoor</option>
+        <option value="Decoratives">Decoratives</option>
+        <option value="LED/Other">LED / Other</option>
       </select>
 
       <select id="edit-subcategory">
@@ -296,8 +300,12 @@
     });
 
     const subcategories = {
-      Indoor: ["Recessed", "Pendant"],
-      Outdoor: ["Wall", "Garden"]
+      Indoor:     ["Recessed", "Surface", "Pendant", "Chandelier", "Track Light"],
+      Outdoor:    ["Ceiling", "Wall", "Bollard", "In Ground", "Solar", "Pillar",
+                   "Post Top", "Street Light", "Flood Light", "Underwater",
+                   "Decorative", "L-Column", "High Bay/Low Bay"],
+      Decoratives:["Table Lamp", "Floor Lamp"],
+      "LED/Other":["Bulb", "LED Strip", "Others"]
     };
 
     // ── Shared helper: populate a subcategory <select> ──
