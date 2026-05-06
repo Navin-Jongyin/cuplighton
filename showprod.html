@@ -14,9 +14,7 @@
       padding: 0 20px;
     }
 
-    input,
-    textarea,
-    select {
+    input, textarea, select {
       width: 100%;
       padding: 10px;
       margin: 8px 0;
@@ -46,18 +44,21 @@
       border-radius: 10px;
     }
 
-    .delete {
-      background: red;
+    .card-actions {
+      display: flex;
+      gap: 6px;
       margin-top: 10px;
     }
 
-    /* Image Preview Grid */
-    #imagePreviewContainer {
+    .delete { background: red; }
+    .edit-btn { background: #1565C0; }
+
+    /* Image Previews */
+    .img-preview-box {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
       margin-top: 10px;
-      min-height: 0;
     }
 
     .preview-item {
@@ -90,46 +91,15 @@
       line-height: 1;
     }
 
-    /* Card Thumbnail Carousel */
-    .card-images {
-      position: relative;
-      width: 100%;
-      height: 150px;
-      overflow: hidden;
-    }
+    /* Card Carousel */
+    .card-images { position: relative; width: 100%; height: 150px; overflow: hidden; }
+    .card-images img { width: 100%; height: 150px; object-fit: cover; display: none; }
+    .card-images img.active { display: block; }
+    .card-nav { display: flex; justify-content: space-between; margin-top: 4px; }
+    .card-nav button { width: 48%; padding: 4px; font-size: 12px; background: #555; }
+    .img-counter { font-size: 11px; text-align: center; color: #888; margin-top: 2px; }
 
-    .card-images img {
-      width: 100%;
-      height: 150px;
-      object-fit: cover;
-      display: none;
-    }
-
-    .card-images img.active {
-      display: block;
-    }
-
-    .card-nav {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 4px;
-    }
-
-    .card-nav button {
-      width: 48%;
-      padding: 4px;
-      font-size: 12px;
-      background: #555;
-    }
-
-    .img-counter {
-      font-size: 11px;
-      text-align: center;
-      color: #888;
-      margin-top: 2px;
-    }
-
-    label[for="imageFile"] {
+    .dashed-upload {
       display: block;
       padding: 12px;
       background: #f0f0f0;
@@ -139,23 +109,97 @@
       cursor: pointer;
       margin: 8px 0;
     }
+    .dashed-upload:hover { background: #e0e0e0; }
 
-    label[for="imageFile"]:hover {
-      background: #e0e0e0;
-    }
-
-    #addBtn {
-      background: #1a1a1a;
-      margin-top: 12px;
-    }
-
+    #addBtn { background: #1a1a1a; margin-top: 12px; }
     #addBtn:hover { background: #333; }
+
+    /* ── Edit Modal ─────────────────────────────── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-overlay.open { display: flex; }
+
+    .modal-box {
+      background: white;
+      border-radius: 12px;
+      padding: 28px;
+      width: 90%;
+      max-width: 600px;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+    }
+
+    .modal-box h3 { margin-top: 0; }
+
+    .modal-close {
+      position: absolute;
+      top: 14px;
+      right: 18px;
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: #333;
+      width: auto;
+      padding: 0;
+    }
+
+    .existing-images {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 10px 0;
+    }
+
+    .existing-img-item {
+      position: relative;
+      width: 80px;
+      height: 80px;
+    }
+
+    .existing-img-item img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 6px;
+      border: 2px solid #ccc;
+    }
+
+    .existing-img-item .remove-existing {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      background: red;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      padding: 0;
+      cursor: pointer;
+      font-size: 13px;
+      line-height: 1;
+    }
+
+    #saveBtn { background: #2e7d32; margin-top: 12px; }
+    #saveBtn:hover { background: #388e3c; }
   </style>
 </head>
 
 <body>
 
-  <h2>Add Product</h2>
+  <h2 style="display:flex; align-items:center; justify-content:space-between;">
+    Add Product
+    <button id="logout-btn" style="background:#d32f2f;color:white;border:none;padding:8px 20px;border-radius:6px;cursor:pointer;font-size:14px;">Logout</button>
+  </h2>
 
   <input id="name" placeholder="Product Name">
   <input id="price" type="number" placeholder="Price">
@@ -170,31 +214,59 @@
     <option value="">Select Subcategory</option>
   </select>
 
-  <label for="imageFile">📷 Click or drag to upload images (multiple allowed)</label>
+  <label for="imageFile" class="dashed-upload">📷 Click to upload images (multiple allowed)</label>
   <input type="file" id="imageFile" multiple accept="image/*" style="display:none">
-  <div id="imagePreviewContainer"></div>
+  <div id="imagePreviewContainer" class="img-preview-box"></div>
 
   <input type="file" id="pdfFile" accept="application/pdf">
-
   <textarea id="description" placeholder="Description"></textarea>
-
   <button id="addBtn">Add Product</button>
 
   <h2>Products</h2>
 
-  <select id="filterCategory">
-    <option value="">All Categories</option>
-  </select>
-
-  <select id="filterSubcategory">
-    <option value="">All Subcategories</option>
-  </select>
+  <select id="filterCategory"><option value="">All Categories</option></select>
+  <select id="filterSubcategory"><option value="">All Subcategories</option></select>
 
   <div class="grid" id="productList"></div>
 
+  <!-- ── Edit Modal ──────────────────────────────── -->
+  <div class="modal-overlay" id="editModal">
+    <div class="modal-box">
+      <button class="modal-close" id="closeModal">&times;</button>
+      <h3>Edit Product</h3>
+
+      <input id="edit-name" placeholder="Product Name">
+      <input id="edit-price" type="number" placeholder="Price">
+
+      <select id="edit-category">
+        <option value="">Select Category</option>
+        <option value="Indoor">Indoor</option>
+        <option value="Outdoor">Outdoor</option>
+      </select>
+
+      <select id="edit-subcategory">
+        <option value="">Select Subcategory</option>
+      </select>
+
+      <textarea id="edit-description" placeholder="Description"></textarea>
+
+      <p style="margin:8px 0 4px;font-weight:bold;">Current Images</p>
+      <div class="existing-images" id="edit-existing-images"></div>
+
+      <label for="edit-imageFile" class="dashed-upload">📷 Add more images</label>
+      <input type="file" id="edit-imageFile" multiple accept="image/*" style="display:none">
+      <div id="edit-image-preview" class="img-preview-box"></div>
+
+      <p style="margin:8px 0 4px;font-weight:bold;">Replace PDF (leave empty to keep current)</p>
+      <input type="file" id="edit-pdfFile" accept="application/pdf">
+
+      <button id="saveBtn">Save Changes</button>
+    </div>
+  </div>
+
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-    import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc }
+    import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, getDoc, updateDoc }
       from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
     import { getStorage, ref, uploadBytes, getDownloadURL }
       from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
@@ -208,80 +280,84 @@
       appId: "1:60391723671:web:fc2b7b509b99b595f74fd2"
     };
 
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
+    const app     = initializeApp(firebaseConfig);
+    const db      = getFirestore(app);
     const storage = getStorage(app);
+
+    // ── Auth Guard (sessionStorage) ──
+    if (sessionStorage.getItem('isAdmin') !== 'true') {
+      window.location.href = 'login.html';
+    }
+
+    // ── Logout Button ──
+    document.getElementById('logout-btn').addEventListener('click', () => {
+      sessionStorage.removeItem('isAdmin');
+      window.location.href = 'login.html';
+    });
 
     const subcategories = {
       Indoor: ["Recessed", "Pendant"],
       Outdoor: ["Wall", "Garden"]
     };
 
-    const categorySelect = document.getElementById("category");
-    const subcategorySelect = document.getElementById("subcategory");
-    const imageFileInput = document.getElementById("imageFile");
-    const previewContainer = document.getElementById("imagePreviewContainer");
+    // ── Shared helper: populate a subcategory <select> ──
+    function fillSubcategories(selectEl, category, selected = "") {
+      selectEl.innerHTML = "<option value=''>Select Subcategory</option>";
+      (subcategories[category] || []).forEach(sub => {
+        const opt = document.createElement("option");
+        opt.value = sub;
+        opt.textContent = sub;
+        if (sub === selected) opt.selected = true;
+        selectEl.appendChild(opt);
+      });
+    }
 
-    // Track selected files in a DataTransfer to allow removing individual images
+    // ── Add Form ──
+    const categorySelect    = document.getElementById("category");
+    const subcategorySelect = document.getElementById("subcategory");
+    const imageFileInput    = document.getElementById("imageFile");
+    const previewContainer  = document.getElementById("imagePreviewContainer");
     let selectedFiles = [];
 
-    // --- Subcategory Dropdown ---
-    categorySelect.addEventListener("change", () => {
-      const selected = categorySelect.value;
-      subcategorySelect.innerHTML = "<option value=''>Select Subcategory</option>";
-      if (subcategories[selected]) {
-        subcategories[selected].forEach(sub => {
-          const option = document.createElement("option");
-          option.value = sub;
-          option.textContent = sub;
-          subcategorySelect.appendChild(option);
-        });
-      }
-    });
+    categorySelect.addEventListener("change", () =>
+      fillSubcategories(subcategorySelect, categorySelect.value));
 
-    // --- Multi-image Preview ---
     imageFileInput.addEventListener("change", () => {
-      const newFiles = Array.from(imageFileInput.files);
-      newFiles.forEach(file => {
-        // Avoid duplicates by name
-        if (!selectedFiles.find(f => f.name === file.name)) {
-          selectedFiles.push(file);
-        }
+      Array.from(imageFileInput.files).forEach(f => {
+        if (!selectedFiles.find(x => x.name === f.name)) selectedFiles.push(f);
       });
-      imageFileInput.value = ""; // Reset so same file can be re-selected if removed
-      renderPreviews();
+      imageFileInput.value = "";
+      renderPreviews(previewContainer, selectedFiles,
+        idx => { selectedFiles.splice(idx, 1); renderPreviews(previewContainer, selectedFiles, arguments.callee); }
+      );
     });
 
-    function renderPreviews() {
-      previewContainer.innerHTML = "";
-      selectedFiles.forEach((file, index) => {
+    function renderPreviews(container, files, onRemove) {
+      container.innerHTML = "";
+      files.forEach((file, index) => {
         const reader = new FileReader();
-        reader.onload = (e) => {
+        reader.onload = e => {
           const item = document.createElement("div");
           item.className = "preview-item";
-          item.innerHTML = `
-            <img src="${e.target.result}" alt="${file.name}">
-            <button class="remove-img" title="Remove" data-index="${index}">&times;</button>
-          `;
+          item.innerHTML = `<img src="${e.target.result}" alt="${file.name}">
+            <button class="remove-img">&times;</button>`;
           item.querySelector(".remove-img").addEventListener("click", () => {
-            selectedFiles.splice(index, 1);
-            renderPreviews();
+            files.splice(index, 1);
+            renderPreviews(container, files, onRemove);
           });
-          previewContainer.appendChild(item);
+          container.appendChild(item);
         };
         reader.readAsDataURL(file);
       });
     }
 
-    // --- Products State ---
+    // ── Products State ──
     let allProducts = [];
 
     async function loadProducts() {
       const snapshot = await getDocs(collection(db, "products"));
       allProducts = [];
-      snapshot.forEach(docSnap => {
-        allProducts.push({ ...docSnap.data(), id: docSnap.id });
-      });
+      snapshot.forEach(docSnap => allProducts.push({ ...docSnap.data(), id: docSnap.id }));
       populateFilters();
       displayProducts(allProducts);
     }
@@ -289,19 +365,15 @@
     function populateFilters() {
       const cat = document.getElementById("filterCategory");
       const sub = document.getElementById("filterSubcategory");
-      // Avoid duplicating options on reload
       cat.querySelectorAll("option:not([value=''])").forEach(o => o.remove());
       sub.querySelectorAll("option:not([value=''])").forEach(o => o.remove());
-
       Object.keys(subcategories).forEach(c => {
         const opt = document.createElement("option");
-        opt.value = c; opt.textContent = c;
-        cat.appendChild(opt);
+        opt.value = c; opt.textContent = c; cat.appendChild(opt);
       });
       Object.values(subcategories).flat().forEach(s => {
         const opt = document.createElement("option");
-        opt.value = s; opt.textContent = s;
-        sub.appendChild(opt);
+        opt.value = s; opt.textContent = s; sub.appendChild(opt);
       });
     }
 
@@ -313,20 +385,12 @@
         const card = document.createElement("div");
         card.className = "card";
 
-        // Support both old single-image and new multi-image
-        const images = item.images && item.images.length > 0
-          ? item.images
-          : (item.image ? [item.image] : []);
-
+        const images = item.images?.length > 0 ? item.images : (item.image ? [item.image] : []);
         const imgsHtml = images.length > 0
-          ? images.map((url, i) => `<img src="${url}" class="${i === 0 ? 'active' : ''}">`).join('')
+          ? images.map((url, i) => `<img src="${url}" class="${i === 0 ? 'active' : ''}">` ).join('')
           : '<img src="" alt="No Image" class="active">';
-
         const navHtml = images.length > 1
-          ? `<div class="card-nav">
-               <button class="prev-img">◀ Prev</button>
-               <button class="next-img">Next ▶</button>
-             </div>
+          ? `<div class="card-nav"><button class="prev-img">◀</button><button class="next-img">▶</button></div>
              <p class="img-counter">1 / ${images.length}</p>`
           : '';
 
@@ -338,115 +402,223 @@
           <p>${item.description || ""}</p>
           <strong>${item.price} THB</strong>
           ${item.pdf ? `<br><a href="${item.pdf}" target="_blank">📄 View PDF</a>` : ""}
-          <button class="delete">Delete</button>
+          <div class="card-actions">
+            <button class="edit-btn">Edit</button>
+            <button class="delete">Delete</button>
+          </div>
         `;
 
-        // Carousel Navigation
+        // Carousel
         if (images.length > 1) {
-          let currentIdx = 0;
-          const imgEls = card.querySelectorAll(".card-images img");
+          let idx = 0;
+          const imgEls  = card.querySelectorAll(".card-images img");
           const counter = card.querySelector(".img-counter");
-
           card.querySelector(".prev-img").onclick = () => {
-            imgEls[currentIdx].classList.remove("active");
-            currentIdx = (currentIdx - 1 + images.length) % images.length;
-            imgEls[currentIdx].classList.add("active");
-            counter.textContent = `${currentIdx + 1} / ${images.length}`;
+            imgEls[idx].classList.remove("active");
+            idx = (idx - 1 + images.length) % images.length;
+            imgEls[idx].classList.add("active");
+            counter.textContent = `${idx + 1} / ${images.length}`;
           };
           card.querySelector(".next-img").onclick = () => {
-            imgEls[currentIdx].classList.remove("active");
-            currentIdx = (currentIdx + 1) % images.length;
-            imgEls[currentIdx].classList.add("active");
-            counter.textContent = `${currentIdx + 1} / ${images.length}`;
+            imgEls[idx].classList.remove("active");
+            idx = (idx + 1) % images.length;
+            imgEls[idx].classList.add("active");
+            counter.textContent = `${idx + 1} / ${images.length}`;
           };
         }
 
         card.querySelector(".delete").onclick = async () => {
+          if (!confirm("Delete this product?")) return;
           await deleteDoc(doc(db, "products", item.id));
           loadProducts();
         };
+
+        card.querySelector(".edit-btn").onclick = () => openEditModal(item);
 
         list.appendChild(card);
       });
     }
 
-    document.getElementById("filterCategory").addEventListener("change", filter);
-    document.getElementById("filterSubcategory").addEventListener("change", filter);
+    document.getElementById("filterCategory").addEventListener("change", applyFilter);
+    document.getElementById("filterSubcategory").addEventListener("change", applyFilter);
 
-    function filter() {
-      let filtered = allProducts;
+    function applyFilter() {
+      let f = allProducts;
       const cat = document.getElementById("filterCategory").value;
       const sub = document.getElementById("filterSubcategory").value;
-      if (cat) filtered = filtered.filter(p => p.category === cat);
-      if (sub) filtered = filtered.filter(p => p.subcategory === sub);
-      displayProducts(filtered);
+      if (cat) f = f.filter(p => p.category === cat);
+      if (sub) f = f.filter(p => p.subcategory === sub);
+      displayProducts(f);
     }
 
-    // --- Add Product ---
+    // ── Add Product ──
     document.getElementById("addBtn").addEventListener("click", async () => {
-      const name = document.getElementById("name").value.trim();
-      const price = document.getElementById("price").value;
+      const name        = document.getElementById("name").value.trim();
+      const price       = document.getElementById("price").value;
       const description = document.getElementById("description").value.trim();
-      const category = categorySelect.value;
+      const category    = categorySelect.value;
       const subcategory = subcategorySelect.value;
-      const pdfFile = document.getElementById("pdfFile").files[0];
+      const pdfFile     = document.getElementById("pdfFile").files[0];
 
       if (!name || !price || !category || !subcategory || selectedFiles.length === 0) {
         alert("Please fill all required fields and select at least one image.");
         return;
       }
 
-      const addBtn = document.getElementById("addBtn");
-      addBtn.textContent = "Uploading...";
-      addBtn.disabled = true;
+      const btn = document.getElementById("addBtn");
+      btn.textContent = "Uploading..."; btn.disabled = true;
 
       try {
-        // Upload all images
         const imageUrls = [];
         for (const file of selectedFiles) {
-          const imgRef = ref(storage, "products/" + Date.now() + "_" + file.name);
-          await uploadBytes(imgRef, file);
-          const url = await getDownloadURL(imgRef);
-          imageUrls.push(url);
+          const r   = ref(storage, "products/" + Date.now() + "_" + file.name);
+          await uploadBytes(r, file);
+          imageUrls.push(await getDownloadURL(r));
         }
 
-        // Upload PDF if provided
         let pdfUrl = "";
         if (pdfFile) {
-          const pdfRef = ref(storage, "pdfs/" + Date.now() + "_" + pdfFile.name);
-          await uploadBytes(pdfRef, pdfFile);
-          pdfUrl = await getDownloadURL(pdfRef);
+          const r = ref(storage, "pdfs/" + Date.now() + "_" + pdfFile.name);
+          await uploadBytes(r, pdfFile);
+          pdfUrl = await getDownloadURL(r);
         }
 
         await addDoc(collection(db, "products"), {
-          name,
-          price: Number(price),
-          description,
-          category,
-          subcategory,
-          images: imageUrls,       // Array of all image URLs
-          image: imageUrls[0],     // First image as default (for backward compatibility)
-          pdf: pdfUrl
+          name, price: Number(price), description, category, subcategory,
+          images: imageUrls, image: imageUrls[0], pdf: pdfUrl
         });
 
-        // Reset form
-        document.getElementById("name").value = "";
-        document.getElementById("price").value = "";
-        document.getElementById("description").value = "";
+        // Reset
+        ["name","price","description"].forEach(id => document.getElementById(id).value = "");
         categorySelect.value = "";
         subcategorySelect.innerHTML = "<option value=''>Select Subcategory</option>";
         document.getElementById("pdfFile").value = "";
         selectedFiles = [];
-        renderPreviews();
+        previewContainer.innerHTML = "";
 
         alert("Product added successfully!");
         loadProducts();
       } catch (err) {
-        console.error(err);
-        alert("Error adding product: " + err.message);
+        alert("Error: " + err.message);
       } finally {
-        addBtn.textContent = "Add Product";
-        addBtn.disabled = false;
+        btn.textContent = "Add Product"; btn.disabled = false;
+      }
+    });
+
+    // ── Edit Modal ──
+    const editModal      = document.getElementById("editModal");
+    const closeModalBtn  = document.getElementById("closeModal");
+    const editCatSelect  = document.getElementById("edit-category");
+    const editSubSelect  = document.getElementById("edit-subcategory");
+    const editImgInput   = document.getElementById("edit-imageFile");
+    const editImgPreview = document.getElementById("edit-image-preview");
+
+    let editProductId   = null;
+    let existingImages  = []; // URLs still kept
+    let newEditFiles    = []; // new File objects to upload
+
+    editCatSelect.addEventListener("change", () =>
+      fillSubcategories(editSubSelect, editCatSelect.value));
+
+    editImgInput.addEventListener("change", () => {
+      Array.from(editImgInput.files).forEach(f => {
+        if (!newEditFiles.find(x => x.name === f.name)) newEditFiles.push(f);
+      });
+      editImgInput.value = "";
+      renderPreviews(editImgPreview, newEditFiles, () => {});
+    });
+
+    function openEditModal(item) {
+      editProductId  = item.id;
+      existingImages = item.images?.length > 0 ? [...item.images] : (item.image ? [item.image] : []);
+      newEditFiles   = [];
+      editImgPreview.innerHTML = "";
+
+      document.getElementById("edit-name").value        = item.name || "";
+      document.getElementById("edit-price").value       = item.price || "";
+      document.getElementById("edit-description").value = item.description || "";
+      document.getElementById("edit-pdfFile").value     = "";
+
+      editCatSelect.value = item.category || "";
+      fillSubcategories(editSubSelect, item.category, item.subcategory);
+
+      // Render existing images with remove buttons
+      const existingContainer = document.getElementById("edit-existing-images");
+      renderExistingImages(existingContainer);
+
+      editModal.classList.add("open");
+    }
+
+    function renderExistingImages(container) {
+      container.innerHTML = "";
+      existingImages.forEach((url, i) => {
+        const item = document.createElement("div");
+        item.className = "existing-img-item";
+        item.innerHTML = `<img src="${url}"><button class="remove-existing">&times;</button>`;
+        item.querySelector(".remove-existing").addEventListener("click", () => {
+          existingImages.splice(i, 1);
+          renderExistingImages(container);
+        });
+        container.appendChild(item);
+      });
+    }
+
+    closeModalBtn.addEventListener("click", () => editModal.classList.remove("open"));
+    editModal.addEventListener("click", e => { if (e.target === editModal) editModal.classList.remove("open"); });
+
+    document.getElementById("saveBtn").addEventListener("click", async () => {
+      const name        = document.getElementById("edit-name").value.trim();
+      const price       = document.getElementById("edit-price").value;
+      const description = document.getElementById("edit-description").value.trim();
+      const category    = editCatSelect.value;
+      const subcategory = editSubSelect.value;
+      const pdfFile     = document.getElementById("edit-pdfFile").files[0];
+
+      if (!name || !price || !category || !subcategory) {
+        alert("Please fill in all required fields.");
+        return;
+      }
+
+      const btn = document.getElementById("saveBtn");
+      btn.textContent = "Saving..."; btn.disabled = true;
+
+      try {
+        // Upload any new images
+        const newUrls = [];
+        for (const file of newEditFiles) {
+          const r = ref(storage, "products/" + Date.now() + "_" + file.name);
+          await uploadBytes(r, file);
+          newUrls.push(await getDownloadURL(r));
+        }
+
+        const finalImages = [...existingImages, ...newUrls];
+
+        // Upload new PDF if provided
+        let pdfUrl = "";
+        if (pdfFile) {
+          const r = ref(storage, "pdfs/" + Date.now() + "_" + pdfFile.name);
+          await uploadBytes(r, pdfFile);
+          pdfUrl = await getDownloadURL(r);
+        }
+
+        const updateData = {
+          name, price: Number(price), description, category, subcategory,
+          images: finalImages,
+          image: finalImages[0] || ""
+        };
+
+        // Only overwrite PDF if a new one was uploaded
+        if (pdfUrl) updateData.pdf = pdfUrl;
+
+        await updateDoc(doc(db, "products", editProductId), updateData);
+
+        editModal.classList.remove("open");
+        alert("Product updated successfully!");
+        loadProducts();
+      } catch (err) {
+        alert("Error saving: " + err.message);
+      } finally {
+        btn.textContent = "Save Changes"; btn.disabled = false;
       }
     });
 
@@ -454,5 +626,4 @@
   </script>
 
 </body>
-
 </html>

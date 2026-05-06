@@ -2282,3 +2282,36 @@ nav {
     cursor: pointer;
     pointer-events: all;
 }
+
+/* ── Admin / Login Nav Items ─────────────────────────── */
+.nav-login,
+.nav-admin {
+    padding: 0.4rem 1rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.nav-login {
+    border: 1.5px solid rgba(255, 193, 7, 0.5);
+    color: var(--accent-gold) !important;
+}
+
+.nav-login:hover {
+    background: var(--accent-gold);
+    color: #1a1a1a !important;
+    box-shadow: 0 2px 10px var(--accent-glow);
+}
+
+.nav-admin {
+    background: var(--accent-gold);
+    color: #1a1a1a !important;
+}
+
+.nav-admin:hover {
+    background: var(--accent-gold-dim);
+    color: #1a1a1a !important;
+    box-shadow: 0 2px 10px var(--accent-glow);
+}
