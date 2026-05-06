@@ -1,4 +1,46 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // --- Firebase Initialization ---
+    const firebaseConfig = {
+        apiKey: "AIzaSyD8JyqoRLjwn93CsL9iOkZ8w79VT2OU5VI",
+        authDomain: "cuplighton-72192.firebaseapp.com",
+        projectId: "cuplighton-72192",
+        storageBucket: "cuplighton-72192.firebasestorage.app",
+        messagingSenderId: "60391723671",
+        appId: "1:60391723671:web:fc2b7b509b99b595f74fd2"
+    };
+
+    // Dynamically load Firebase
+    if (!window.firebase) {
+        const script = document.createElement('script');
+        script.src = 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+        script.onload = () => {
+            const scriptDb = document.createElement('script');
+            scriptDb.src = 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+            scriptDb.onload = initializeApp;
+            document.head.appendChild(scriptDb);
+        };
+        document.head.appendChild(script);
+    } else {
+        initializeApp();
+    }
+
+    let db = null;
+
+    async function initializeApp() {
+        if (window.firebase && window.firebase.initializeApp) {
+            try {
+                const app = window.firebase.initializeApp(firebaseConfig);
+                db = window.firebase.firestore(app);
+                initializePage();
+            } catch (e) {
+                console.log('Firebase already initialized or error:', e);
+                db = window.firebase.firestore();
+                initializePage();
+            }
+        }
+    }
+
+    function initializePage() {
     // --- Load Featured Products on Homepage ---
     // --- Featured Products on Homepage ---
     // Now handled by static HTML in index.html
@@ -213,11 +255,39 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
 
-        // Load products from JSON
-        fetch('product.json')
-            .then(response => response.json())
-            .then(data => {
-                allProductsData = data;
+        // Load products from Firebase
+        async function loadProductsFromFirebase() {
+            try {
+                const querySnapshot = await db.collection('products').get();
+                
+                // Transform Firebase data into the JSON structure
+                const transformedData = {
+                    categories: {}
+                };
+
+                querySnapshot.forEach((doc) => {
+                    const product = doc.data();
+                    const category = product.category || 'other';
+                    const subcategory = product.subcategory || 'uncategorized';
+
+                    if (!transformedData.categories[category]) {
+                        transformedData.categories[category] = {};
+                    }
+                    if (!transformedData.categories[category][subcategory]) {
+                        transformedData.categories[category][subcategory] = [];
+                    }
+
+                    transformedData.categories[category][subcategory].push({
+                        name: product.name,
+                        price: product.price,
+                        image: product.image,
+                        description: product.description,
+                        datasheet: product.datasheet || '',
+                        id: doc.id
+                    });
+                });
+
+                allProductsData = transformedData;
 
                 // Check for URL parameters to filter initially
                 const urlParams = new URLSearchParams(window.location.search);
@@ -282,115 +352,91 @@ document.addEventListener('DOMContentLoaded', () => {
                         renderProducts(null, true);
                     });
                 }
-            })
-            .catch(error => {
-                console.error('Error loading products:', error);
+            } catch (error) {
+                console.error('Error loading products from Firebase:', error);
                 productGrid.innerHTML = '<p style="text-align: center; grid-column: 1/-1;">Error loading products. Please try again later.</p>';
-            });
+            }
+        }
+
+        // Load products from Firebase
+        loadProductsFromFirebase();
     }
 
     // --- Product Detail Page Logic ---
-    if (window.location.pathname.includes('product-detail.html')) {
+    if (window.location.pathname.includes('product-detail.html') && db) {
         const urlParams = new URLSearchParams(window.location.search);
         const productId = urlParams.get('id');
 
         if (productId) {
-            fetch('product.json')
-                .then(response => response.json())
-                .then(data => {
-                    const [categoryKey, subcategoryKey, indexStr] = productId.split('-');
-                    const index = parseInt(indexStr);
+            // Load product from Firebase by ID
+            db.collection('products').doc(productId).get().then((doc) => {
+                if (doc.exists) {
+                    const product = doc.data();
 
-                    if (data.categories[categoryKey] &&
-                        data.categories[categoryKey][subcategoryKey] &&
-                        data.categories[categoryKey][subcategoryKey][index]) {
+                    document.title = `${product.name} | Cuplighton`;
+                    document.getElementById('detail-category').textContent = `${product.category} / ${product.subcategory}`;
+                    document.getElementById('detail-name').textContent = product.name;
+                    document.getElementById('detail-title').textContent = product.name;
+                    document.getElementById('detail-price').textContent = `฿${product.price.toLocaleString()}`;
+                    document.getElementById('detail-description').textContent = product.description || 'Premium lighting solution designed for modern spaces.';
 
-                        const product = data.categories[categoryKey][subcategoryKey][index];
+                    const imgElement = document.getElementById('detail-image');
+                    const thumbnailsContainer = document.getElementById('image-thumbnails');
 
-                        document.title = `${product.name} | Cuplighton`;
-                        document.getElementById('detail-category').textContent = `${categoryKey.charAt(0).toUpperCase() + categoryKey.slice(1)} / ${subcategoryKey.charAt(0).toUpperCase() + subcategoryKey.slice(1)}`;
-                        document.getElementById('detail-name').textContent = product.name;
-                        document.getElementById('detail-title').textContent = product.name;
-                        document.getElementById('detail-price').textContent = `$${product.price.toLocaleString()}`;
-                        document.getElementById('detail-description').textContent = product.description || 'Premium lighting solution designed for modern spaces.';
-
-
-                        const imgElement = document.getElementById('detail-image');
-                        const thumbnailsContainer = document.getElementById('image-thumbnails');
-
-                        const productImages = product.images && product.images.length > 0
-                            ? product.images
-                            : (product.image ? [product.image] : []);
-
-                        if (productImages.length > 0) {
-                            imgElement.src = productImages[0];
-                            imgElement.alt = product.name;
-
-                            if (productImages.length > 1) {
-                                thumbnailsContainer.innerHTML = '';
-                                productImages.forEach((imageSrc, index) => {
-                                    const thumbnail = document.createElement('img');
-                                    thumbnail.src = imageSrc;
-                                    thumbnail.alt = `${product.name} - Image ${index + 1}`;
-                                    thumbnail.className = 'thumbnail' + (index === 0 ? ' active' : '');
-                                    thumbnail.addEventListener('click', () => {
-                                        imgElement.src = imageSrc;
-                                        document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
-                                        thumbnail.classList.add('active');
-                                    });
-                                    thumbnailsContainer.appendChild(thumbnail);
-                                });
-                            }
-                        } else {
-                            imgElement.style.backgroundColor = '#ffffff';
-                            imgElement.alt = 'Image coming soon';
-                        }
-
-                        const datasheetBtn = document.getElementById('datasheet-btn');
-                        if (product.datasheet) {
-                            datasheetBtn.onclick = () => {
-                                window.open(product.datasheet, '_blank');
-                            };
-                        } else {
-                            datasheetBtn.disabled = true;
-                            datasheetBtn.textContent = 'Datasheet Not Available';
-                            datasheetBtn.style.opacity = '0.5';
-                        }
-
-                        const featuresList = document.getElementById('detail-features');
-                        featuresList.innerHTML = '';
-
-                        if (product.features && product.features.length > 0) {
-                            product.features.forEach(feature => {
-                                const li = document.createElement('li');
-                                li.textContent = feature;
-                                li.style.marginBottom = '0.5rem';
-                                featuresList.appendChild(li);
-                            });
-                        } else {
-                            const defaultFeatures = [
-                                'Premium Quality Materials',
-                                'Energy Efficient',
-                                'Easy Installation',
-                                '2 Year Warranty'
-                            ];
-                            defaultFeatures.forEach(feature => {
-                                const li = document.createElement('li');
-                                li.textContent = feature;
-                                li.style.marginBottom = '0.5rem';
-                                featuresList.appendChild(li);
-                            });
-                        }
+                    if (product.image) {
+                        imgElement.src = product.image;
+                        imgElement.alt = product.name;
                     } else {
-                        document.querySelector('.product-detail-container').innerHTML = '<h2 class="text-center">Product Not Found</h2><p class="text-center"><a href="products.html" class="text-gold">Return to Collection</a></p>';
+                        imgElement.style.backgroundColor = '#ffffff';
+                        imgElement.alt = 'Image coming soon';
                     }
-                })
-                .catch(error => {
-                    console.error('Error loading product details:', error);
-                    document.querySelector('.product-detail-container').innerHTML = '<h2 class="text-center">Error Loading Product</h2><p class="text-center"><a href="products.html" class="text-gold">Return to Collection</a></p>';
-                });
+
+                    const datasheetBtn = document.getElementById('datasheet-btn');
+                    if (product.datasheet) {
+                        datasheetBtn.onclick = () => {
+                            window.open(product.datasheet, '_blank');
+                        };
+                    } else {
+                        datasheetBtn.disabled = true;
+                        datasheetBtn.textContent = 'Datasheet Not Available';
+                        datasheetBtn.style.opacity = '0.5';
+                    }
+
+                    const featuresList = document.getElementById('detail-features');
+                    featuresList.innerHTML = '';
+
+                    if (product.features && product.features.length > 0) {
+                        product.features.forEach(feature => {
+                            const li = document.createElement('li');
+                            li.textContent = feature;
+                            li.style.marginBottom = '0.5rem';
+                            featuresList.appendChild(li);
+                        });
+                    } else {
+                        const defaultFeatures = [
+                            'Premium Quality Materials',
+                            'Energy Efficient',
+                            'Easy Installation',
+                            '2 Year Warranty'
+                        ];
+                        defaultFeatures.forEach(feature => {
+                            const li = document.createElement('li');
+                            li.textContent = feature;
+                            li.style.marginBottom = '0.5rem';
+                            featuresList.appendChild(li);
+                        });
+                    }
+                } else {
+                    document.querySelector('.product-detail-container').innerHTML = '<h2 class="text-center">Product Not Found</h2><p class="text-center"><a href="products.html" class="text-gold">Return to Collection</a></p>';
+                }
+            }).catch(error => {
+                console.error('Error loading product details:', error);
+                document.querySelector('.product-detail-container').innerHTML = '<h2 class="text-center">Error Loading Product</h2><p class="text-center"><a href="products.html" class="text-gold">Return to Collection</a></p>';
+            });
         } else {
             document.querySelector('.product-detail-container').innerHTML = '<h2 class="text-center">Product Not Found</h2><p class="text-center"><a href="products.html" class="text-gold">Return to Collection</a></p>';
         }
     }
+    }
 });
+

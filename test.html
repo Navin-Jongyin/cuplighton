@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Add Product</title>
+  <style>
+    body {
+      font-family: Arial;
+      max-width: 500px;
+      margin: 40px auto;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+    }
+
+    button {
+      padding: 10px;
+      width: 100%;
+      background: black;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    img {
+      width: 100%;
+      margin-top: 10px;
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h2>Add Product</h2>
+
+  <input id="name" placeholder="Product Name">
+  <input id="price" type="number" placeholder="Price">
+  <input type="file" id="imageFile">
+  <img id="preview">
+  <textarea id="description" placeholder="Description"></textarea>
+
+  <button id="addBtn">Add Product</button>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+    import { getStorage, ref, uploadBytes, getDownloadURL } 
+      from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
+
+    // 🔥 PUT YOUR CONFIG HERE (copy from Firebase console)
+    const firebaseConfig = {
+      apiKey: "AIzaSyD8JyqoRLjwn93CsL9iOkZ8w79VT2OU5VI",
+      authDomain: "cuplighton-72192.firebaseapp.com",
+      projectId: "cuplighton-72192",
+      storageBucket: "cuplighton-72192.firebasestorage.app",
+      messagingSenderId: "60391723671",
+      appId: "1:60391723671:web:fc2b7b509b99b595f74fd2"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const storage = getStorage(app);
+
+    const fileInput = document.getElementById("imageFile");
+    const preview = document.getElementById("preview");
+
+    // Preview image
+    fileInput.addEventListener("change", () => {
+      const file = fileInput.files[0];
+      if (file) {
+        preview.src = URL.createObjectURL(file);
+        preview.style.display = "block";
+      }
+    });
+
+    // Add product
+    document.getElementById("addBtn").addEventListener("click", async () => {
+      try {
+        const name = document.getElementById("name").value;
+        const price = document.getElementById("price").value;
+        const description = document.getElementById("description").value;
+        const file = fileInput.files[0];
+
+        if (!name || !price || !file) {
+          alert("Please fill all fields + image");
+          return;
+        }
+
+        // unique filename
+        const fileName = Date.now() + "_" + file.name;
+
+        // upload to Storage
+        const storageRef = ref(storage, "products/" + fileName);
+        await uploadBytes(storageRef, file);
+
+        // get download URL
+        const imageUrl = await getDownloadURL(storageRef);
+
+        // save to Firestore
+        await addDoc(collection(db, "products"), {
+          name: name,
+          price: Number(price),
+          description: description,
+          image: imageUrl,
+          createdAt: new Date()
+        });
+
+        alert("✅ Product added!");
+
+        // reset form
+        document.getElementById("name").value = "";
+        document.getElementById("price").value = "";
+        document.getElementById("description").value = "";
+        fileInput.value = "";
+        preview.style.display = "none";
+
+      } catch (error) {
+        console.error(error);
+        alert("❌ Error — check console (F12)");
+      }
+    });
+  </script>
+
+</body>
+</html>

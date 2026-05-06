@@ -43,6 +43,23 @@
                     ],
                     "description": "",
                     "datasheet": "Products/Datasheet/Indoor/Recessed/Shibuya/Shibuya.pdf"
+                },
+                {
+                    "name": "KZN 05 Family",
+                    "price": 1299,
+                    "image": "Products/Images/Indoor/Recessed/KZN05/KZN05-1.png",
+                    "images": [
+                        "Products/Images/Indoor/Recessed/KZN05/KZN05-1.png",
+                        "Products/Images/Indoor/Recessed/KZN05/KZN05-2.png",
+                        "Products/Images/Indoor/Recessed/KZN05/KZN05-3.png",
+                        "Products/Images/Indoor/Recessed/KZN05/KZN05-4.png",
+                        "Products/Images/Indoor/Recessed/KZN05/KZN05-5.png",
+                        "Products/Images/Indoor/Recessed/KZN05/KZN05-6.png",
+                        "Products/Images/Indoor/Recessed/KZN05/KZN05-7.png",
+                        "Products/Images/Indoor/Recessed/KZN05/KZN05-8.png"
+                    ],
+                    "description": "",
+                    "datasheet": "Products/Datasheet/Indoor/Recessed/KZN05/KZN05.pdf"
                 }
             ],
             "surface": [

@@ -18,11 +18,11 @@
             </a>
             <nav>
                 <ul class="flex nav-links">
-                    <li><a href="index.html" class="nav-link active">Home</a></li>
-                    <li><a href="about.html" class="nav-link">About</a></li>
-                    <li><a href="products.html" class="nav-link">Products</a></li>
-                    <li><a href="services.html" class="nav-link">Services</a></li>
-                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                    <li><a href="index.html" class="nav-link active" data-i18n="nav.home">Home</a></li>
+                    <li><a href="about.html" class="nav-link" data-i18n="nav.about">About</a></li>
+                    <li><a href="products.html" class="nav-link" data-i18n="nav.products">Products</a></li>
+                    <li><a href="services.html" class="nav-link" data-i18n="nav.services">Services</a></li>
+                    <li><a href="contact.html" class="nav-link" data-i18n="nav.contact">Contact</a></li>
                 </ul>
             </nav>
         </div>
@@ -33,7 +33,8 @@
         <div class="hero-content text-center">
             <div class="hero-badge">Welcome to Cuplighton</div>
             <h1 class="hero-title">Illuminate Your Space</h1>
-            <p class="hero-subtitle">Premium lighting solutions for residential and commercial projects</p>
+            <p class="hero-subtitle">Premium lighting solutions for residential and commercial
+                projects</p>
             <div style="margin-top: 2rem;">
                 <a href="products.html" class="btn btn-primary">Explore Our Products</a>
             </div>
@@ -43,7 +44,7 @@
     <!-- Shop by Category -->
     <section class="categories-section">
         <div class="container">
-            <h2 class="section-title text-center">Shop by Category</h2>
+            <h2 class="section-title text-center" data-i18n="home.categoryTitle">Shop by Category</h2>
             <div class="category-grid">
                 <!-- Indoor -->
                 <a href="products.html?category=Indoor" class="category-card">
@@ -51,7 +52,7 @@
                         <img src="images/indoor-category.png" alt="Indoor Lighting">
                     </div>
                     <div class="category-content">
-                        <h3>Indoor</h3>
+                        <h3 data-i18n="home.indoor">Indoor</h3>
                     </div>
                 </a>
                 <!-- Outdoor -->
@@ -60,7 +61,7 @@
                         <img src="images/outdoor-category.png" alt="Outdoor Lighting">
                     </div>
                     <div class="category-content">
-                        <h3>Outdoor</h3>
+                        <h3 data-i18n="home.outdoor">Outdoor</h3>
                     </div>
                 </a>
                 <!-- Decoratives -->
@@ -69,7 +70,7 @@
                         <img src="images/decorative-category.png" alt="Decorative Lighting">
                     </div>
                     <div class="category-content">
-                        <h3>Decoratives</h3>
+                        <h3 data-i18n="home.decoratives">Decoratives</h3>
                     </div>
                 </a>
                 <!-- LED/Other -->
@@ -78,7 +79,7 @@
                         <img src="images/led-category.png" alt="LED & Other">
                     </div>
                     <div class="category-content">
-                        <h3>LED & Other</h3>
+                        <h3 data-i18n="home.ledOther">LED & Other</h3>
                     </div>
                 </a>
             </div>
@@ -90,9 +91,10 @@
     <!-- Contact CTA -->
     <section style="padding: 8rem 0; background: var(--bg-secondary);">
         <div class="container text-center">
-            <h2>Bespoke Lighting Solutions</h2>
-            <p style="margin-bottom: 2rem;">Looking for something unique? Let us design your perfect light.</p>
-            <a href="contact.html" class="btn">Contact Us</a>
+            <h2 data-i18n="home.bespoke">Bespoke Lighting Solutions</h2>
+            <p style="margin-bottom: 2rem;" data-i18n="home.bespokeText">Looking for something unique? Let us design
+                your perfect light.</p>
+            <a href="contact.html" class="btn" data-i18n="home.contactBtn">Contact Us</a>
         </div>
     </section>
 
@@ -101,14 +103,16 @@
         <div class="container">
             <div class="logo" style="margin-bottom: 1rem;">CUPLIGHT<span>ON</span></div>
             <ul class="flex footer-links">
-                <li><a href="index.html" class="nav-link">Home</a></li>
-                <li><a href="products.html" class="nav-link">Catalog</a></li>
-                <li><a href="contact.html" class="nav-link">Support</a></li>
+                <li><a href="index.html" class="nav-link" data-i18n="nav.home">Home</a></li>
+                <li><a href="products.html" class="nav-link" data-i18n="footer.catalog">Catalog</a></li>
+                <li><a href="contact.html" class="nav-link" data-i18n="footer.support">Support</a></li>
             </ul>
-            <p>&copy; 2025 Cuplighton. All rights reserved.</p>
+            <p data-i18n="footer.copyright">&copy; 2025 Cuplighton. All rights reserved.</p>
         </div>
     </footer>
 
+    <script src="translations.js"></script>
+    <script src="language.js"></script>
     <script src="script.js"></script>
 </body>
 

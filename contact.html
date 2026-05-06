@@ -18,11 +18,11 @@
             </a>
             <nav>
                 <ul class="flex nav-links">
-                    <li><a href="index.html" class="nav-link">Home</a></li>
-                    <li><a href="about.html" class="nav-link">About</a></li>
-                    <li><a href="products.html" class="nav-link">Products</a></li>
-                    <li><a href="services.html" class="nav-link"> Services</a></li>
-                    <li><a href="contact.html" class="nav-link active">Contact</a></li>
+                    <li><a href="index.html" class="nav-link" data-i18n="nav.home">Home</a></li>
+                    <li><a href="about.html" class="nav-link" data-i18n="nav.about">About</a></li>
+                    <li><a href="products.html" class="nav-link" data-i18n="nav.products">Products</a></li>
+                    <li><a href="services.html" class="nav-link" data-i18n="nav.services">Services</a></li>
+                    <li><a href="contact.html" class="nav-link active" data-i18n="nav.contact">Contact</a></li>
                 </ul>
             </nav>
         </div>
@@ -44,53 +44,21 @@
                 <div class="contact-grid">
                     <!-- Contact Form -->
                     <div class="contact-form">
-                        <h2 class="contact-form-title">Send Us a Message</h2>
-                        <p class="contact-form-description">Fill out the form below and we'll get back to you within 24
-                            hours.</p>
-                        <form
-                            onsubmit="event.preventDefault(); alert('Thank you for reaching out! We will contact you shortly.');">
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label class="form-label">Full Name *</label>
-                                    <input type="text" class="form-input" placeholder="John Doe" required>
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">Email Address *</label>
-                                    <input type="email" class="form-input" placeholder="john@example.com" required>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label class="form-label">Phone Number</label>
-                                    <input type="tel" class="form-input" placeholder="+1 (555) 000-0000">
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">Subject *</label>
-                                    <select class="form-input" required>
-                                        <option value="">Select a subject</option>
-                                        <option value="product">Product Inquiry</option>
-                                        <option value="design">Design Consultation</option>
-                                        <option value="support">Technical Support</option>
-                                        <option value="partnership">Partnership Opportunity</option>
-                                        <option value="other">Other</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Your Message *</label>
-                                <textarea class="form-textarea" rows="6"
-                                    placeholder="Tell us about your project or inquiry..." required></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary">
-                                <span>Send Message</span>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                    <line x1="22" y1="2" x2="11" y2="13"></line>
-                                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-                                </svg>
-                            </button>
-                        </form>
+                        <h2 class="contact-form-title">Send Us an Email</h2>
+                        <p class="contact-form-description">Click the button below to open Gmail and send us your
+                            message directly.</p>
+                        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=nicky220245@gmail.com" class="btn btn-primary"
+                            target="_blank" rel="noopener noreferrer">
+                            <span>Open Gmail Compose</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <line x1="22" y1="2" x2="11" y2="13"></line>
+                                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                            </svg>
+                        </a>
+                        <p class="contact-form-description" style="margin-top: 1rem;">If Gmail does not open,
+                            email us at <a href="mailto:nicky220245@gmail.com">nicky220245@gmail.com</a>.</p>
                     </div>
 
                     <!-- Contact Info -->
@@ -124,7 +92,7 @@
                             <p class="contact-info-label">Phone</p>
                             <p class="contact-info-value">+1 (212) 555-0199</p>
                             <p class="contact-info-label">Email</p>
-                            <p class="contact-info-value">hello@cuplighton.com</p>
+                            <p class="contact-info-value">nicky220245@gmail.com</p>
                             <p class="contact-info-note">We respond within 24 hours</p>
                         </div>
                         <div class="contact-info-item">
@@ -168,6 +136,8 @@
         </div>
     </footer>
 
+    <script src="translations.js"></script>
+    <script src="language.js"></script>
 </body>
 
 </html>
