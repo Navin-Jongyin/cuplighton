@@ -1,8 +1,0 @@
-window.ENV = {
-    FIREBASE_API_KEY: "AIzaSyD8JyqoRLjwn93CsL9iOkZ8w79VT2OU5VI",
-    FIREBASE_AUTH_DOMAIN: "cuplighton-72192.firebaseapp.com",
-    FIREBASE_PROJECT_ID: "cuplighton-72192",
-    FIREBASE_STORAGE_BUCKET: "cuplighton-72192.firebasestorage.app",
-    FIREBASE_MESSAGING_SENDER_ID: "60391723671",
-    FIREBASE_APP_ID: "1:60391723671:web:fc2b7b509b99b595f74fd2"
-};

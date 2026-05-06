@@ -120,12 +120,24 @@
                         </ul>
 
                         <h3 class="sidebar-title" style="margin-top: 2rem;">Price Range</h3>
-                        <ul class="category-list">
-                            <li><a href="#" class="category-link">Under ฿15,000</a></li>
-                            <li><a href="#" class="category-link">฿15,000 - ฿35,000</a></li>
-                            <li><a href="#" class="category-link">฿35,000 - ฿85,000</a></li>
-                            <li><a href="#" class="category-link">Above ฿85,000</a></li>
-                        </ul>
+                        <div class="price-slider-wrapper">
+                            <div class="price-inputs">
+                                <div class="price-input-group">
+                                    <label>Min (฿)</label>
+                                    <input type="number" id="price-min-text" min="0" max="5000" value="0" step="1">
+                                </div>
+                                <span class="price-input-sep">–</span>
+                                <div class="price-input-group">
+                                    <label>Max (฿)</label>
+                                    <input type="number" id="price-max-text" min="0" max="5000" value="5000" step="1">
+                                </div>
+                            </div>
+                            <div class="price-slider-track" id="price-slider-track">
+                                <div class="price-slider-fill" id="price-slider-fill"></div>
+                                <input type="range" id="price-min" class="price-range-input" min="0" max="5000" value="0" step="1">
+                                <input type="range" id="price-max" class="price-range-input" min="0" max="5000" value="5000" step="1">
+                            </div>
+                        </div>
                     </aside>
 
                     <!-- Product Main Content -->
@@ -136,103 +148,46 @@
                         </div>
 
                         <!-- Product Grid -->
-                        <div class="product-grid">
-                            <!-- Product 1 -->
-                            <article class="product-card">
-                                <a href="product-detail.html?id=aurum-pendant">
-                                    <div class="product-image">
-                                        <img src="images/aurum-pendant.png" alt="Aurum Pendant">
-                                    </div>
-                                    <div class="product-info">
-                                        <h3>Aurum Pendant</h3>
-                                        <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">Minimalist gold pendant for
-                                            modern spaces.</p>
-                                        <span class="product-price">฿45,465</span>
-                                        <button class="btn btn-primary" style="width: 100%;"
-                                            data-i18n="products.viewDetails">View Details</button>
-                                    </div>
-                                </a>
-                            </article>
-
-                            <!-- Product 2 -->
-                            <article class="product-card">
-                                <a href="product-detail.html?id=noir-chandelier">
-                                    <div class="product-image">
-                                        <img src="images/noir-chandelier.png" alt="Noir Chandelier">
-                                    </div>
-                                    <div class="product-info">
-                                        <h3>Noir Chandelier</h3>
-                                        <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">Statement piece with matte
-                                            black finish.</p>
-                                        <span class="product-price">฿87,465</span>
-                                        <button class="btn btn-primary" style="width: 100%;">View Details</button>
-                                    </div>
-                                </a>
-                            </article>
-
-                            <!-- Product 3 -->
-                            <article class="product-card">
-                                <a href="product-detail.html?id=lumina-lamp">
-                                    <div class="product-image">
-                                        <img src="images/lumina-lamp.png" alt="Lumina Floor Lamp">
-                                    </div>
-                                    <div class="product-info">
-                                        <h3>Lumina Floor Lamp</h3>
-                                        <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">Elegant floor lamp with
-                                            adjustable arm.</p>
-                                        <span class="product-price">฿31,465</span>
-                                        <button class="btn btn-primary" style="width: 100%;">View Details</button>
-                                    </div>
-                                </a>
-                            </article>
-
-                            <!-- Product 4 -->
-                            <article class="product-card">
-                                <a href="product-detail.html?id=eclipse-sconce">
-                                    <div class="product-image" style="filter: hue-rotate(135deg);"></div>
-                                    <div class="product-info">
-                                        <h3>Eclipse Wall Sconce</h3>
-                                        <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">Ambient lighting inspired
-                                            by solar eclipses.</p>
-                                        <span class="product-price">฿15,750</span>
-                                        <button class="btn btn-primary" style="width: 100%;">View Details</button>
-                                    </div>
-                                </a>
-                            </article>
-
-                            <!-- Product 5 -->
-                            <article class="product-card">
-                                <a href="product-detail.html?id=crystal-cascade">
-                                    <div class="product-image" style="filter: hue-rotate(180deg);"></div>
-                                    <div class="product-info">
-                                        <h3>Crystal Cascade</h3>
-                                        <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">Luxurious crystal
-                                            chandelier cascading light.</p>
-                                        <span class="product-price">฿112,000</span>
-                                        <button class="btn btn-primary" style="width: 100%;">View Details</button>
-                                    </div>
-                                </a>
-                            </article>
-
-                            <!-- Product 6 -->
-                            <article class="product-card">
-                                <a href="product-detail.html?id=orbital-desk-lamp">
-                                    <div class="product-image" style="filter: hue-rotate(225deg);"></div>
-                                    <div class="product-info">
-                                        <h3>Orbital Desk Lamp</h3>
-                                        <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">Futuristic design for the
-                                            modern desk.</p>
-                                        <span class="product-price">฿12,250</span>
-                                        <button class="btn btn-primary" style="width: 100%;">View Details</button>
-                                    </div>
-                                </a>
-                            </article>
+                        <div class="product-grid" id="product-grid">
+                            <div class="loading-state" style="grid-column: 1/-1; text-align: center; padding: 3rem;">
+                                <div class="loader" style="border: 4px solid var(--bg-secondary); border-top: 4px solid var(--gold); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 0 auto 1rem;"></div>
+                                <p>Loading premium products...</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
     </main>
+
+    <!-- Product Modal -->
+    <div id="product-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="close-modal">&times;</span>
+            <!-- Image Carousel -->
+            <div class="modal-image" id="modal-image-panel" style="position:relative;">
+                <div id="modal-img-track" style="width:100%;height:100%;position:relative;"></div>
+                <button id="modal-prev" style="display:none;position:absolute;left:10px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.5);color:#fff;border:none;padding:10px 14px;cursor:pointer;border-radius:50%;font-size:18px;z-index:10;">&#8249;</button>
+                <button id="modal-next" style="display:none;position:absolute;right:10px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.5);color:#fff;border:none;padding:10px 14px;cursor:pointer;border-radius:50%;font-size:18px;z-index:10;">&#8250;</button>
+                <div id="modal-img-counter" style="display:none;position:absolute;bottom:10px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.5);color:#fff;padding:3px 10px;border-radius:20px;font-size:13px;"></div>
+            </div>
+            <div class="modal-details">
+                <h2 id="modal-title">Product Name</h2>
+                <div class="price" id="modal-price">฿0.00</div>
+                <div class="description" id="modal-description">Product description goes here.</div>
+                <div class="modal-actions">
+                    <button id="modal-datasheet-btn" class="btn btn-primary" style="width: 100%;">Download Datasheet</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
 
     <!-- Footer -->
     <footer class="footer">
@@ -250,6 +205,304 @@
     <script src="translations.js"></script>
     <script src="language.js"></script>
     <script src="script.js"></script>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyD8JyqoRLjwn93CsL9iOkZ8w79VT2OU5VI",
+            authDomain: "cuplighton-72192.firebaseapp.com",
+            projectId: "cuplighton-72192",
+            storageBucket: "cuplighton-72192.firebasestorage.app",
+            messagingSenderId: "60391723671",
+            appId: "1:60391723671:web:fc2b7b509b99b595f74fd2"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        let allProducts = [];
+        let currentCategory = null;
+        let currentSubcategory = null;
+
+        const productGrid = document.getElementById('product-grid');
+        const modal = document.getElementById('product-modal');
+        const modalImgTrack = document.getElementById('modal-img-track');
+        const modalPrevBtn = document.getElementById('modal-prev');
+        const modalNextBtn = document.getElementById('modal-next');
+        const modalImgCounter = document.getElementById('modal-img-counter');
+        const modalTitle = document.getElementById('modal-title');
+        const modalPrice = document.getElementById('modal-price');
+        const modalDesc = document.getElementById('modal-description');
+        const datasheetBtn = document.getElementById('modal-datasheet-btn');
+        const closeBtn = document.getElementById('close-modal');
+
+        async function loadProducts() {
+            try {
+                const snapshot = await getDocs(collection(db, "products"));
+                allProducts = [];
+                snapshot.forEach(docSnap => {
+                    allProducts.push({ ...docSnap.data(), id: docSnap.id });
+                });
+                
+                renderProducts();
+                checkUrlParams();
+            } catch (error) {
+                console.error("Error loading products:", error);
+                productGrid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: red;">Error loading products. Please try again later.</p>`;
+            }
+        }
+
+        function renderProducts() {
+            productGrid.innerHTML = "";
+            
+            let filtered = allProducts;
+            
+            if (currentCategory) {
+                filtered = filtered.filter(p => p.category === currentCategory);
+            }
+            if (currentSubcategory) {
+                filtered = filtered.filter(p => p.subcategory === currentSubcategory);
+            }
+
+            // Price range filter
+            const priceMin = parseInt(document.getElementById('price-min')?.value || 0);
+            const priceMax = parseInt(document.getElementById('price-max')?.value || 200000);
+            filtered = filtered.filter(p => Number(p.price) >= priceMin && Number(p.price) <= priceMax);
+
+            // Also check checkboxes
+            const checkedSubcategories = Array.from(document.querySelectorAll('.category-checkbox input[type="checkbox"]:checked')).map(cb => cb.value);
+            if (checkedSubcategories.length > 0) {
+                filtered = filtered.filter(p => checkedSubcategories.includes(p.subcategory));
+            }
+
+            if (filtered.length === 0) {
+                productGrid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; padding: 3rem;">No products found in this category.</p>`;
+                return;
+            }
+
+            filtered.forEach(product => {
+                const article = document.createElement('article');
+                article.className = 'product-card';
+                article.innerHTML = `
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.name}">
+                    </div>
+                    <div class="product-info">
+                        <h3>${product.name}</h3>
+                        <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">${product.description || 'Premium lighting solution'}</p>
+                        <span class="product-price">฿${Number(product.price).toLocaleString()}</span>
+                        <button class="btn btn-primary" style="width: 100%;">View Details</button>
+                    </div>
+                `;
+                
+                article.style.cursor = 'pointer';
+                article.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    openQuickView(product);
+                });
+                
+                productGrid.appendChild(article);
+            });
+
+            // Re-run translation if language system is available
+            if (window.i18next && typeof window.updateContent === 'function') {
+                window.updateContent();
+            }
+        }
+
+        function openQuickView(product) {
+            // Support both images[] array (new) and image string (legacy)
+            const images = (product.images && product.images.length > 0)
+                ? product.images
+                : (product.image ? [product.image] : []);
+
+            // Populate image carousel
+            modalImgTrack.innerHTML = '';
+            images.forEach((url, i) => {
+                const img = document.createElement('img');
+                img.src = url;
+                img.alt = product.name;
+                img.style.cssText = `width:100%;height:100%;object-fit:cover;display:${i === 0 ? 'block' : 'none'};`;
+                modalImgTrack.appendChild(img);
+            });
+
+            let currentIdx = 0;
+            const imgEls = modalImgTrack.querySelectorAll('img');
+
+            if (images.length > 1) {
+                modalPrevBtn.style.display = 'block';
+                modalNextBtn.style.display = 'block';
+                modalImgCounter.style.display = 'block';
+                modalImgCounter.textContent = `1 / ${images.length}`;
+
+                modalPrevBtn.onclick = () => {
+                    imgEls[currentIdx].style.display = 'none';
+                    currentIdx = (currentIdx - 1 + images.length) % images.length;
+                    imgEls[currentIdx].style.display = 'block';
+                    modalImgCounter.textContent = `${currentIdx + 1} / ${images.length}`;
+                };
+                modalNextBtn.onclick = () => {
+                    imgEls[currentIdx].style.display = 'none';
+                    currentIdx = (currentIdx + 1) % images.length;
+                    imgEls[currentIdx].style.display = 'block';
+                    modalImgCounter.textContent = `${currentIdx + 1} / ${images.length}`;
+                };
+            } else {
+                modalPrevBtn.style.display = 'none';
+                modalNextBtn.style.display = 'none';
+                modalImgCounter.style.display = 'none';
+            }
+
+            modalTitle.textContent = product.name;
+            modalPrice.textContent = `฿${Number(product.price).toLocaleString()}`;
+            modalDesc.textContent = product.description || 'No description available for this premium lighting product.';
+            
+            if (product.pdf) {
+                datasheetBtn.onclick = () => window.open(product.pdf, '_blank');
+                datasheetBtn.disabled = false;
+                datasheetBtn.textContent = 'Download Datasheet';
+                datasheetBtn.style.opacity = '1';
+                datasheetBtn.style.cursor = 'pointer';
+            } else {
+                datasheetBtn.onclick = null;
+                datasheetBtn.disabled = true;
+                datasheetBtn.textContent = 'Datasheet Not Available';
+                datasheetBtn.style.opacity = '0.5';
+                datasheetBtn.style.cursor = 'not-allowed';
+            }
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeQuickView() {
+            modal.classList.remove('active');
+            document.body.style.overflow = ''; // Restore scrolling
+        }
+
+        closeBtn.addEventListener('click', closeQuickView);
+        
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeQuickView();
+            }
+        });
+
+        // ESC key to close
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                closeQuickView();
+            }
+        });
+
+        function checkUrlParams() {
+            const params = new URLSearchParams(window.location.search);
+            const cat = params.get('category');
+            if (cat) {
+                currentCategory = cat;
+                renderProducts();
+                
+                // Update UI to match
+                const links = document.querySelectorAll('.category-link');
+                links.forEach(link => {
+                    if (link.textContent.trim() === cat) {
+                        link.classList.add('active');
+                        link.parentElement.classList.add('expanded');
+                    }
+                });
+            }
+        }
+
+        // Event Listeners from script.js
+        window.addEventListener('categoryFilter', (e) => {
+            currentCategory = e.detail.category;
+            currentSubcategory = null;
+            renderProducts();
+        });
+
+        window.addEventListener('subcategoryFilter', (e) => {
+            currentCategory = e.detail.category;
+            currentSubcategory = e.detail.subcategory;
+            renderProducts();
+        });
+
+        window.addEventListener('clearFilters', () => {
+            currentCategory = null;
+            currentSubcategory = null;
+            renderProducts();
+        });
+
+        // Price Range Slider
+        const priceMinInput  = document.getElementById('price-min');
+        const priceMaxInput  = document.getElementById('price-max');
+        const priceMinText   = document.getElementById('price-min-text');
+        const priceMaxText   = document.getElementById('price-max-text');
+        const priceSliderFill = document.getElementById('price-slider-fill');
+        const PRICE_MAX = 5000;
+
+        function updateSliderUI() {
+            let minVal = parseInt(priceMinInput.value);
+            let maxVal = parseInt(priceMaxInput.value);
+
+            // Prevent handles crossing (keep at least 1 gap)
+            if (minVal >= maxVal) {
+                minVal = Math.max(0, maxVal - 1);
+                priceMinInput.value = minVal;
+            }
+
+            const leftPct  = (minVal / PRICE_MAX) * 100;
+            const rightPct = ((PRICE_MAX - maxVal) / PRICE_MAX) * 100;
+
+            priceSliderFill.style.left  = leftPct  + '%';
+            priceSliderFill.style.right = rightPct + '%';
+
+            // Sync text inputs
+            priceMinText.value = minVal;
+            priceMaxText.value = maxVal;
+
+            renderProducts();
+        }
+
+        // Slider → Text
+        priceMinInput.addEventListener('input', updateSliderUI);
+        priceMaxInput.addEventListener('input', updateSliderUI);
+
+        // Text → Slider (on change / Enter)
+        function syncFromText() {
+            let minVal = parseInt(priceMinText.value) || 0;
+            let maxVal = parseInt(priceMaxText.value) || PRICE_MAX;
+
+            // Clamp to valid range
+            minVal = Math.max(0, Math.min(minVal, PRICE_MAX));
+            maxVal = Math.max(0, Math.min(maxVal, PRICE_MAX));
+
+            // Ensure min < max
+            if (minVal >= maxVal) maxVal = Math.min(minVal + 1, PRICE_MAX);
+
+            priceMinInput.value = minVal;
+            priceMaxInput.value = maxVal;
+            priceMinText.value  = minVal;
+            priceMaxText.value  = maxVal;
+
+            updateSliderUI();
+        }
+
+        priceMinText.addEventListener('change', syncFromText);
+        priceMaxText.addEventListener('change', syncFromText);
+        priceMinText.addEventListener('keydown', e => { if (e.key === 'Enter') syncFromText(); });
+        priceMaxText.addEventListener('keydown', e => { if (e.key === 'Enter') syncFromText(); });
+
+        updateSliderUI(); // Initialise fill on load
+
+        // Checkbox listeners
+        document.querySelectorAll('.category-checkbox input').forEach(cb => {
+            cb.addEventListener('change', renderProducts);
+        });
+
+        loadProducts();
+    </script>
 </body>
 
 </html>

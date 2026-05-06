@@ -1,589 +1,202 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Panel - Product Management</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>Admin Panel</title>
+
   <style>
-    * {
-      margin: 0;
-      padding: 0;
+    body {
+      font-family: Arial;
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
       box-sizing: border-box;
     }
 
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #fefdf8;
-      min-height: 100vh;
-      padding: 30px 20px;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .header {
-      text-align: center;
-      color: #1a1a1a;
-      margin-bottom: 40px;
-    }
-
-    .header h1 {
-      font-size: 2.5em;
-      margin-bottom: 10px;
-      text-shadow: none;
-    }
-
-    .header p {
-      font-size: 1.1em;
-      opacity: 0.9;
-    }
-
-    .form-section {
-      background: white;
-      border-radius: 20px;
-      padding: 40px;
-      margin-bottom: 40px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-      border-top: 4px solid #FFC107;
-    }
-
-    .form-section h2 {
-      font-size: 1.8em;
-      color: #333;
-      margin-bottom: 30px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .form-section h2 i {
-      color: #FFC107;
-    }
-
-    .form-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-      margin-bottom: 20px;
-    }
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .form-group label {
-      font-weight: 600;
-      color: #333;
-      margin-bottom: 8px;
-      font-size: 0.95em;
-    }
-
-    input, textarea, select {
-      padding: 12px 15px;
-      border: 2px solid #e0e0e0;
-      border-radius: 10px;
-      font-size: 1em;
-      font-family: inherit;
-      transition: all 0.3s ease;
-    }
-
-    input:focus, textarea:focus, select:focus {
-      outline: none;
-      border-color: #FFC107;
-      box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.15);
-      background-color: #fefdf8;
-    }
-
-    textarea {
-      resize: vertical;
-      min-height: 100px;
-      grid-column: 1 / -1;
-    }
-
-    .file-input-wrapper {
-      grid-column: 1 / -1;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .file-input-wrapper input[type="file"] {
-      padding: 0;
-    }
-
-    .file-label {
-      display: block;
-      padding: 30px;
-      border: 2px dashed #FFC107;
-      border-radius: 10px;
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      background-color: #fefdf8;
-    }
-
-    .file-input-wrapper:hover .file-label {
-      background-color: #f9f8f3;
-      border-color: #FFB300;
-    }
-
-    .file-label i {
-      font-size: 2em;
-      color: #FFC107;
-      display: block;
-      margin-bottom: 10px;
-    }
-
     button {
-      padding: 14px 30px;
-      border: none;
-      border-radius: 10px;
-      font-size: 1em;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-
-    #addBtn {
-      background: linear-gradient(135deg, #FFC107 0%, #FFB300 100%);
-      color: #1a1a1a;
+      padding: 10px;
       width: 100%;
-      padding: 15px;
-      font-size: 1.1em;
-      box-shadow: 0 10px 25px rgba(255, 193, 7, 0.3);
-    }
-
-    #addBtn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 15px 40px rgba(255, 193, 7, 0.4);
-    }
-
-    #addBtn:active {
-      transform: translateY(0);
-    }
-
-    .products-section {
-      margin-top: 40px;
-    }
-
-    .products-section h2 {
-      font-size: 1.8em;
-      color: #333;
-      margin-bottom: 30px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-shadow: none;
-    }
-
-    .products-section h2 i {
-      color: #FFC107;
-    }
-
-    .products-section h3 {
-      font-size: 1.5em;
-      color: #333;
-      margin-top: 40px;
-      margin-bottom: 20px;
-      padding-bottom: 15px;
-      border-bottom: 3px solid #FFC107;
-      display: flex;
-      align-items: center;
-      gap: 10px;
+      background: black;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
     }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 25px;
-      margin-bottom: 40px;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
     }
 
     .card {
-      background: white;
-      border-radius: 15px;
-      padding: 0;
-      overflow: hidden;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-      transition: all 0.3s ease;
-      transform: translateY(0);
-      border-top: 4px solid #FFC107;
-    }
-
-    .card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 15px 40px rgba(255, 193, 7, 0.15);
-    }
-
-    .card-image {
-      width: 100%;
-      height: 200px;
-      overflow: hidden;
-      background: #f0f0f0;
-      position: relative;
-    }
-
-    .card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.3s ease;
-    }
-
-    .card:hover img {
-      transform: scale(1.05);
-    }
-
-    .card-content {
-      padding: 20px;
-    }
-
-    .card h3 {
-      font-size: 1.3em;
-      color: #333;
-      margin-bottom: 8px;
-      margin-top: 0;
-      border: none;
-      padding: 0;
-    }
-
-    .card .subcategory {
-      color: #FFC107;
-      font-size: 0.85em;
-      font-weight: 600;
-      margin-bottom: 10px;
-      display: block;
-    }
-
-    .card p {
-      color: #666;
-      font-size: 0.9em;
-      line-height: 1.5;
-      margin-bottom: 15px;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-
-    .card-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-top: 15px;
-      border-top: 1px solid #f0f0f0;
-    }
-
-    .card strong {
-      font-size: 1.3em;
-      color: #FFC107;
+      border: 1px solid #ddd;
+      padding: 10px;
+      border-radius: 10px;
     }
 
     .delete {
-      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      background: red;
+      margin-top: 10px;
+    }
+
+    /* Image Preview Grid */
+    #imagePreviewContainer {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+      min-height: 0;
+    }
+
+    .preview-item {
+      position: relative;
+      width: 100px;
+      height: 100px;
+    }
+
+    .preview-item img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 6px;
+      border: 2px solid #ddd;
+    }
+
+    .preview-item .remove-img {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      background: red;
       color: white;
       border: none;
-      padding: 8px 15px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 0.85em;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .delete:hover {
-      transform: scale(1.05);
-      box-shadow: 0 5px 15px rgba(245, 87, 108, 0.3);
-    }
-
-    .category-section {
-      margin-bottom: 20px;
-      background: white;
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-      border-top: 4px solid #FFC107;
-    }
-
-    .category-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 20px 30px;
-      background: white;
-      cursor: pointer;
-      user-select: none;
-      transition: all 0.3s ease;
-      font-size: 1.5em;
-      color: #333;
-      font-weight: 600;
-      border: none;
-      width: 100%;
-      text-align: left;
-    }
-
-    .category-header:hover {
-      background: #fefdf8;
-    }
-
-    .category-header i:first-child {
-      color: #FFC107;
-      font-size: 1.3em;
-    }
-
-    .category-header .toggle-icon {
-      font-size: 1em;
-      color: #FFC107;
-      transition: transform 0.3s ease;
-      margin-left: auto;
-    }
-
-    .category-header.collapsed .toggle-icon {
-      transform: rotate(-90deg);
-    }
-
-    .category-content {
-      max-height: 10000px;
-      overflow: hidden;
-      transition: max-height 0.3s ease;
-      padding: 0 30px 30px;
-    }
-
-    .category-content.collapsed {
-      max-height: 0;
+      border-radius: 50%;
+      width: 22px;
+      height: 22px;
       padding: 0;
-    }
-
-    .subcategory-group {
-      margin-bottom: 25px;
-    }
-
-    .subcategory-header {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 15px;
-      background: #fefdf8;
-      border-left: 3px solid #FFC107;
-      border-radius: 8px;
       cursor: pointer;
-      user-select: none;
-      transition: all 0.3s ease;
-      font-size: 1.1em;
-      color: #333;
-      font-weight: 600;
+      font-size: 14px;
+      line-height: 1;
     }
 
-    .subcategory-header:hover {
-      background: #f9f8f3;
-    }
-
-    .subcategory-header .toggle-icon {
-      font-size: 0.9em;
-      color: #FFC107;
-      transition: transform 0.3s ease;
-      margin-left: auto;
-    }
-
-    .subcategory-header.collapsed .toggle-icon {
-      transform: rotate(-90deg);
-    }
-
-    .subcategory-content {
-      max-height: 10000px;
+    /* Card Thumbnail Carousel */
+    .card-images {
+      position: relative;
+      width: 100%;
+      height: 150px;
       overflow: hidden;
-      transition: max-height 0.3s ease;
-      margin-top: 15px;
     }
 
-    .subcategory-content.collapsed {
-      max-height: 0;
-      margin-top: 0;
+    .card-images img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      display: none;
     }
 
-.filter-section {
-      background: white;
-      border-radius: 20px;
-      padding: 30px;
-      margin-bottom: 30px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-      border-top: 4px solid #FFC107;
-    }
-
-    .filter-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-
-    .filter-group {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .filter-group label {
-      font-weight: 600;
-      color: #333;
-      margin-bottom: 8px;
-      font-size: 0.95em;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .filter-group label i {
-      color: #FFC107;
-    }
-
-    .filter-group select {
-      padding: 12px 15px;
-      border: 2px solid #e0e0e0;
-      border-radius: 10px;
-      font-size: 1em;
-      font-family: inherit;
-      transition: all 0.3s ease;
-      cursor: pointer;
-    }
-
-    .filter-group select:focus {
-      outline: none;
-      border-color: #FFC107;
-      box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.15);
-      background-color: #fefdf8;
-    }
-
-    .no-products {
-      text-align: center;
-      color: #1a1a1a;
-      padding: 60px 20px;
-      font-size: 1.1em;
-    }
-
-    .no-products i {
-      font-size: 3em;
+    .card-images img.active {
       display: block;
-      margin-bottom: 15px;
-      color: #FFC107;
-      opacity: 1;
     }
 
-    @media (max-width: 768px) {
-      .form-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .grid {
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        gap: 15px;
-      }
-
-      .form-section {
-        padding: 25px;
-      }
-
-      .header h1 {
-        font-size: 2em;
-      }
+    .card-nav {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 4px;
     }
+
+    .card-nav button {
+      width: 48%;
+      padding: 4px;
+      font-size: 12px;
+      background: #555;
+    }
+
+    .img-counter {
+      font-size: 11px;
+      text-align: center;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    label[for="imageFile"] {
+      display: block;
+      padding: 12px;
+      background: #f0f0f0;
+      border: 2px dashed #aaa;
+      border-radius: 6px;
+      text-align: center;
+      cursor: pointer;
+      margin: 8px 0;
+    }
+
+    label[for="imageFile"]:hover {
+      background: #e0e0e0;
+    }
+
+    #addBtn {
+      background: #1a1a1a;
+      margin-top: 12px;
+    }
+
+    #addBtn:hover { background: #333; }
   </style>
 </head>
 
 <body>
-  <div class="container">
-    <div class="header">
-      <h1><i class="fas fa-light-ceiling"></i> Cup Lighton Product Management</h1>
-      <p>Manage and add new products to your catalog</p>
-    </div>
 
-    <div class="form-section">
-      <h2><i class="fas fa-plus-circle"></i> Add New Product</h2>
-      
-      <div class="form-grid">
-        <div class="form-group">
-          <label for="name"><i class="fas fa-tag"></i> Product Name</label>
-          <input id="name" placeholder="Enter product name" type="text">
-        </div>
+  <h2>Add Product</h2>
 
-        <div class="form-group">
-          <label for="price"><i class="fas fa-tag"></i> Price (THB)</label>
-          <input id="price" type="number" placeholder="Enter price" min="0" step="0.01">
-        </div>
+  <input id="name" placeholder="Product Name">
+  <input id="price" type="number" placeholder="Price">
 
-        <div class="form-group">
-          <label for="category"><i class="fas fa-layer-group"></i> Category</label>
-          <select id="category">
-            <option value="">Select Category</option>
-            <option value="Indoor">Indoor</option>
-            <option value="Outdoor">Outdoor</option>
-            <option value="Decoratives">Decoratives</option>
-            <option value="LED/Other">LED/Other</option>
-          </select>
-        </div>
+  <select id="category">
+    <option value="">Select Category</option>
+    <option value="Indoor">Indoor</option>
+    <option value="Outdoor">Outdoor</option>
+  </select>
 
-        <div class="form-group">
-          <label for="subcategory"><i class="fas fa-list"></i> Subcategory</label>
-          <select id="subcategory">
-            <option value="">Select Subcategory</option>
-          </select>
-        </div>
+  <select id="subcategory">
+    <option value="">Select Subcategory</option>
+  </select>
 
-        <div class="form-group file-input-wrapper">
-          <label for="imageFile" class="file-label">
-            <i class="fas fa-cloud-upload-alt"></i>
-            <span>Click to upload image</span>
-          </label>
-          <input type="file" id="imageFile" accept="image/*" style="display: none;">
-        </div>
+  <label for="imageFile">📷 Click or drag to upload images (multiple allowed)</label>
+  <input type="file" id="imageFile" multiple accept="image/*" style="display:none">
+  <div id="imagePreviewContainer"></div>
 
-        <div class="form-group">
-          <label for="description"><i class="fas fa-align-left"></i> Description</label>
-          <textarea id="description" placeholder="Enter product description..."></textarea>
-        </div>
-      </div>
+  <input type="file" id="pdfFile" accept="application/pdf">
 
-      <button id="addBtn"><i class="fas fa-plus"></i> Add Product</button>
-    </div>
+  <textarea id="description" placeholder="Description"></textarea>
 
-    <div class="products-section">
-      <h2><i class="fas fa-th"></i> All Products</h2>
-      
-      <div class="filter-section">
-        <div class="filter-grid">
-          <div class="filter-group">
-            <label for="filterCategory"><i class="fas fa-layer-group"></i> Category</label>
-            <select id="filterCategory">
-              <option value="">All Categories</option>
-            </select>
-          </div>
-          <div class="filter-group">
-            <label for="filterSubcategory"><i class="fas fa-list"></i> Subcategory</label>
-            <select id="filterSubcategory">
-              <option value="">All Subcategories</option>
-            </select>
-          </div>
-        </div>
-      </div>
-      
-      <div id="productList"><div class="no-products"><i class="fas fa-box-open"></i>Loading...</div></div>
-    </div>
-  </div>
+  <button id="addBtn">Add Product</button>
 
+  <h2>Products</h2>
+
+  <select id="filterCategory">
+    <option value="">All Categories</option>
+  </select>
+
+  <select id="filterSubcategory">
+    <option value="">All Subcategories</option>
+  </select>
+
+  <div class="grid" id="productList"></div>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-    import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc } 
+    import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc }
       from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-    import { getStorage, ref, uploadBytes, getDownloadURL } 
+    import { getStorage, ref, uploadBytes, getDownloadURL }
       from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
 
     const firebaseConfig = {
@@ -599,33 +212,23 @@
     const db = getFirestore(app);
     const storage = getStorage(app);
 
-    const productList = document.getElementById("productList");
-    const imageFileInput = document.getElementById("imageFile");
-    const fileLabel = document.querySelector(".file-label");
-
-    // File input label update
-    imageFileInput.addEventListener("change", (e) => {
-      if (e.target.files.length > 0) {
-        fileLabel.innerHTML = `<i class="fas fa-check-circle"></i><span>${e.target.files[0].name}</span>`;
-      }
-    });
-
-    fileLabel.addEventListener("click", () => imageFileInput.click());
-
     const subcategories = {
-      Indoor: ["Recessed", "Surface", "Pendant", "Chandelier", "Track Light"],
-      Outdoor: ["Ceiling", "Wall", "Bollard", "In Ground", "Solar", "Pillar", "Post Top", "Street Light", "Flood Light", "Underwater", "Decorative", "L-Column", "High Bay / Low Bay"],
-      Decoratives: ["Table Lamp", "Floor Lamp"],
-      "LED/Other": ["Bulb", "LED Strip", "Others"]
+      Indoor: ["Recessed", "Pendant"],
+      Outdoor: ["Wall", "Garden"]
     };
 
     const categorySelect = document.getElementById("category");
     const subcategorySelect = document.getElementById("subcategory");
+    const imageFileInput = document.getElementById("imageFile");
+    const previewContainer = document.getElementById("imagePreviewContainer");
 
+    // Track selected files in a DataTransfer to allow removing individual images
+    let selectedFiles = [];
+
+    // --- Subcategory Dropdown ---
     categorySelect.addEventListener("change", () => {
       const selected = categorySelect.value;
       subcategorySelect.innerHTML = "<option value=''>Select Subcategory</option>";
-
       if (subcategories[selected]) {
         subcategories[selected].forEach(sub => {
           const option = document.createElement("option");
@@ -636,185 +239,214 @@
       }
     });
 
-    // Store all products
+    // --- Multi-image Preview ---
+    imageFileInput.addEventListener("change", () => {
+      const newFiles = Array.from(imageFileInput.files);
+      newFiles.forEach(file => {
+        // Avoid duplicates by name
+        if (!selectedFiles.find(f => f.name === file.name)) {
+          selectedFiles.push(file);
+        }
+      });
+      imageFileInput.value = ""; // Reset so same file can be re-selected if removed
+      renderPreviews();
+    });
+
+    function renderPreviews() {
+      previewContainer.innerHTML = "";
+      selectedFiles.forEach((file, index) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const item = document.createElement("div");
+          item.className = "preview-item";
+          item.innerHTML = `
+            <img src="${e.target.result}" alt="${file.name}">
+            <button class="remove-img" title="Remove" data-index="${index}">&times;</button>
+          `;
+          item.querySelector(".remove-img").addEventListener("click", () => {
+            selectedFiles.splice(index, 1);
+            renderPreviews();
+          });
+          previewContainer.appendChild(item);
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    // --- Products State ---
     let allProducts = [];
 
     async function loadProducts() {
-      const querySnapshot = await getDocs(collection(db, "products"));
-
-      // Store all products
+      const snapshot = await getDocs(collection(db, "products"));
       allProducts = [];
-      querySnapshot.forEach((docSnap) => {
-        const data = docSnap.data();
-        allProducts.push({ ...data, id: docSnap.id });
+      snapshot.forEach(docSnap => {
+        allProducts.push({ ...docSnap.data(), id: docSnap.id });
       });
-
-      // Populate filter dropdowns
-      populateFilterDropdowns();
-
-      // Display products
+      populateFilters();
       displayProducts(allProducts);
     }
 
-    function populateFilterDropdowns() {
-      const filterCat = document.getElementById("filterCategory");
-      const filterSubcat = document.getElementById("filterSubcategory");
+    function populateFilters() {
+      const cat = document.getElementById("filterCategory");
+      const sub = document.getElementById("filterSubcategory");
+      // Avoid duplicating options on reload
+      cat.querySelectorAll("option:not([value=''])").forEach(o => o.remove());
+      sub.querySelectorAll("option:not([value=''])").forEach(o => o.remove());
 
-      // Clear existing options except the first one
-      while (filterCat.children.length > 1) {
-        filterCat.removeChild(filterCat.lastChild);
-      }
-      while (filterSubcat.children.length > 1) {
-        filterSubcat.removeChild(filterSubcat.lastChild);
-      }
-
-      // Add all categories
-      Object.keys(subcategories).forEach((cat) => {
-        const option = document.createElement("option");
-        option.value = cat;
-        option.textContent = cat;
-        filterCat.appendChild(option);
+      Object.keys(subcategories).forEach(c => {
+        const opt = document.createElement("option");
+        opt.value = c; opt.textContent = c;
+        cat.appendChild(opt);
       });
-
-      // Add all subcategories
-      const uniqueSubcats = new Set();
-      Object.values(subcategories).flat().forEach((subcat) => {
-        uniqueSubcats.add(subcat);
-      });
-      
-      uniqueSubcats.forEach((subcat) => {
-        const option = document.createElement("option");
-        option.value = subcat;
-        option.textContent = subcat;
-        filterSubcat.appendChild(option);
+      Object.values(subcategories).flat().forEach(s => {
+        const opt = document.createElement("option");
+        opt.value = s; opt.textContent = s;
+        sub.appendChild(opt);
       });
     }
 
-    function displayProducts(productsToDisplay) {
-      productList.innerHTML = "";
+    function displayProducts(products) {
+      const list = document.getElementById("productList");
+      list.innerHTML = "";
 
-      if (productsToDisplay.length === 0) {
-        productList.innerHTML = "<div class='no-products'><i class='fas fa-box-open'></i><p>No products found</p></div>";
-        return;
-      }
-
-      // Create grid with all products
-      const grid = document.createElement("div");
-      grid.className = "grid";
-
-      productsToDisplay.forEach((item) => {
+      products.forEach(item => {
         const card = document.createElement("div");
         card.className = "card";
 
-        const imageUrl = item.image || "https://via.placeholder.com/300x200?text=No+Image";
+        // Support both old single-image and new multi-image
+        const images = item.images && item.images.length > 0
+          ? item.images
+          : (item.image ? [item.image] : []);
+
+        const imgsHtml = images.length > 0
+          ? images.map((url, i) => `<img src="${url}" class="${i === 0 ? 'active' : ''}">`).join('')
+          : '<img src="" alt="No Image" class="active">';
+
+        const navHtml = images.length > 1
+          ? `<div class="card-nav">
+               <button class="prev-img">◀ Prev</button>
+               <button class="next-img">Next ▶</button>
+             </div>
+             <p class="img-counter">1 / ${images.length}</p>`
+          : '';
 
         card.innerHTML = `
-          <div class="card-image">
-            <img src="${imageUrl}" alt="${item.name}">
-          </div>
-          <div class="card-content">
-            <h3>${item.name}</h3>
-            <span class="subcategory">${item.subcategory || "Uncategorized"}</span>
-            <p>${item.description || "No description available"}</p>
-            <div class="card-footer">
-              <strong>฿${Number(item.price).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</strong>
-              <button class="delete" title="Delete product">
-                <i class="fas fa-trash-alt"></i> Delete
-              </button>
-            </div>
-          </div>
+          <div class="card-images">${imgsHtml}</div>
+          ${navHtml}
+          <h3>${item.name}</h3>
+          <p>${item.category} - ${item.subcategory}</p>
+          <p>${item.description || ""}</p>
+          <strong>${item.price} THB</strong>
+          ${item.pdf ? `<br><a href="${item.pdf}" target="_blank">📄 View PDF</a>` : ""}
+          <button class="delete">Delete</button>
         `;
 
-        card.querySelector(".delete").addEventListener("click", async () => {
-          if (confirm(`Delete "${item.name}"?`)) {
-            try {
-              await deleteDoc(doc(db, "products", item.id));
-              loadProducts();
-            } catch (error) {
-              alert("Error deleting product: " + error.message);
-            }
-          }
-        });
+        // Carousel Navigation
+        if (images.length > 1) {
+          let currentIdx = 0;
+          const imgEls = card.querySelectorAll(".card-images img");
+          const counter = card.querySelector(".img-counter");
 
-        grid.appendChild(card);
+          card.querySelector(".prev-img").onclick = () => {
+            imgEls[currentIdx].classList.remove("active");
+            currentIdx = (currentIdx - 1 + images.length) % images.length;
+            imgEls[currentIdx].classList.add("active");
+            counter.textContent = `${currentIdx + 1} / ${images.length}`;
+          };
+          card.querySelector(".next-img").onclick = () => {
+            imgEls[currentIdx].classList.remove("active");
+            currentIdx = (currentIdx + 1) % images.length;
+            imgEls[currentIdx].classList.add("active");
+            counter.textContent = `${currentIdx + 1} / ${images.length}`;
+          };
+        }
+
+        card.querySelector(".delete").onclick = async () => {
+          await deleteDoc(doc(db, "products", item.id));
+          loadProducts();
+        };
+
+        list.appendChild(card);
       });
-
-      productList.appendChild(grid);
     }
 
-    // Filter functionality
-    const filterCategory = document.getElementById("filterCategory");
-    const filterSubcategory = document.getElementById("filterSubcategory");
+    document.getElementById("filterCategory").addEventListener("change", filter);
+    document.getElementById("filterSubcategory").addEventListener("change", filter);
 
-    filterCategory.addEventListener("change", () => {
-      filterProducts();
-    });
-
-    filterSubcategory.addEventListener("change", () => {
-      filterProducts();
-    });
-
-    function filterProducts() {
-      const selectedCategory = filterCategory.value;
-      const selectedSubcategory = filterSubcategory.value;
-
+    function filter() {
       let filtered = allProducts;
-
-      if (selectedCategory) {
-        filtered = filtered.filter(p => p.category === selectedCategory);
-      }
-
-      if (selectedSubcategory) {
-        filtered = filtered.filter(p => p.subcategory === selectedSubcategory);
-      }
-
+      const cat = document.getElementById("filterCategory").value;
+      const sub = document.getElementById("filterSubcategory").value;
+      if (cat) filtered = filtered.filter(p => p.category === cat);
+      if (sub) filtered = filtered.filter(p => p.subcategory === sub);
       displayProducts(filtered);
     }
 
+    // --- Add Product ---
     document.getElementById("addBtn").addEventListener("click", async () => {
-      try {
-        const name = document.getElementById("name").value.trim();
-        const price = document.getElementById("price").value.trim();
-        const description = document.getElementById("description").value.trim();
-        const file = imageFileInput.files[0];
-        const category = categorySelect.value;
-        const subcategory = subcategorySelect.value;
+      const name = document.getElementById("name").value.trim();
+      const price = document.getElementById("price").value;
+      const description = document.getElementById("description").value.trim();
+      const category = categorySelect.value;
+      const subcategory = subcategorySelect.value;
+      const pdfFile = document.getElementById("pdfFile").files[0];
 
-        if (!name || !price || !file || !category || !subcategory) {
-          alert("📋 Please fill in all fields");
-          return;
+      if (!name || !price || !category || !subcategory || selectedFiles.length === 0) {
+        alert("Please fill all required fields and select at least one image.");
+        return;
+      }
+
+      const addBtn = document.getElementById("addBtn");
+      addBtn.textContent = "Uploading...";
+      addBtn.disabled = true;
+
+      try {
+        // Upload all images
+        const imageUrls = [];
+        for (const file of selectedFiles) {
+          const imgRef = ref(storage, "products/" + Date.now() + "_" + file.name);
+          await uploadBytes(imgRef, file);
+          const url = await getDownloadURL(imgRef);
+          imageUrls.push(url);
         }
 
-        const fileName = Date.now() + "_" + file.name;
-        const storageRef = ref(storage, "products/" + fileName);
-        await uploadBytes(storageRef, file);
-        const imageUrl = await getDownloadURL(storageRef);
+        // Upload PDF if provided
+        let pdfUrl = "";
+        if (pdfFile) {
+          const pdfRef = ref(storage, "pdfs/" + Date.now() + "_" + pdfFile.name);
+          await uploadBytes(pdfRef, pdfFile);
+          pdfUrl = await getDownloadURL(pdfRef);
+        }
 
         await addDoc(collection(db, "products"), {
-          name: name,
+          name,
           price: Number(price),
-          description: description,
-          image: imageUrl,
-          category: category,
-          subcategory: subcategory,
-          createdAt: new Date()
+          description,
+          category,
+          subcategory,
+          images: imageUrls,       // Array of all image URLs
+          image: imageUrls[0],     // First image as default (for backward compatibility)
+          pdf: pdfUrl
         });
 
-        alert("✅ Product added successfully!");
-
+        // Reset form
         document.getElementById("name").value = "";
         document.getElementById("price").value = "";
         document.getElementById("description").value = "";
-        imageFileInput.value = "";
-        fileLabel.innerHTML = '<i class="fas fa-cloud-upload-alt"></i><span>Click to upload image</span>';
         categorySelect.value = "";
         subcategorySelect.innerHTML = "<option value=''>Select Subcategory</option>";
+        document.getElementById("pdfFile").value = "";
+        selectedFiles = [];
+        renderPreviews();
 
+        alert("Product added successfully!");
         loadProducts();
-
-      } catch (error) {
-        console.error(error);
-        alert("❌ Error adding product: " + error.message);
+      } catch (err) {
+        console.error(err);
+        alert("Error adding product: " + err.message);
+      } finally {
+        addBtn.textContent = "Add Product";
+        addBtn.disabled = false;
       }
     });
 
@@ -822,5 +454,5 @@
   </script>
 
 </body>
-</html>
+
 </html>
