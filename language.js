@@ -61,8 +61,11 @@ class LanguageSwitcher {
     }
 
     getTranslation(key) {
+        if (!window.translations || !window.translations[this.currentLang]) {
+            return null;
+        }
         const keys = key.split('.');
-        let value = translations[this.currentLang];
+        let value = window.translations[this.currentLang];
 
         for (const k of keys) {
             if (value && value[k]) {

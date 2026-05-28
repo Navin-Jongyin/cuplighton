@@ -22,7 +22,6 @@
                     <li><a href="services.html" class="nav-link" data-i18n="nav.services">Services</a></li>
                     <li><a href="contact.html" class="nav-link" data-i18n="nav.contact">Contact</a></li>
                     <li id="nav-admin-item" style="display:none;"><a href="showprod.html" class="nav-link nav-admin">Admin</a></li>
-                    <li id="nav-login-item"><a href="login.html" class="nav-link nav-login">Login</a></li>
                 </ul>
             </nav>
         </div>
@@ -171,7 +170,6 @@
     <script src="language.js"></script>
     <script>
         const isAdmin = sessionStorage.getItem('isAdmin') === 'true';
-        document.getElementById('nav-login-item').style.display = isAdmin ? 'none' : 'list-item';
         document.getElementById('nav-admin-item').style.display = isAdmin ? 'list-item' : 'none';
     </script>
 </body>

@@ -24,7 +24,6 @@
                     <li><a href="services.html" class="nav-link" data-i18n="nav.services">Services</a></li>
                     <li><a href="contact.html" class="nav-link" data-i18n="nav.contact">Contact</a></li>
                     <li id="nav-admin-item" style="display:none;"><a href="showprod.html" class="nav-link nav-admin">Admin</a></li>
-                    <li id="nav-login-item"><a href="login.html" class="nav-link nav-login">Login</a></li>
                 </ul>
             </nav>
         </div>
@@ -78,7 +77,7 @@
                                     <li><label class="category-checkbox"><input type="checkbox"
                                                 value="Bollard"><span>Bollard</span></label></li>
                                     <li><label class="category-checkbox"><input type="checkbox"
-                                                value="In ground"><span>In ground</span></label></li>
+                                                value="In Ground"><span>In Ground</span></label></li>
                                     <li><label class="category-checkbox"><input type="checkbox"
                                                 value="Solar"><span>Solar</span></label></li>
                                     <li><label class="category-checkbox"><input type="checkbox"
@@ -240,6 +239,19 @@
         const datasheetBtn = document.getElementById('modal-datasheet-btn');
         const closeBtn = document.getElementById('close-modal');
 
+        function safeUrl(url) {
+            if (!url || typeof url !== 'string') return '';
+            try {
+                const parsed = new URL(url, window.location.origin);
+                if (parsed.protocol === 'http:' || parsed.protocol === 'https:') {
+                    return parsed.href;
+                }
+            } catch (e) {
+                return '';
+            }
+            return '';
+        }
+
         async function loadProducts() {
             try {
                 const snapshot = await getDocs(collection(db, "products"));
@@ -287,17 +299,40 @@
             filtered.forEach(product => {
                 const article = document.createElement('article');
                 article.className = 'product-card';
-                article.innerHTML = `
-                    <div class="product-image">
-                        <img src="${product.image}" alt="${product.name}">
-                    </div>
-                    <div class="product-info">
-                        <h3>${product.name}</h3>
-                        <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">${product.description || 'Premium lighting solution'}</p>
-                        <span class="product-price">฿${Number(product.price).toLocaleString()}</span>
-                        <button class="btn btn-primary" style="width: 100%;">View Details</button>
-                    </div>
-                `;
+                const imageWrap = document.createElement('div');
+                imageWrap.className = 'product-image';
+                const img = document.createElement('img');
+                img.src = safeUrl(product.image) || 'data:,';
+                img.alt = product.name || 'Product image';
+                imageWrap.appendChild(img);
+
+                const infoWrap = document.createElement('div');
+                infoWrap.className = 'product-info';
+
+                const nameEl = document.createElement('h3');
+                nameEl.textContent = product.name || 'Unnamed Product';
+
+                const descEl = document.createElement('p');
+                descEl.style.fontSize = '0.9rem';
+                descEl.style.marginBottom = '0.5rem';
+                descEl.textContent = product.description || 'Premium lighting solution';
+
+                const priceEl = document.createElement('span');
+                priceEl.className = 'product-price';
+                priceEl.textContent = `฿${Number(product.price || 0).toLocaleString()}`;
+
+                const btn = document.createElement('button');
+                btn.className = 'btn btn-primary';
+                btn.style.width = '100%';
+                btn.textContent = 'View Details';
+
+                infoWrap.appendChild(nameEl);
+                infoWrap.appendChild(descEl);
+                infoWrap.appendChild(priceEl);
+                infoWrap.appendChild(btn);
+
+                article.appendChild(imageWrap);
+                article.appendChild(infoWrap);
                 
                 article.style.cursor = 'pointer';
                 article.addEventListener('click', (e) => {
@@ -324,7 +359,7 @@
             modalImgTrack.innerHTML = '';
             images.forEach((url, i) => {
                 const img = document.createElement('img');
-                img.src = url;
+                img.src = safeUrl(url) || 'data:,';
                 img.alt = product.name;
                 img.style.cssText = `width:100%;height:100%;object-fit:cover;display:${i === 0 ? 'block' : 'none'};`;
                 modalImgTrack.appendChild(img);
@@ -361,8 +396,9 @@
             modalPrice.textContent = `฿${Number(product.price).toLocaleString()}`;
             modalDesc.textContent = product.description || 'No description available for this premium lighting product.';
             
-            if (product.pdf) {
-                datasheetBtn.onclick = () => window.open(product.pdf, '_blank');
+            const pdfUrl = safeUrl(product.pdf);
+            if (pdfUrl) {
+                datasheetBtn.onclick = () => window.open(pdfUrl, '_blank');
                 datasheetBtn.disabled = false;
                 datasheetBtn.textContent = 'Download Datasheet';
                 datasheetBtn.style.opacity = '1';
@@ -507,7 +543,6 @@
 
         // Auth state: toggle Login / Admin link
         const isAdmin = sessionStorage.getItem('isAdmin') === 'true';
-        document.getElementById('nav-login-item').style.display = isAdmin ? 'none' : 'list-item';
         document.getElementById('nav-admin-item').style.display = isAdmin ? 'list-item' : 'none';
     </script>
 </body>

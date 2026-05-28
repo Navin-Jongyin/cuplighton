@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     // UI Logic for Sidebar and Navigation
     initializeUI();
+    initializeHiddenAdminAccess();
 
     function initializeUI() {
         // --- Sidebar Category Toggles ---
@@ -78,6 +79,61 @@ document.addEventListener('DOMContentLoaded', () => {
                 window.dispatchEvent(new CustomEvent('clearFilters'));
             });
         }
+    }
+
+    function initializeHiddenAdminAccess() {
+        const adminLoginPath = 'login.html';
+
+        // Hidden keyboard shortcuts:
+        // - Alt/Option + Shift + A
+        // - Cmd + Shift + A (Mac-friendly fallback)
+        window.addEventListener('keydown', (e) => {
+            const isAKey = e.code === 'KeyA';
+            const combo1 = e.altKey && e.shiftKey && isAKey;
+            const combo2 = e.metaKey && e.shiftKey && isAKey;
+            if (combo1 || combo2) {
+                e.preventDefault();
+                window.location.href = adminLoginPath;
+            }
+        });
+
+        // Hidden logo trigger: 5 clicks within 4 seconds
+        const logoLink = document.querySelector('.logo');
+        if (!logoLink) return;
+
+        let logoClickCount = 0;
+        let firstClickAt = 0;
+        let clickTimer = null;
+        const requiredClicks = 5;
+        const windowMs = 4000;
+
+        logoLink.addEventListener('click', (e) => {
+            const now = Date.now();
+            if (!firstClickAt || (now - firstClickAt) > windowMs) {
+                firstClickAt = now;
+                logoClickCount = 0;
+            }
+
+            // Pause normal navigation while we detect the hidden click sequence.
+            e.preventDefault();
+            logoClickCount += 1;
+            if (logoClickCount >= requiredClicks) {
+                window.location.href = adminLoginPath;
+                logoClickCount = 0;
+                firstClickAt = 0;
+                if (clickTimer) {
+                    clearTimeout(clickTimer);
+                    clickTimer = null;
+                }
+                return;
+            }
+
+            if (clickTimer) clearTimeout(clickTimer);
+            clickTimer = setTimeout(() => {
+                // If sequence was not completed, continue normal logo behavior.
+                window.location.href = logoLink.getAttribute('href') || 'index.html';
+            }, 500);
+        });
     }
 });
 

@@ -204,6 +204,7 @@
         if (username === data.username && password === data.password) {
           // Credentials match — store session and redirect
           sessionStorage.setItem('isAdmin', 'true');
+          sessionStorage.setItem('adminLoginAt', String(Date.now()));
           window.location.href = 'showprod.html';
         } else {
           showError('Incorrect username or password. Please try again.');
