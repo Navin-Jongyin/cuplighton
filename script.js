@@ -85,11 +85,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const adminLoginPath = 'login.html';
 
         // Hidden keyboard shortcuts:
-        // - Alt/Option + Shift + A
-        // - Cmd + Shift + A (Mac-friendly fallback)
+        // - Ctrl + Shift + A (Windows/Linux)
+        // - Cmd + Shift + A (Mac)
         window.addEventListener('keydown', (e) => {
             const isAKey = e.code === 'KeyA';
-            const combo1 = e.altKey && e.shiftKey && isAKey;
+            const combo1 = e.ctrlKey && e.shiftKey && isAKey;
             const combo2 = e.metaKey && e.shiftKey && isAKey;
             if (combo1 || combo2) {
                 e.preventDefault();
