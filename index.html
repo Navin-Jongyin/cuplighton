@@ -1,124 +1,29 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cuplighton | Premium Lighting</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cuplighton (Vite + Firebase CMS POC)</title>
+  <link rel="stylesheet" href="/src/css/main.css">
 </head>
+<body data-slug="home">
+  <header>
+    <h1>Cuplighton</h1>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </header>
 
-<body>
+  <main id="content">
+    <!-- Page content will be injected here from Firestore -->
+    <p>Loading content...</p>
+  </main>
 
-    <!-- Navigation -->
-    <header class="header">
-        <div class="container nav flex">
-            <a href="index.html" class="logo">
-                <img src="images/Logo/logo.png" alt="Logo">
-            </a>
-            <nav>
-                <ul class="flex nav-links">
-                    <li><a href="index.html" class="nav-link active" data-i18n="nav.home">Home</a></li>
-                    <li><a href="about.html" class="nav-link" data-i18n="nav.about">About</a></li>
-                    <li><a href="products.html" class="nav-link" data-i18n="nav.products">Products</a></li>
-                    <li><a href="services.html" class="nav-link" data-i18n="nav.services">Services</a></li>
-                    <li><a href="contact.html" class="nav-link" data-i18n="nav.contact">Contact</a></li>
-                    <li id="nav-admin-item" style="display:none;"><a href="showprod.html" class="nav-link nav-admin">Admin</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+  <footer>
+    <small>Powered by static HTML + Firestore</small>
+  </footer>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content text-center">
-            <div class="hero-badge">Welcome to Cuplighton</div>
-            <h1 class="hero-title">Illuminate Your Space</h1>
-            <p class="hero-subtitle">Premium lighting solutions for residential and commercial
-                projects</p>
-            <div style="margin-top: 2rem;">
-                <a href="products.html" class="btn btn-primary">Explore Our Products</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Shop by Category -->
-    <section class="categories-section">
-        <div class="container">
-            <h2 class="section-title text-center" data-i18n="home.categoryTitle">Shop by Category</h2>
-            <div class="category-grid">
-                <!-- Indoor -->
-                <a href="products.html?category=Indoor" class="category-card">
-                    <div class="category-image">
-                        <img src="images/indoor-category.png" alt="Indoor Lighting">
-                    </div>
-                    <div class="category-content">
-                        <h3 data-i18n="home.indoor">Indoor</h3>
-                    </div>
-                </a>
-                <!-- Outdoor -->
-                <a href="products.html?category=Outdoor" class="category-card">
-                    <div class="category-image">
-                        <img src="images/outdoor-category.png" alt="Outdoor Lighting">
-                    </div>
-                    <div class="category-content">
-                        <h3 data-i18n="home.outdoor">Outdoor</h3>
-                    </div>
-                </a>
-                <!-- Decoratives -->
-                <a href="products.html?category=Decoratives" class="category-card">
-                    <div class="category-image">
-                        <img src="images/decorative-category.png" alt="Decorative Lighting">
-                    </div>
-                    <div class="category-content">
-                        <h3 data-i18n="home.decoratives">Decoratives</h3>
-                    </div>
-                </a>
-                <!-- LED/Other -->
-                <a href="products.html?category=LED/Other" class="category-card">
-                    <div class="category-image">
-                        <img src="images/led-category.png" alt="LED & Other">
-                    </div>
-                    <div class="category-content">
-                        <h3 data-i18n="home.ledOther">LED & Other</h3>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </section>
-
-
-
-    <!-- Contact CTA -->
-    <section style="padding: 8rem 0; background: var(--bg-secondary);">
-        <div class="container text-center">
-            <h2 data-i18n="home.bespoke">Bespoke Lighting Solutions</h2>
-            <p style="margin-bottom: 2rem;" data-i18n="home.bespokeText">Looking for something unique? Let us design
-                your perfect light.</p>
-            <a href="contact.html" class="btn" data-i18n="home.contactBtn">Contact Us</a>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="logo" style="margin-bottom: 1rem;">CUPLIGHT<span>ON</span></div>
-            <ul class="flex footer-links">
-                <li><a href="index.html" class="nav-link" data-i18n="nav.home">Home</a></li>
-                <li><a href="products.html" class="nav-link" data-i18n="footer.catalog">Catalog</a></li>
-                <li><a href="contact.html" class="nav-link" data-i18n="footer.support">Support</a></li>
-            </ul>
-            <p data-i18n="footer.copyright">&copy; 2025 Cuplighton. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <script src="translations.js"></script>
-    <script src="language.js"></script>
-    <script src="script.js"></script>
-    <script>
-        const isAdmin = sessionStorage.getItem('isAdmin') === 'true';
-        document.getElementById('nav-admin-item').style.display = isAdmin ? 'list-item' : 'none';
-    </script>
+  <script type="module" src="/src/js/main.js"></script>
 </body>
-
 </html>

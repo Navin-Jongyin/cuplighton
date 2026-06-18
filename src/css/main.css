@@ -1,0 +1,6 @@
+/* Minimal CSS placeholder — keep your existing styles or replace this file */
+:root{--bg:#fff;--fg:#111}
+body{font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;margin:0;padding:1rem;background:var(--bg);color:var(--fg)}
+header{display:flex;justify-content:space-between;align-items:center;padding:0.5rem 0}
+#content{max-width:900px;margin:1rem auto;padding:1rem}
+.cms-badge{position:fixed;right:1rem;bottom:1rem;background:#111;color:#fff;padding:.5rem .75rem;border-radius:6px}
