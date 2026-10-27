@@ -10,8 +10,13 @@ export function loadStore() {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (raw) {
       const parsed = JSON.parse(raw);
-      if (parsed && parsed.schemaVersion === SCHEMA_VERSION && Array.isArray(parsed.variants)) {
-        state = parsed;
+      if (parsed && Array.isArray(parsed.variants)) {
+        if (parsed.schemaVersion !== SCHEMA_VERSION) {
+          state = migrateStoreSchema(parsed);
+          persist(true);
+        } else {
+          state = parsed;
+        }
         ensureIndexes();
         return state;
       }
@@ -22,6 +27,21 @@ export function loadStore() {
   state = buildSeed();
   persist(true);
   return state;
+}
+
+/** Drop demo catalog; keep users, settings, and session */
+function migrateStoreSchema(previous) {
+  const fresh = buildSeed();
+  if (previous.settings) {
+    fresh.settings = { ...fresh.settings, ...previous.settings };
+  }
+  if (Array.isArray(previous.users) && previous.users.length) {
+    fresh.users = previous.users;
+  }
+  if (previous.session) {
+    fresh.session = previous.session;
+  }
+  return fresh;
 }
 
 export function getState() {
@@ -102,17 +122,16 @@ function ensureIndexes() {
       state[k] = [];
     }
   }
-  if (!state.categories || !state.categories.length) state.categories = seed.categories;
-  if (!state.brands || !state.brands.length) state.brands = seed.brands;
+  if (!state.categories) state.categories = [];
+  if (!state.brands) state.brands = [];
+  if (!state.units) state.units = [];
+  if (!state.products) state.products = [];
+  if (!state.variants) state.variants = [];
+  if (!state.barcodes) state.barcodes = [];
+  if (!state.packaging) state.packaging = [];
+  if (!state.inventory) state.inventory = [];
+  if (!state.movements) state.movements = [];
   if (!state.quotations) state.quotations = [];
-  if (!state.variants || !state.variants.length) {
-    state.products = seed.products;
-    state.variants = seed.variants;
-    state.barcodes = seed.barcodes;
-    state.packaging = seed.packaging;
-    state.inventory = seed.inventory;
-    state.movements = seed.movements;
-  }
   migrateUserPins();
   migrateInvoices();
   migrateLots();

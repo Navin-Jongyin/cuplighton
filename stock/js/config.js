@@ -15,7 +15,7 @@
  */
 export const APP_NAME = "Cuplighton Stock";
 export const STORAGE_KEY = "cuplighton_wms_v1";
-export const SCHEMA_VERSION = 5;
+export const SCHEMA_VERSION = 6;
 export const CURRENCY = "THB";
 export const CURRENCY_SYMBOL = "฿";
 export const PAGE_SIZE = 25;
