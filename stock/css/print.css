@@ -1,0 +1,45 @@
+@media print {
+  .app-header,
+  .app-sidebar,
+  .sidebar-toggle,
+  .overlay,
+  .no-print,
+  .toast-root,
+  .toolbar .btn,
+  .page-header .btn {
+    display: none !important;
+  }
+
+  .app-shell {
+    display: block;
+    height: auto;
+  }
+
+  .app-main {
+    overflow: visible;
+  }
+
+  body {
+    overflow: visible;
+    font-size: 12px;
+  }
+
+  .page { padding: 0; max-width: none; }
+
+  .print-only { display: block !important; }
+
+  .panel, .table-wrap { border-color: #000; break-inside: avoid; }
+
+  @page {
+    margin: 12mm;
+  }
+}
+
+.print-doc {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.print-doc h1 { font-size: 20px; }
+.print-meta { margin-bottom: 16px; }

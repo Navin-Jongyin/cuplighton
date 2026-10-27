@@ -1,0 +1,623 @@
+/* Cuplighton main website theme for stock app */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Sarabun:wght@300;400;500;700&display=swap');
+
+:root {
+  --bg-primary: #fefdf8;
+  --bg-secondary: #f9f8f3;
+  --text-primary: #1a1a1a;
+  --text-secondary: #666666;
+  --accent-gold: #ffc107;
+  --accent-gold-dim: #ffb300;
+  --accent-glow: rgba(255, 193, 7, 0.25);
+  --header-height: 80px;
+
+  --white: var(--bg-primary);
+  --black: var(--text-primary);
+  --ink: var(--text-primary);
+  --yellow: var(--accent-gold);
+  --yellow-soft: rgba(255, 193, 7, 0.12);
+  --gray-50: var(--bg-secondary);
+  --gray-100: #e8e6df;
+  --gray-500: var(--text-secondary);
+  --gray-800: #2c2c2c;
+  --header: #1a1a1a;
+  --accent: var(--accent-gold);
+  --accent-soft: rgba(255, 193, 7, 0.15);
+  --ok: #166534;
+  --ok-bg: #dcfce7;
+  --low: #92400e;
+  --low-bg: #fef3c7;
+  --out: #ffffff;
+  --out-bg: #1a1a1a;
+  --font: "Outfit", "Sarabun", system-ui, sans-serif;
+  --mono: "Outfit", monospace;
+  --sidebar-w: 260px;
+  --header-h: var(--header-height);
+  --radius: 12px;
+  --radius-sm: 8px;
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 8px 32px rgba(26, 26, 26, 0.08);
+  --line: 1px solid rgba(0, 0, 0, 0.08);
+  --line-soft: 1px solid rgba(0, 0, 0, 0.06);
+  --track: 0.1em;
+  --transition-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html,
+body {
+  font-family: var(--font);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+.boot {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-primary);
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+}
+
+/* —— Shell —— */
+.app-shell {
+  background: var(--bg-primary);
+}
+
+.app-header {
+  position: relative;
+  background: rgba(26, 26, 26, 0.97);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 193, 7, 0.2);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+  min-height: var(--header-h);
+  padding: 0 1.5rem;
+  gap: 1rem;
+}
+
+.app-header::after {
+  display: none;
+}
+
+.app-header .brand {
+  color: #fff;
+}
+
+.app-header .brand:hover {
+  opacity: 0.9;
+  text-decoration: none;
+}
+
+.brand-logo {
+  height: 40px !important;
+  width: auto;
+}
+
+.app-header .sidebar-toggle {
+  color: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-sm);
+  background: transparent;
+}
+
+.app-header .sidebar-toggle:hover {
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
+}
+
+.stock-back-site {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.65);
+  text-transform: uppercase;
+  letter-spacing: var(--track);
+  margin-left: auto;
+  margin-right: 0;
+  padding: 0.5rem 0;
+  transition: color 0.2s ease;
+}
+
+.stock-back-site:hover {
+  color: var(--accent-gold);
+  text-decoration: none;
+}
+
+.header-actions {
+  margin-left: 0 !important;
+}
+
+.header-user .name {
+  color: #fff;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.8rem;
+}
+
+.header-user .role {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.65rem;
+}
+
+/* —— Sidebar (matches products sidebar) —— */
+.app-sidebar {
+  background: var(--bg-secondary);
+  border-right: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.app-sidebar nav {
+  padding: 1.25rem 0.75rem 2rem;
+}
+
+.app-sidebar .nav-link {
+  border-radius: var(--radius-sm);
+  margin-bottom: 0.25rem;
+  color: var(--text-primary);
+  font-weight: 500;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-left: 3px solid transparent;
+  min-height: 44px;
+}
+
+.app-sidebar .nav-link:hover {
+  background: rgba(255, 193, 7, 0.08);
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.app-sidebar .nav-link.active {
+  background: rgba(255, 193, 7, 0.15);
+  color: var(--text-primary);
+  box-shadow: none;
+  border-left-color: var(--accent-gold);
+}
+
+.app-sidebar .nav-icon {
+  color: var(--accent-gold);
+}
+
+.app-main {
+  background: var(--bg-primary);
+}
+
+.page {
+  padding: 2rem 2.5rem 3rem;
+  max-width: 1400px;
+}
+
+.page-header {
+  border-bottom: 1px solid var(--gray-100);
+  padding-bottom: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.page-header h1,
+.page h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--text-primary);
+}
+
+.page-sub {
+  color: var(--text-secondary);
+  text-transform: none;
+  letter-spacing: normal;
+  font-weight: 400;
+  font-size: 0.95rem;
+}
+
+/* —— Buttons (main site .btn) —— */
+.btn {
+  border: 2px solid var(--accent-gold) !important;
+  border-radius: var(--radius-sm) !important;
+  background: transparent !important;
+  color: var(--text-primary) !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+  font-size: 0.8rem !important;
+  transition: var(--transition-smooth) !important;
+  min-height: 44px;
+}
+
+.btn:hover {
+  background: var(--accent-gold) !important;
+  color: var(--text-primary) !important;
+  box-shadow: 0 4px 16px var(--accent-glow);
+  transform: translateY(-2px);
+  text-decoration: none !important;
+}
+
+.btn-primary {
+  background: var(--accent-gold) !important;
+  border-color: var(--accent-gold) !important;
+  color: var(--text-primary) !important;
+  font-weight: 600 !important;
+}
+
+.btn-primary:hover {
+  background: var(--accent-gold-dim) !important;
+  border-color: var(--accent-gold-dim) !important;
+}
+
+.app-header .btn {
+  border-color: rgba(255, 255, 255, 0.25) !important;
+  color: #fff !important;
+}
+
+.app-header .btn:hover {
+  background: var(--accent-gold) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--accent-gold) !important;
+}
+
+/* —— Panels & cards —— */
+.panel,
+.stat-card,
+.card {
+  background: #fff !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  border-radius: var(--radius) !important;
+  box-shadow: var(--shadow) !important;
+}
+
+.panel + .panel {
+  border-top: none !important;
+}
+
+.panel-h {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--gray-100);
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-primary);
+}
+
+.panel-h a {
+  color: var(--accent-gold-dim);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+}
+
+.panel-b {
+  padding: 0 1.25rem 1.25rem !important;
+}
+
+.kpi-grid {
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.kpi {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  border-radius: var(--radius) !important;
+  padding: 1.25rem !important;
+  box-shadow: var(--shadow);
+}
+
+.kpi .value {
+  color: var(--text-primary);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.kpi .label {
+  color: var(--text-secondary);
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+}
+
+/* —— Tables —— */
+.table-wrap {
+  border-radius: var(--radius);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.table-wrap thead th {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  border-bottom: 2px solid var(--accent-gold);
+}
+
+.table-wrap tbody tr:hover {
+  background: rgba(255, 193, 7, 0.06);
+}
+
+/* —— Forms —— */
+.field label {
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 0.72rem;
+}
+
+.field input,
+.field select,
+.field textarea {
+  border: 1px solid var(--gray-100) !important;
+  border-radius: var(--radius-sm) !important;
+  padding: 0.65rem 0.85rem !important;
+  background: #fff !important;
+  min-height: 44px;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: var(--accent-gold) !important;
+  box-shadow: 0 0 0 3px var(--accent-soft) !important;
+}
+
+input:not(.field input),
+select:not(.field select),
+textarea:not(.field textarea) {
+  border-radius: var(--radius-sm) !important;
+  border: 1px solid var(--gray-100) !important;
+}
+
+/* —— Tabs —— */
+.tabs {
+  border-bottom: 1px solid var(--gray-100);
+  gap: 0.5rem;
+}
+
+.tab {
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  color: var(--text-secondary);
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+}
+
+.tab.active {
+  color: var(--text-primary);
+  border-bottom: 2px solid var(--accent-gold);
+  background: transparent;
+}
+
+/* —— Chips & status —— */
+.chip,
+.status-chip {
+  border-radius: 999px;
+}
+
+/* —— Overlay mobile —— */
+.overlay.show {
+  background: rgba(26, 26, 26, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+/* —— Login shell (if used) —— */
+.login-wrap,
+.login-split {
+  background: var(--bg-primary);
+}
+
+.login-box {
+  border-radius: var(--radius) !important;
+  box-shadow: var(--shadow-lg) !important;
+}
+
+/* Embedded in admin panel (no duplicate sidebar/header) */
+body.stock-embed {
+  overflow: auto !important;
+  height: auto !important;
+}
+
+body.stock-embed #app {
+  height: auto !important;
+}
+
+body.stock-embed .app-main-embed {
+  background: var(--bg-primary);
+  min-height: 100%;
+}
+
+body.stock-embed .page-embed {
+  padding: 1.5rem 1.75rem 2.5rem;
+  max-width: none;
+}
+
+/* —— Settings page layout —— */
+#pane {
+  max-width: 1100px;
+}
+
+#pane .tabs {
+  gap: 0.25rem;
+  border-bottom: 1px solid var(--gray-100);
+  margin-bottom: 1.5rem;
+  padding-bottom: 0;
+}
+
+#pane .tab {
+  padding: 0.6rem 1rem;
+  margin-right: 0.25rem;
+  margin-bottom: 0;
+  border-bottom: 2px solid transparent;
+  font-weight: 600;
+}
+
+#pane .tab.active {
+  border-bottom-color: var(--accent-gold);
+  color: var(--text-primary);
+}
+
+.settings-panel {
+  margin-bottom: 1.5rem;
+}
+
+.settings-panel-b {
+  padding: 1.25rem 1.5rem 1.5rem !important;
+}
+
+.settings-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  max-width: 36rem;
+}
+
+.settings-form-wide {
+  max-width: none;
+}
+
+.settings-form .field {
+  margin: 0;
+  width: 100%;
+}
+
+.settings-form .field label {
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.35rem;
+}
+
+.field-checkbox .checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: var(--text-primary);
+  text-transform: none;
+  letter-spacing: normal;
+  font-weight: 400;
+  margin: 0;
+}
+
+.field-checkbox .checkbox-label input[type="checkbox"] {
+  width: 1.05rem;
+  height: 1.05rem;
+  margin: 0;
+  flex-shrink: 0;
+  min-height: unset;
+  accent-color: var(--accent-gold);
+}
+
+.settings-hint {
+  margin: 0 !important;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  max-width: 42rem;
+}
+
+.settings-actions {
+  margin-top: 0.25rem;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.settings-list-panel {
+  margin-bottom: 1.25rem;
+  overflow: hidden;
+}
+
+.settings-list-wrap {
+  padding: 1.25rem 1.5rem 1.5rem !important;
+}
+
+.settings-list-wrap .table-wrap {
+  margin-bottom: 0;
+  padding: 0;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--gray-100);
+  overflow: hidden;
+}
+
+.settings-list-wrap .table-wrap table {
+  min-width: 0 !important;
+  width: 100%;
+}
+
+.settings-list-wrap .data-table th,
+.settings-list-wrap .data-table td {
+  padding: 0.75rem 1.25rem !important;
+}
+
+.settings-list-wrap .data-table th:first-child,
+.settings-list-wrap .data-table td:first-child {
+  padding-left: 1.25rem !important;
+}
+
+.settings-list-wrap .data-table th:last-child,
+.settings-list-wrap .data-table td:last-child {
+  padding-right: 1.25rem !important;
+}
+
+.settings-add-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 0.75rem 1rem;
+  margin-top: 1.25rem;
+  padding: 1rem 1.25rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--gray-100);
+  border-radius: var(--radius-sm);
+}
+
+.settings-add-field {
+  flex: 1 1 12rem;
+  max-width: 20rem;
+  min-width: 0;
+  margin: 0;
+}
+
+.settings-add-toolbar .field label {
+  display: block;
+  text-transform: capitalize;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.35rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.settings-add-toolbar input {
+  width: 100%;
+  min-height: 44px;
+  box-sizing: border-box;
+}
+
+.settings-add-btn {
+  flex: 0 0 auto;
+  min-width: 7.5rem;
+  min-height: 44px !important;
+  margin: 0;
+  align-self: flex-end;
+}
+
+.settings-user-fields {
+  align-items: end;
+  gap: 1rem;
+}
+
+.settings-user-fields .field {
+  margin: 0;
+}
+
+.settings-users-add .panel-b {
+  padding: 1.25rem 1.5rem !important;
+}

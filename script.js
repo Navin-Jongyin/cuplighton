@@ -82,7 +82,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function initializeHiddenAdminAccess() {
-        const adminLoginPath = 'login.html';
+        const openAdmin = () => {
+            sessionStorage.setItem('isAdmin', 'true');
+            sessionStorage.setItem('adminLoginAt', String(Date.now()));
+            window.location.href = 'showprod.html';
+        };
 
         // Hidden keyboard shortcuts:
         // - Ctrl + Shift + A (Windows/Linux)
@@ -93,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const combo2 = e.metaKey && e.shiftKey && isAKey;
             if (combo1 || combo2) {
                 e.preventDefault();
-                window.location.href = adminLoginPath;
+                openAdmin();
             }
         });
 
@@ -118,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             logoClickCount += 1;
             if (logoClickCount >= requiredClicks) {
-                window.location.href = adminLoginPath;
+                openAdmin();
                 logoClickCount = 0;
                 firstClickAt = 0;
                 if (clickTimer) {

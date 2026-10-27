@@ -178,6 +178,7 @@
                 <div class="description" id="modal-description">Product description goes here.</div>
                 <div class="modal-actions">
                     <button id="modal-datasheet-btn" class="btn btn-primary" style="width: 100%;">Download Datasheet</button>
+                    <button id="modal-manual-btn" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">Installation Manual</button>
                 </div>
             </div>
         </div>
@@ -237,6 +238,7 @@
         const modalPrice = document.getElementById('modal-price');
         const modalDesc = document.getElementById('modal-description');
         const datasheetBtn = document.getElementById('modal-datasheet-btn');
+        const manualBtn = document.getElementById('modal-manual-btn');
         const closeBtn = document.getElementById('close-modal');
 
         function safeUrl(url) {
@@ -409,6 +411,21 @@
                 datasheetBtn.textContent = 'Datasheet Not Available';
                 datasheetBtn.style.opacity = '0.5';
                 datasheetBtn.style.cursor = 'not-allowed';
+            }
+
+            const manualUrl = safeUrl(product.manual);
+            if (manualUrl) {
+                manualBtn.onclick = () => window.open(manualUrl, '_blank');
+                manualBtn.disabled = false;
+                manualBtn.textContent = 'Installation Manual';
+                manualBtn.style.opacity = '1';
+                manualBtn.style.cursor = 'pointer';
+            } else {
+                manualBtn.onclick = null;
+                manualBtn.disabled = true;
+                manualBtn.textContent = 'Manual Not Available';
+                manualBtn.style.opacity = '0.5';
+                manualBtn.style.cursor = 'not-allowed';
             }
             
             modal.classList.add('active');
